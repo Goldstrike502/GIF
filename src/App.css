@@ -1,0 +1,36 @@
+nav {
+  background: rgba(255,255,255,.9);
+  border-top: solid 8px #f5b230;
+  width: 100%;
+  position: fixed;
+}
+nav ul {
+  margin:0;
+  display: inline;
+}
+nav ul li:first-child {
+  border:none;
+}
+nav ul li {
+  display: inline;
+  padding: 15px 25px;
+  line-height: 54px;  /* not sure if needed */
+  font-size: 18px;
+  border-left: rgba(0,0,0,.86) solid 1px;
+  font-family: 'Playfair Display', serif;
+}
+nav li a:hover {
+  text-decoration: underline;
+}
+nav li a {
+  color: rgba(0,0,0,1);
+  text-decoration: none;
+}
+nav .brand {
+  font-size: 22px;
+  font-family: 'Playfair Display', serif;  
+  margin-left: 25px;
+}
+body {
+  font-family: 'Montserrat', sans-serif;  
+}
