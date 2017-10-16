@@ -81,3 +81,18 @@ hr {
   display: flex;
   flex-direction: column;  
 }
+
+.image-intro .close:hover {
+  transform: scale(1.36);
+}
+
+.image-intro .close {
+  transition: all .3s ease;
+  position: absolute;
+  font-size: 27px;
+  font-weight: 200;
+  right: 0;
+  color: rgba(0,0,0, .67);
+  top: 0;
+  padding: 20px;
+}
