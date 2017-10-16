@@ -96,3 +96,10 @@ hr {
   top: 0;
   padding: 20px;
 }
+.image-gallery-image img {
+  transition: all .6s ease;
+  margin: -8px;
+}
+.blur .image-gallery-image img {
+  -webkit-filter: blur(5px);  
+}

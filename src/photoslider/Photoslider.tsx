@@ -15,15 +15,20 @@ constructor() {
   super();
 }
 componentWillReceiveProps(props: Props) {
-  console.log('propsss', props);
+  this.setState({isFocussed: props.focus || false});
 }
 render() {
   return (
-    <ImageGallery
-      autoPlay={this.state.isFocussed}
-      showPlayButton={this.state.isFocussed}
-      {... this.props}
-    />);
+    <div
+      className={this.state.isFocussed ? 'focus' : 'blur'}
+    >
+      <ImageGallery
+        autoPlay={this.state.isFocussed}
+        showPlayButton={this.state.isFocussed}
+        {... this.props}
+      />
+    </div>
+    );
 
 }
 }

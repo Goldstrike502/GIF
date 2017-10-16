@@ -30,26 +30,7 @@ export class Home extends React.Component<{}, State> {
       <div className="container">
         <section className="image-intro">
           <PhotoSlider items={this.images} focus={this.state.introClosed}/>
-          {this.state.introClosed ? '' :
-          <header>
-          <span className="close" onClick={() => this.onIntroClose()}>X</span>
-            <figure>
-              <img src="./logo.png" alt="Logo" />
-              <h1><span>Goed in</span> Frankrijk</h1>
-            </figure>
-            <hr />
-            <ul>
-              <li>Kindvriendelijk</li>
-              <li>Luxe vakantie villa's</li>
-              <li>Persoonlijk contact</li>
-            </ul>
-            <p>Zeven eigenaren van luxe vakantievilla's 
-              gelegen in Zuid-Frankrijk hebben zich verrenigd in een stichting.  
-              Dit om zich te kunnen onderscheiden in mooie en luxe ingerichte villa's met een 
-              echt thuisgevoel. Wij zijn er voor uw gemakken en een mooie vakantie.
-            </p>
-          </header>  
-          }
+          {this.state.introClosed ? '' : this.renderIntroHeader()}
         </section>
         <section>Chateau</section>
         <section>Villa</section>
@@ -59,5 +40,27 @@ export class Home extends React.Component<{}, State> {
   }
   onIntroClose() {
     this.setState({introClosed: true});
+  }
+  renderIntroHeader() {
+    return (
+      <header>
+      <span className="close" onClick={() => this.onIntroClose()}>X</span>
+        <figure>
+          <img src="./logo.png" alt="Logo" />
+          <h1><span>Goed in</span> Frankrijk</h1>
+        </figure>
+        <hr />
+        <ul>
+          <li>Kindvriendelijk</li>
+          <li>Luxe vakantie villa's</li>
+          <li>Persoonlijk contact</li>
+        </ul>
+        <p>Zeven eigenaren van luxe vakantievilla's 
+          gelegen in Zuid-Frankrijk hebben zich verrenigd in een stichting.  
+          Dit om zich te kunnen onderscheiden in mooie en luxe ingerichte villa's met een 
+          echt thuisgevoel. Wij zijn er voor uw gemakken en een mooie vakantie.
+        </p>
+      </header>  
+    );
   }
 }
