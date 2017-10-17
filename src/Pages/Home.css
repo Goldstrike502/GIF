@@ -26,15 +26,14 @@ header figure h1 {
   text-transform: uppercase;
   flex-basis: 170px;
 }
-section.image-intro header {
-  margin-top: 85px;
-}
 
 section.image-intro {
   position: relative;
   display: flex;
   flex-direction: row;  
   justify-content: center;
+  min-height: 95vh;
+  align-items: center;
 }
   section.image-intro .image-gallery {
   position: absolute;
@@ -42,7 +41,7 @@ section.image-intro {
   right: 0;
   width: 100%;
   z-index:0;
-  min-height: 100vh;
+  max-height: 100vh;
 }
 header p {
   font-size: 17px;
@@ -60,10 +59,21 @@ header ul li {
   font-size: 19px;
   font-weight: 200;
 }
+
+header.hidden ul, header.hidden p { 
+  display:none;
+}
+header.hidden {
+  margin-top: 80vh;
+  opacity:0;
+}
 header {
+  transition: all .3s ease-in-out;
   background: rgba(255, 255, 255, 1);
   padding: 28px;
+  opacity:1;
   position: relative;
+  border-radius: 4px;
   z-index: 10;
   flex-direction: column;
   display: flex;
@@ -98,7 +108,6 @@ hr {
 }
 .image-gallery-image img {
   transition: all .6s ease;
-  margin: -8px;
 }
 .blur .image-gallery-image img {
   -webkit-filter: blur(5px);  

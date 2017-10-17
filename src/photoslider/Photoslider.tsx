@@ -25,6 +25,8 @@ render() {
       <ImageGallery
         autoPlay={this.state.isFocussed}
         showPlayButton={this.state.isFocussed}
+        showFullscreenButton={this.state.isFocussed}
+        showNav={this.state.isFocussed}
         {... this.props}
       />
     </div>

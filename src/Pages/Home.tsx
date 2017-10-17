@@ -30,7 +30,7 @@ export class Home extends React.Component<{}, State> {
       <div className="container">
         <section className="image-intro">
           <PhotoSlider items={this.images} focus={this.state.introClosed}/>
-          {this.state.introClosed ? '' : this.renderIntroHeader()}
+          {this.renderIntroHeader()}
         </section>
         <section>Chateau</section>
         <section>Villa</section>
@@ -43,7 +43,7 @@ export class Home extends React.Component<{}, State> {
   }
   renderIntroHeader() {
     return (
-      <header>
+      <header className={this.state.introClosed ? 'hidden' : ''}>
       <span className="close" onClick={() => this.onIntroClose()}>X</span>
         <figure>
           <img src="./logo.png" alt="Logo" />
@@ -60,7 +60,9 @@ export class Home extends React.Component<{}, State> {
           Dit om zich te kunnen onderscheiden in mooie en luxe ingerichte villa's met een 
           echt thuisgevoel. Wij zijn er voor uw gemakken en een mooie vakantie.
         </p>
-      </header>  
+        <button>Meer informatie</button>        
+      </header> 
+      
     );
   }
 }
