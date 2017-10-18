@@ -29,12 +29,13 @@ export class Home extends React.Component<{}, State> {
     return (
       <div className="container">
         <section className="image-intro">
-          <PhotoSlider items={this.images} focus={this.state.introClosed}/>
           {this.renderIntroHeader()}
+          <PhotoSlider items={this.images} closed={this.state.introClosed} onClose={() => this.onIntroClose()} />
         </section>
         <section>Chateau</section>
         <section>Villa</section>
         <section>Omgeving</section>
+        <button className="button">Meer informatie</button>     
       </div>
     );
   }
@@ -44,25 +45,23 @@ export class Home extends React.Component<{}, State> {
   renderIntroHeader() {
     return (
       <header className={this.state.introClosed ? 'hidden' : ''}>
-      <span className="close" onClick={() => this.onIntroClose()}>X</span>
+        <span className="close" onClick={() => this.onIntroClose()}>X</span>
         <figure>
           <img src="./logo.png" alt="Logo" />
           <h1><span>Goed in</span> Frankrijk</h1>
-        </figure>
+        </figure> 
         <hr />
         <ul>
           <li>Kindvriendelijk</li>
-          <li>Luxe vakantie villa's</li>
+          <li>Luxe vakantie-villa's</li>
           <li>Persoonlijk contact</li>
         </ul>
-        <p>Zeven eigenaren van luxe vakantievilla's 
-          gelegen in Zuid-Frankrijk hebben zich verrenigd in een stichting.  
+        <p>Zeven eigenaren van luxe vakantie-villa's 
+          gelegen in Zuid-Frankrijk hebben zich verenigd in een stichting.  
           Dit om zich te kunnen onderscheiden in mooie en luxe ingerichte villa's met een 
           echt thuisgevoel. Wij zijn er voor uw gemakken en een mooie vakantie.
-        </p>
-        <button>Meer informatie</button>        
+        </p>   
       </header> 
-      
     );
   }
 }
