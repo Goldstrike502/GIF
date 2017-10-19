@@ -49,6 +49,7 @@ button.button {
    border-right: 3px solid #1D5D88;
    font-weight: 400;
    color: #fff;
+   padding: 6px 30px;
    background: #2b87c6;
 }
 button.button.yellow:hover {

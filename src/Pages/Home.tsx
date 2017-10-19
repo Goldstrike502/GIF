@@ -2,6 +2,7 @@ import { Photo } from '../photoslider/Types';
 import { PhotoSlider } from '../photoslider/Photoslider';
 import * as React from 'react';
 import './Home.css';
+import { ChateauListViewComponent } from './Chateau/Chateau';
 
 interface State {
   introClosed: boolean;
@@ -32,7 +33,7 @@ export class Home extends React.Component<{}, State> {
           {this.renderIntroHeader()}
           <PhotoSlider items={this.images} closed={this.state.introClosed} onClose={() => this.onIntroClose()} />
         </section>
-        <section>Chateau</section>
+       <ChateauListViewComponent />  
         <section>Villa</section>
         <section>Omgeving</section>
         <button className="button">Meer informatie</button>     

@@ -1,0 +1,14 @@
+.chateau-list-view {
+    background: url('/images/chateau-bg.png');
+    background-size: cover;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+}
+.chateau-intro {
+    padding: 15px;  
+}
+.list {
+    min-width: 67%;
+}
