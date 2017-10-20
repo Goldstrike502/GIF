@@ -1,14 +1,17 @@
-import { Photo } from '../photoslider/Types';
 import { PhotoSlider } from '../photoslider/Photoslider';
 import * as React from 'react';
 import './Home.css';
-import { ChateauListViewComponent } from './Chateau/Chateau';
-
+import { ChateauItem, ChateauListViewComponent, ChateauPost } from './Chateau/Chateau';
+import { CHATEAU_CONTENT_TYPE_ID, ContentfulClient } from '../Contentful';
+import { ContentfulClientApi, Entry } from 'contentful';
+import { Photo } from '../photoslider/Types';
 interface State {
   introClosed: boolean;
+  chateauPosts?: Entry<ChateauPost>[];
 }
 
 export class Home extends React.Component<{}, State> {
+  client: ContentfulClientApi = ContentfulClient;
   images: Photo[] = [
     {
       original: 'http://lorempixel.com/1000/600/nature/1/',
@@ -25,7 +28,17 @@ export class Home extends React.Component<{}, State> {
   ];
   state = {
     introClosed: false,
-  };
+    chateauPosts: []
+  }; 
+  constructor() {
+    super();
+    this.client.getEntries({content_type: CHATEAU_CONTENT_TYPE_ID}).then((content) => {
+      this.setState({...this.state, chateauPosts: content.items});
+      console.log('content!!', content);
+    });
+    // this.setState({...this.state, chateauPosts: });
+    
+  }
   render() {
     return (
       <div className="container">
@@ -33,7 +46,10 @@ export class Home extends React.Component<{}, State> {
           {this.renderIntroHeader()}
           <PhotoSlider items={this.images} closed={this.state.introClosed} onClose={() => this.onIntroClose()} />
         </section>
-       <ChateauListViewComponent />  
+       <ChateauListViewComponent>
+        {this.state.chateauPosts
+          .map((item: Entry<ChateauPost>) => <ChateauItem key={item.fields.slug} item={item} />)}
+       </ChateauListViewComponent>  
         <section>Villa</section>
         <section>Omgeving</section>
         <button className="button">Meer informatie</button>     

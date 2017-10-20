@@ -1,15 +1,26 @@
 import * as React from 'react';
 import './Chateau.css';
+import { Entry } from 'contentful';
+import { ContentfulPhoto } from '../../Contentful';
+
+export interface ChateauPost {
+    title: string;
+    description: string;
+    content: string;
+    cover: () => Entry<ContentfulPhoto>;
+    slug: string;
+}
 
 interface Props {
     items?: any[];
+    children: string | JSX.Element[];
 }
 
 export const ChateauListViewComponent: React.StatelessComponent<Props> = props => {
     return (
         <div className="chateau-list-view">
             <ul className="list">
-                {/* {props.children} */}
+                {props.children}
             </ul>
             <div className="chateau-intro">
                 <h1>Vakantiepark Chateau Cazaleres</h1>
@@ -31,4 +42,15 @@ export const ChateauListViewComponent: React.StatelessComponent<Props> = props =
         </div>
     </div>
                 );
+};
+interface ChateauItemProps {
+    item: Entry<ChateauPost>;
+}
+export const ChateauItem: React.StatelessComponent<ChateauItemProps> = props => {
+    console.log(props);
+    return (
+        <div>
+           <h1> {props.item.fields.title}</h1>
+        </div>
+    );
 };
