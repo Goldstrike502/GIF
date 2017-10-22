@@ -49,12 +49,17 @@ interface ChateauItemProps {
 export const ChateauItem: React.StatelessComponent<ChateauItemProps> = props => {
     return (
         <div className="chateau-item">
-           <img 
-                src={props.item.fields.cover.fields.file.url} 
-                alt={props.item.fields.cover.fields.description} 
-                title={props.item.fields.cover.fields.title} 
-           />
-           <h3> {props.item.fields.title}</h3>
+            <figure>
+                <img 
+                    src={props.item.fields.cover.fields.file.url} 
+                    alt={props.item.fields.cover.fields.description} 
+                    title={props.item.fields.cover.fields.title} 
+                />
+                <caption>
+                    <h3> {props.item.fields.title}</h3>
+                    <p>Content</p>
+                </caption>
+            </figure>
         </div>       
     );
 };
