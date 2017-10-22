@@ -7,7 +7,7 @@ export interface ChateauPost {
     title: string;
     description: string;
     content: string;
-    cover: () => Entry<ContentfulPhoto>;
+    cover: Entry<ContentfulPhoto>;
     slug: string;
 }
 
@@ -47,10 +47,14 @@ interface ChateauItemProps {
     item: Entry<ChateauPost>;
 }
 export const ChateauItem: React.StatelessComponent<ChateauItemProps> = props => {
-    console.log(props);
     return (
-        <div>
-           <h1> {props.item.fields.title}</h1>
-        </div>
+        <div className="chateau-item">
+           <img 
+                src={props.item.fields.cover.fields.file.url} 
+                alt={props.item.fields.cover.fields.description} 
+                title={props.item.fields.cover.fields.title} 
+           />
+           <h3> {props.item.fields.title}</h3>
+        </div>       
     );
 };

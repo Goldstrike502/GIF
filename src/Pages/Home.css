@@ -103,7 +103,8 @@ hr {
 
 .image-intro .close {
   transition: all .3s ease;
-  position: absolute;
+  positio
+n: absolute;
   font-size: 27px;
   font-weight: 200;
   right: 0;

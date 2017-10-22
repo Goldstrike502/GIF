@@ -1,3 +1,4 @@
+
 .chateau-list-view {
     background: url('/images/chateau-bg.png');
     background-size: cover;
@@ -9,6 +10,22 @@
 .chateau-intro {
     padding: 15px;  
 }
+
 .list {
+    display: flex;
+    flex-direction: row;
     min-width: 67%;
 }
+
+.chateau-item h3 {
+    margin-top: -49px;
+    background: rgba(0,0,0,0.7);
+    z-index: 292563;
+    color: rgba(255,255,255,0.7);
+    position: relative;
+    padding: 10px;
+}
+
+.chateau-item img {
+    max-width: 283px;
+ }
