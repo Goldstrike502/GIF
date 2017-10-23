@@ -1,3 +1,4 @@
+import { VillaCompactView } from './Villa/Villa';
 import { PhotoSlider } from '../photoslider/Photoslider';
 import * as React from 'react';
 import './Home.css';
@@ -49,7 +50,8 @@ export class Home extends React.Component<{}, State> {
        <ChateauListViewComponent>
         {this.state.chateauPosts
           .map((item: Entry<ChateauPost>) => <ChateauItem key={item.fields.slug} item={item} />)}
-       </ChateauListViewComponent>  
+       </ChateauListViewComponent>
+       <VillaCompactView>aaaa</VillaCompactView>  
         <section>Villa</section>
         <section>Omgeving</section>
         <button className="button">Meer informatie</button>     

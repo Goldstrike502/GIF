@@ -24,6 +24,7 @@ export const ChateauListViewComponent: React.StatelessComponent<Props> = props =
             </ul>
             <div className="chateau-intro">
                 <h1>Vakantiepark Chateau Cazaleres</h1>
+                <hr />
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum erat felis,
                     eget volutpat nisl aliquam ut. Aliquam et sollicitudin sem.
                    Morbi sit amet dictum sem. Praesent congue eget elit in sollicitudin. 
