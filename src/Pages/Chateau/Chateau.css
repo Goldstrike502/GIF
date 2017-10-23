@@ -15,25 +15,37 @@
     display: flex;
     flex-direction: row;
     min-width: 67%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    box-sizing: border-box;
 }
 
+.chateau-item {
+    min-width: 250px;
+    max-width: 50%;
+}
 .chateau-item h3 {
     color: rgba(255,255,255,0.7);
     z-index: 292563;
-    padding: 10px;
+    padding: 5px 0 2px 0;
     margin:0;
 }
-.chateau-item caption:hover p {
-    height: auto;
+.chateau-item figure:hover caption {
+    background: rgba(0,0,0,0.9);
+}
+.chateau-item figure:hover caption p {
     opacity: 1;
+    height: auto;
+    color: rgba(255,255,255,0.7);
 }
 .chateau-item caption p {
+    color: rgba(255,255,255,0.0);
     margin:0 0 8px 0;
-    color: rgba(255,255,255,0.7);
     font-size: 14px;
     text-align: left;
     padding: 0 8px;
-    transition: all .4s ease;
+    transition: color .4s ease;
     height: 0;
     opacity: 0;
 }
@@ -47,6 +59,8 @@
 }
 .chateau-item figure {
     position: relative;
+    overflow: hidden;
+    margin: 20px;
 }
 .chateau-item img {
     max-width: 100%;

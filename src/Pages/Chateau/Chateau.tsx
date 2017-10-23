@@ -57,7 +57,7 @@ export const ChateauItem: React.StatelessComponent<ChateauItemProps> = props => 
                 />
                 <caption>
                     <h3> {props.item.fields.title}</h3>
-                    <p>Content</p>
+                    <p>{props.item.fields.description}</p>
                 </caption>
             </figure>
         </div>       
