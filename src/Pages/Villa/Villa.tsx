@@ -1,7 +1,10 @@
+import * as React from 'react';
+
+import './Villa.css';
+
 import { ContentfulPhoto } from '../../Contentful';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import * as React from 'react';
 interface Props {
     children?: JSX.Element | string;
 }
