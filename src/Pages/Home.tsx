@@ -33,7 +33,8 @@ export class Home extends React.Component<{}, State> {
   }; 
   constructor() {
     super();
-    this.client.getEntries({content_type: CHATEAU_CONTENT_TYPE_ID}).then((content) => {
+    this.client.getEntries({content_type: CHATEAU_CONTENT_TYPE_ID})
+    .then((content) => {
       this.setState({...this.state, chateauPosts: content.items});
       console.log('content!!', content);
     });
