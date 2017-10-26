@@ -1,3 +1,5 @@
+import { Entry } from 'contentful';
+import { ContentfulPhoto } from '../Contentful';
 
 type positionTypes = 'top' | 'right' | 'bottom' | 'left';
 export interface Photo {
@@ -50,4 +52,10 @@ export interface ImageGalleryProps {
   onTouchEnd?: () => void;
   onTouchStart?: () => void;
   renderCustomControls?: () => void;
+}
+
+export interface SliderPhotoContentModel {
+  title: string;
+  image: Entry<ContentfulPhoto>;
+  order: number;
 }

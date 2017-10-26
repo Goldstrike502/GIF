@@ -3,12 +3,13 @@ import { PhotoSlider } from '../photoslider/Photoslider';
 import * as React from 'react';
 import './Home.css';
 import { ChateauItem, ChateauListViewComponent, ChateauPost } from './Chateau/Chateau';
-import { CHATEAU_CONTENT_TYPE_ID, ContentfulClient } from '../Contentful';
-import { ContentfulClientApi, Entry } from 'contentful';
-import { Photo } from '../photoslider/Types';
+import { CHATEAU_CONTENT_TYPE_ID, ContentfulClient, SLIDER_PHOTO_CONTENT_TYPE_ID } from '../Contentful';
+import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
+import { Photo, SliderPhotoContentModel } from '../photoslider/Types';
 interface State {
   introClosed: boolean;
   chateauPosts?: Entry<ChateauPost>[];
+  sliderPhotos?: Photo[];
 }
 
 export class Home extends React.Component<{}, State> {
@@ -29,24 +30,47 @@ export class Home extends React.Component<{}, State> {
   ];
   state = {
     introClosed: false,
-    chateauPosts: []
+    chateauPosts: [],
+    sliderPhotos: [],
   }; 
   constructor() {
     super();
-    this.client.getEntries({content_type: CHATEAU_CONTENT_TYPE_ID})
+    this.initPhotoSliderContentState();
+    this.initChateauContentState();
+  }
+
+  initPhotoSliderContentState() {
+    return this.client.getEntries({content_type: SLIDER_PHOTO_CONTENT_TYPE_ID})
+    .then(content => {console.log('got slider photos', content); return content; })
+    .then((content: EntryCollection<SliderPhotoContentModel>) => content.items.map(photo => {
+          return {
+            original: photo.fields.image.fields.file.url,
+            thumbnail: photo.fields.image.fields.file.url
+          };
+        }))
+    .then((photos) => {
+      this.setState({...this.state, sliderPhotos: photos});
+      return photos;
+    });
+  }
+  
+  initChateauContentState(): Promise<EntryCollection<ChateauPost>> {
+    return this.client.getEntries({content_type: CHATEAU_CONTENT_TYPE_ID})
     .then((content) => {
       this.setState({...this.state, chateauPosts: content.items});
-      console.log('content!!', content);
+      return content;
     });
-    // this.setState({...this.state, chateauPosts: });
-    
   }
   render() {
     return (
       <div className="container">
         <section className="image-intro">
           {this.renderIntroHeader()}
-          <PhotoSlider items={this.images} closed={this.state.introClosed} onClose={() => this.onIntroClose()} />
+          <PhotoSlider 
+            items={this.state.sliderPhotos} 
+            closed={this.state.introClosed}   
+            onClose={() => this.onIntroClose()} 
+          />
         </section>
        <ChateauListViewComponent>
         {this.state.chateauPosts

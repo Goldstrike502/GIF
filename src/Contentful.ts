@@ -8,6 +8,9 @@ export const ContentfulClient: ContentfulClientApi = createClient({
 });
 
 export const CHATEAU_CONTENT_TYPE_ID = 'chateauPosts';
+export const SLIDER_PHOTO_CONTENT_TYPE_ID = 'sliderPhoto';
+export const VILLAS_CONTENT_TYPE_ID = 'villas';
+export const OMGEVING_CONTENT_TYPE_ID = 'omgeving';
 
 export interface ContentfulPhoto {
     description: string;
