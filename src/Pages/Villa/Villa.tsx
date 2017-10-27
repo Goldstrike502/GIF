@@ -1,40 +1,22 @@
+
 import * as React from 'react';
-
-import './Villa.css';
-
 import { ContentfulPhoto } from '../../Contentful';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import './Villa.css';
 
 interface Props {
     children?: JSX.Element | string;
 }
 interface State {
-    selectedVilla: JSX.Element;
+    selectedVilla: React.StatelessComponent<{faciliteiten: string}>;
 }
 export class VillaCompactView extends React.Component<Props, State> {
     render() {
         return (
-            <div className="villa-compact-view">
-
-                <Tabs>
-                    <TabList>
-                        <Tab>Title 1</Tab>
-                        <Tab>Title 2</Tab>
-                    </TabList>
-
-                    <TabPanel>
-                        <h2>Any content 1</h2>
-                    </TabPanel>
-                    <TabPanel>
-                        <h2>Any content 2</h2>
-                    </TabPanel>
-                </Tabs>
-
-            </div>
+            <div className="villa-compact-view">{this.props.children}</div>
         );
     }
 }
-export interface VillaProps {
+export interface VillaContentModel {
     title: string;
     faciliteiten: string;
     description: string;
@@ -42,6 +24,6 @@ export interface VillaProps {
     infoRechts: string;
     prijsVanaf: string;
 }
-export const villa: React.StatelessComponent<VillaProps> = props => {
-    return (<div>asdf</div>);
+export const villa: React.StatelessComponent<{faciliteiten: string}> = props => {
+    return (<div>{props.faciliteiten}</div>);
 };

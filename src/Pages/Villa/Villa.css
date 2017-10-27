@@ -14,9 +14,7 @@
 }
 .villa-compact-view .react-tabs .react-tabs__tab-panel {
     background-color: #FFF;
-    -webkit-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 63px 0px rgba(0,0,0,0.45);
     padding: 20px;
     z-index: 1;
     position: relative;
@@ -36,7 +34,7 @@ margin: 0;
     background: white;
 }
 .villa-compact-view .react-tabs .react-tabs__tab {
-    box-shadow: 13px -20px 39px 0px rgba(0,0,0,0.65);
+    box-shadow: 6px -11px 28px -4px rgba(0,0,0,0.45);
     color: white;
     font-size: 24px;
     
