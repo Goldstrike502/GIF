@@ -1,5 +1,14 @@
 @import '../../../node_modules/react-tabs/style/react-tabs.css';
 
+.villa-compact-view span.prijs span {
+    font-size: 17px;
+}
+.villa-compact-view span.prijs {
+    font-size: 28px;
+}
+.villa-compact-view .button{
+    float: right;
+}	
 .villa-compact-view {
     background: url('/images/villas-bg.jpg');
     background-size: cover;
@@ -13,32 +22,39 @@
     justify-content: space-around;
 }
 .villa-compact-view .react-tabs .react-tabs__tab-panel {
-    background-color: #FFF;
+    background: #fff;
     box-shadow: 10px 10px 63px 0px rgba(0,0,0,0.45);
     padding: 20px;
     z-index: 1;
     position: relative;
     font-family: 'Montserrat', sans-serif;
+    line-height: 32px;
+    border-radius: 0;
 }
 .villa-compact-view .react-tabs .react-tabs__tab-list {
-margin: 0;
+    margin: 0;
 }
 .villa-compact-view .react-tabs {
     width: 900px;
-	margin: 200px auto;
+    margin: 100px auto;
 }
 .villa-compact-view .react-tabs .react-tabs__tab.react-tabs__tab--selected {
     position: relative;
     z-index: 2;
+    opacity: 1;
     color: rgba(0,0,0,.87);
     background: white;
 }
 .villa-compact-view .react-tabs .react-tabs__tab {
+    height: auto;
+    transition: all .6s ease;
     box-shadow: 6px -11px 28px -4px rgba(0,0,0,0.45);
     color: white;
     font-size: 24px;
-    
+    padding: 10px 30px;
     background: #323230;
     font-family: 'Playfair Display', serif;
     text-transform: uppercase;
+    border-radius:0;
+    border: none;
 }
