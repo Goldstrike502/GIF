@@ -1,66 +1,91 @@
+import { ChateauItem, ChateauListViewComponent } from './ChateauList';
+import { CHATEAU_CONTENT_TYPE_ID, ContentfulClient } from '../../Contentful';
+import { EntryCollection } from 'contentful';
+import { ChateauPost } from './Types';
 import * as React from 'react';
 import './Chateau.css';
-import { Entry } from 'contentful';
-import { ContentfulPhoto } from '../../Contentful';
+import { match } from 'react-router';
+import * as ReactMarkdown from 'react-markdown';
 
-export interface ChateauPost {
-    title: string;
-    description: string;
-    content: string;
-    cover: Entry<ContentfulPhoto>;
-    slug: string;
+interface ChateauPageProps {
+    match?: match<{post: string}>;
 }
+interface ChateauPageState {
+    headerPhoto?: string;
+    chateauPosts?: ChateauPost[];
+    selectedPost?: ChateauPost;
+}
+export class ChateauPage extends React.Component<ChateauPageProps, ChateauPageState> {
+    client = ContentfulClient;
+    state = {
+        headerPhoto: '/images/uploads/chateau.jpg',
+        chateauPosts: [],
+        selectedPost: undefined
+    };
+    componentWillReceiveProps(nextProps: ChateauPageProps) {
+        if (nextProps.match && 
+            this.props.match && nextProps.match.params.post !== this.props.match.params.post) {
+                this.selectPostForMatchParam(nextProps.match.params.post);
+        }
+        return false;
+    }
+    constructor() {
+        super();
+        
+        this.client.getEntries({content_type: CHATEAU_CONTENT_TYPE_ID})
+        .then((entries: EntryCollection<ChateauPost>): ChateauPost[] => 
+        entries.items.map((entry) => {
+            return {
+                id: entry.sys.id,
+                ... entry.fields
+            };
+        }))
+        .then(posts => {
+            const state = {... this.state, chateauPosts: posts};
+            this.setState({... state,
+                chateauPosts: posts});
 
-interface Props {
-    items?: any[];
-    children: string | JSX.Element[];
-}
+            if (this.props.match && this.props.match.params.post) {
+                this.selectPostForMatchParam(this.props.match.params.post);
+            }
+        });
+    }
+    selectPostForMatchParam(slug: string) {
+        const selectedPost = this.state.chateauPosts.find((post: ChateauPost) => post.slug === slug);
+        const headerPhoto = selectedPost ?
+             (selectedPost as ChateauPost).cover.fields.file.url : '/images/uploads/chateau.jpg';
 
-export const ChateauListViewComponent: React.StatelessComponent<Props> = props => {
-    return (
-        <div className="chateau-list-view">
-            <ul className="list">
-                {props.children}
-            </ul>
-            <div className="chateau-intro">
-                <h1>Vakantiepark Chateau Cazaleres</h1>
-                <hr />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum erat felis,
-                    eget volutpat nisl aliquam ut. Aliquam et sollicitudin sem.
-                   Morbi sit amet dictum sem. Praesent congue eget elit in sollicitudin. 
-                   Nam a congue dui. Sed tristique efficitur convallis. Nulla vitae ornare 
-                   nibh, id ornare augue. Suspendisse ut faucibus velit, et convallis arcu. 
-                   Aenean facilisis aliquam nisl ut condimentum. Donec rhoncus diam fringilla 
-                   neque convallis, quis iaculis nisl aliquet. Integer vel erat mauris. </p>
-                <p>Praesent sit amet ante at diam molestie lobortis. 
-                    Donec et mauris tempor, consectetur elit non, iaculis leo. Fusce tincidunt maximus 
-                    urna, non dignissim massa semper at. Duis dapibus dictum mauris, eget bibendum massa.
-                     Pellentesque semper in arcu ac scelerisque. Vestibulum in ex pellentesque, 
-                     imperdiet est hendrerit, aliquam urna. Nulla eget suscipit diam. 
-                     Suspendisse rutrum non enim sit amet iaculis.
-                </p>
-                <button className="button">Meer informatie</button>     
-        </div>
-    </div>
-                );
-};
-interface ChateauItemProps {
-    item: Entry<ChateauPost>;
+
+        this.setState({... this.state, 
+            headerPhoto,
+            selectedPost}); 
+    }
+    hasPost() {
+       return (this.props.match && this.props.match.params.post && this.state.chateauPosts.length > 0);
+    }
+    backgroundStyle(): any {
+        return {
+            backgroundImage: this.state.headerPhoto ? `url('${this.state.headerPhoto}')` : '',
+        };
+    }
+    render() {
+        const selectedPost = this.state.selectedPost;
+        return (
+            <div className="container">
+        <section className="chateau-page" style={this.backgroundStyle()}>
+        <h1>{(selectedPost ? (selectedPost as ChateauPost).title : 'Chateau Cazaleres')}</h1>
+        </section>
+        <section>
+            {selectedPost ? 
+                <ReactMarkdown 
+                    source={(selectedPost as ChateauPost).description ? (selectedPost as ChateauPost).description : ''} 
+                /> : 'Chateau Cazaleres'}
+        </section>
+
+        <ChateauListViewComponent>
+            {this.state.chateauPosts
+                .map((item: ChateauPost, i) => <ChateauItem key={i} item={item} />)}
+        </ChateauListViewComponent>
+        </div>);
+    }
 }
-export const ChateauItem: React.StatelessComponent<ChateauItemProps> = props => {
-    return (
-        <div className="chateau-item">
-            <figure>
-                <img 
-                    src={props.item.fields.cover.fields.file.url} 
-                    alt={props.item.fields.cover.fields.description} 
-                    title={props.item.fields.cover.fields.title} 
-                />
-                <caption>
-                    <h3> {props.item.fields.title}</h3>
-                    <p>{props.item.fields.description}</p>
-                </caption>
-            </figure>
-        </div>       
-    );
-};

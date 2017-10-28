@@ -33,13 +33,12 @@ nav .brand {
   font-family: 'Playfair Display', serif;  
   margin-left: 25px;
 }
-button.button:hover {
+.button:hover {
   border-bottom: 2px solid #1D5D88;
   border-right: 2px solid #1D5D88;
   background:#237DB9;
 }
-
-button.button {
+.button {
   font-size: 16px;
   transition: all .3s ease; 
    height: 40px;
@@ -53,12 +52,12 @@ button.button {
    padding: 6px 30px;
    background: #2b87c6;
 }
-button.button.yellow:hover {
+.button.yellow:hover {
   border-bottom: 2px solid #b99040;
   border-right: 2px solid #b99040;
   background: #f6b632;
 }
-button.button.yellow {
+.button.yellow {
   background-color: #f5b230;
   border-bottom: 3px solid #b99040;
   border-right: 3px solid #b99040;

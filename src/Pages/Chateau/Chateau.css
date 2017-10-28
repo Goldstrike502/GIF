@@ -12,6 +12,9 @@
     line-height: 32px;
 }
 
+.list.full-width .chateau-item {
+    max-width: 28%;
+}
 .list {
     display: flex;
     flex-direction: row;
@@ -71,4 +74,20 @@
 }
 .chateau-item img {
     max-width: 100%;
+}
+
+
+.chateau-page h1 {
+    font-size: 48px;
+    color: #fff;
+    text-shadow: 3px 3px 10px rgba(0,0,0,.6);
+}
+.chateau-page {
+    min-height: 68vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    padding: 0 20px;
 }

@@ -1,10 +1,11 @@
+import { ChateauItem, ChateauListViewComponent } from './Chateau/ChateauList';
+import { ChateauPost } from './Chateau/Types';
 import { VillaCompactView, VillaFaciliteiten } from './Villa/Villa';
 import { PhotoSlider } from '../photoslider/Photoslider';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import * as ReactMarkdown from 'react-markdown';
 import * as React from 'react';
 import './Home.css';
-import { ChateauItem, ChateauListViewComponent, ChateauPost } from './Chateau/Chateau';
 import {
   CHATEAU_CONTENT_TYPE_ID,
   ContentfulClient,
@@ -15,7 +16,7 @@ import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
 import { Photo, SliderPhotoContentModel } from '../photoslider/Types';
 interface State {
   introClosed: boolean;
-  chateauPosts?: Entry<ChateauPost>[];
+  chateauPosts?: ChateauPost[];
   sliderPhotos?: Photo[];
   villaFaciliteiten?: VillaFaciliteiten[];
 }
@@ -71,10 +72,13 @@ export class Home extends React.Component<{}, State> {
       });
   }
 
-  initChateauContentState(): Promise<EntryCollection<ChateauPost>> {
+  initChateauContentState() {
     return this.client.getEntries({ content_type: CHATEAU_CONTENT_TYPE_ID })
+      .then((entries: EntryCollection<ChateauPost>) => entries.items.map((post: Entry<ChateauPost>) => {
+        return post.fields;
+      }))
       .then((content) => {
-        this.setState({ ...this.state, chateauPosts: content.items });
+        this.setState({ ...this.state, chateauPosts: content });
         return content;
       });
   }
@@ -89,26 +93,26 @@ export class Home extends React.Component<{}, State> {
             onClose={() => this.onIntroClose()}
           />
         </section>
-        <ChateauListViewComponent>
+        <ChateauListViewComponent intro={true}>
           {this.state.chateauPosts
-            .map((item: Entry<ChateauPost>) => <ChateauItem key={item.fields.slug} item={item} />)}
-        </ChateauListViewComponent>
+            .map((item: ChateauPost) => <ChateauItem key={item.slug} item={item} />)}
+      </ChateauListViewComponent>
         <VillaCompactView>
-          { this.state.villaFaciliteiten.length > 0 ?
-          <Tabs defaultIndex={0} >
-            <TabList>
-             { this.state.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
-              <Tab key={faciliteiten.id} tabIndex={i.toString()}> {faciliteiten.title}</Tab>)}
-            </TabList>
+          {this.state.villaFaciliteiten.length > 0 ?
+            <Tabs defaultIndex={0} >
+              <TabList>
+                {this.state.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
+                  <Tab key={faciliteiten.id} tabIndex={i.toString()}> {faciliteiten.title}</Tab>)}
+              </TabList>
 
-           { this.state.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) => 
-            <TabPanel key={faciliteiten.id}>
-            <ReactMarkdown source={faciliteiten.faciliteiten} />
-            <span className="prijs"><span>Vanaf </span> {faciliteiten.prijsVanaf} <span> per week</span></span>
-            <button className="button yellow">Villa informatie & beschikbaarheid</button>
-           </TabPanel>)}
-          </Tabs>
-          : ''}
+              {this.state.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
+                <TabPanel key={faciliteiten.id}>
+                  <ReactMarkdown source={faciliteiten.faciliteiten} />
+                  <span className="prijs"><span>Vanaf </span> {faciliteiten.prijsVanaf} <span> per week</span></span>
+                  <button className="button yellow">Villa informatie & beschikbaarheid</button>
+                </TabPanel>)}
+            </Tabs>
+            : ''}
         </VillaCompactView>
         <section>Villa</section>
         <section>Omgeving</section>

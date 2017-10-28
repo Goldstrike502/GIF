@@ -1,3 +1,4 @@
+import { ChateauPage } from './Pages/Chateau/Chateau';
 import { Home } from './Pages/Home';
 import * as React from 'react';
 import './App.css';
@@ -21,7 +22,8 @@ class App extends React.Component {
             </ul>
           </nav>
           <Route exact={true} path="/" component={Home}/>
-          <Route path="/chateau" component={Home}/>
+          <Route exact={true} path="/chateau" component={ChateauPage}/>
+          <Route path="/chateau/:post" component={ChateauPage}/>
           </div>
         </Router>
       </div>
