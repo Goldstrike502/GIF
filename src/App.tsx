@@ -1,3 +1,4 @@
+import { VillaPage } from './Pages/Villa/Villa';
 import { ChateauPage } from './Pages/Chateau/Chateau';
 import { Home } from './Pages/Home';
 import * as React from 'react';
@@ -24,6 +25,7 @@ class App extends React.Component {
           <Route exact={true} path="/" component={Home}/>
           <Route exact={true} path="/chateau" component={ChateauPage}/>
           <Route path="/chateau/:post" component={ChateauPage}/>
+          <Route path="/vakantie-villas/:villa" component={VillaPage}/>
           </div>
         </Router>
       </div>

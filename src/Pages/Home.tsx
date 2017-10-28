@@ -14,6 +14,7 @@ import {
 } from '../Contentful';
 import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
 import { Photo, SliderPhotoContentModel } from '../photoslider/Types';
+import { Link } from 'react-router-dom';
 interface State {
   introClosed: boolean;
   chateauPosts?: ChateauPost[];
@@ -109,7 +110,12 @@ export class Home extends React.Component<{}, State> {
                 <TabPanel key={faciliteiten.id}>
                   <ReactMarkdown source={faciliteiten.faciliteiten} />
                   <span className="prijs"><span>Vanaf </span> {faciliteiten.prijsVanaf} <span> per week</span></span>
-                  <button className="button yellow">Villa informatie & beschikbaarheid</button>
+                  <Link 
+                    to={'/vakantie-villas/' + faciliteiten.id} 
+                    className="button yellow"
+                  >
+                        Villa informatie & beschikbaarheid
+                  </Link>
                 </TabPanel>)}
             </Tabs>
             : ''}
