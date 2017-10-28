@@ -16,20 +16,6 @@ interface State {
 
 export class Home extends React.Component<{}, State> {
   client: ContentfulClientApi = ContentfulClient;
-  images: Photo[] = [
-    {
-      original: 'http://lorempixel.com/1000/600/nature/1/',
-      thumbnail: 'http://lorempixel.com/250/150/nature/1/',
-    },
-    {
-      original: 'http://lorempixel.com/1000/600/nature/2/',
-      thumbnail: 'http://lorempixel.com/250/150/nature/2/'
-    },
-    {
-      original: 'http://lorempixel.com/1000/600/nature/3/',
-      thumbnail: 'http://lorempixel.com/250/150/nature/3/'
-    }
-  ];
   state = {
     introClosed: false,
     chateauPosts: [],
@@ -42,7 +28,8 @@ export class Home extends React.Component<{}, State> {
   }
 
   initPhotoSliderContentState() {
-    return this.client.getEntries({ content_type: SLIDER_PHOTO_CONTENT_TYPE_ID })
+    return this.client.getEntries({ content_type: SLIDER_PHOTO_CONTENT_TYPE_ID,
+      'fields.page.sys.id[all]': 'CpAKWj8P7iWggMwIkm4K2'})
       .then((content: EntryCollection<SliderPhotoContentModel>) => content.items.map(photo => {
         return {
           original: photo.fields.image.fields.file.url,
