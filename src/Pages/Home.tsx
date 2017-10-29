@@ -39,14 +39,11 @@ export class Home extends React.Component<{}, State> {
   initVillaFaciliteitenState() {
     return this.client.getEntries({
       content_type: VILLAS_CONTENT_TYPE_ID,
-      select: ['fields.faciliteiten,fields.title,fields.prijsVanaf']
+      select: ['fields.faciliteiten,fields.title,fields.prijsVanaf,fields.slug']
     })
       .then(entries => entries.items.map((villa: Entry<VillaFaciliteiten>) => {
         return {
-          id: villa.sys.id,
-          title: villa.fields.title,
-          faciliteiten: villa.fields.faciliteiten,
-          prijsVanaf: villa.fields.prijsVanaf
+          ... villa.fields
         };
       }))
       .then((faciliteiten) => {
