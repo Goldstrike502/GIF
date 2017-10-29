@@ -56,7 +56,7 @@ export class Home extends React.Component<{}, State> {
   initPhotoSliderContentState() {
     return this.client.getEntries({
       content_type: SLIDER_PHOTO_CONTENT_TYPE_ID,
-      'fields.page.sys.id[all]': 'CpAKWj8P7iWggMwIkm4K2'
+      'fields.homepage': true
     })
       .then((content: EntryCollection<SliderPhotoContentModel>) => content.items.map(photo => {
         return {
@@ -106,13 +106,14 @@ export class Home extends React.Component<{}, State> {
               {this.state.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
                 <TabPanel key={faciliteiten.id}>
                   <ReactMarkdown source={faciliteiten.faciliteiten} />
-                  <span className="prijs"><span>Vanaf </span> {faciliteiten.prijsVanaf} <span> per week</span></span>
-                  <Link 
-                    to={'/vakantie-villas/' + faciliteiten.id} 
-                    className="button yellow"
-                  >
-                        Villa informatie & beschikbaarheid
-                  </Link>
+                  <div className="villa-actions">
+                    <Link 
+                      to={'/vakantie-villas/' + faciliteiten.slug} 
+                      className="button yellow"
+                    > Villa informatie & beschikbaarheid 
+                    </Link>
+                    <span className="prijs"><span>Vanaf </span> {faciliteiten.prijsVanaf} <span> per week</span></span>
+                  </div>
                 </TabPanel>)}
             </Tabs>
             : ''}

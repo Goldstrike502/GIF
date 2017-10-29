@@ -1,13 +1,10 @@
-import { EntryCollection } from 'contentful';
+import { Photo, SliderPhotoContentModel } from '../../photoslider/Types';
+import { Entry, EntryCollection } from 'contentful';
 import * as React from 'react';
-import {
-    ContentfulClient,
-    ContentfulPhoto,
-    VILLAS_CONTENT_TYPE_ID
-} from '../../Contentful';
+import { ContentfulClient, ContentfulPhoto, VILLAS_CONTENT_TYPE_ID } from '../../Contentful';
 import './Villa.css';
 import { match } from 'react-router';
-// import ImageGallery from 'react-image-gallery';
+import ImageGallery from 'react-image-gallery';
 
 interface Props {
     children?: JSX.Element | string;
@@ -30,6 +27,7 @@ export interface VillaContentModel {
     plattegrond: ContentfulPhoto;
     infoRechts: string;
     prijsVanaf: string;
+    sliderPhotos: Entry<SliderPhotoContentModel>[];
     slug: string;
 }
 export interface VillaFaciliteiten extends Partial<VillaContentModel> {
@@ -48,6 +46,7 @@ interface VillaPageProps {
 interface VillaPageState {
     selectedVilla?: VillaContentModel;
     villas: VillaContentModel[];
+    sliderPhotos: Photo[];
 }
 export class VillaPage extends React.Component<VillaPageProps, VillaPageState> {
     client = ContentfulClient;
@@ -55,41 +54,54 @@ export class VillaPage extends React.Component<VillaPageProps, VillaPageState> {
     constructor() {
         super();
         this.client.getEntries({ content_type: VILLAS_CONTENT_TYPE_ID})
-            .then(newFunction())
-            .then(villas => {
-                console.log('dataaaaaa', villas);
-                this.setState({ ... this.state, villas });
-                this.selectVillaForParam(this.props.match.params.villa);
+            .then(transFormContenfulToPlainModel())
+        .then(villas => {
+            this.setState({ ... this.state, villas });
+            return villas;
+        })
+        .then((villas: VillaContentModel[]) => {
+                this.selectVillaStateForParam(this.props.match.params.villa);
+                return villas;
             });
-    }
-    selectVillaForParam(slug: string) {
-        const selectedVilla = this.state.villas.find(v => v.slug === slug);
-        this.setState({ ... this.state, selectedVilla });
+        }
+        selectVillaStateForParam(slug: string) {
+            const selectedVilla: VillaContentModel
+                 = this.state.villas.find((v: VillaContentModel) => v.slug === slug) || this.state.villas[0];
+            if (selectedVilla !== undefined && 
+                    selectedVilla.sliderPhotos !== undefined) {
+                const sliderPhotos: Photo[] = selectedVilla.sliderPhotos.map(photo => {
+                    return {
+                        original: photo.fields.image.fields.file.url,
+                        thumbnail: photo.fields.image.fields.file.url
+                      };
+                    });
+                this.setState({ ... this.state, selectedVilla, sliderPhotos });
+            } else {
+                this.setState({ ... this.state, selectedVilla });
+            }
     }
 
     render() {
+
         return (
             <section className="container">
-                {/* <ImageGallery items= /> */}
+                {this.state && this.state.sliderPhotos ? 
+                    <ImageGallery 
+                        items={this.state.sliderPhotos} 
+                        thumbnailPosition="left"
+                    /> : ''}
                 {(this.state && this.state.selectedVilla ?
                     this.renderVilla(this.state.selectedVilla) : 'Kies villa')}
             </section>
         );
     }
     renderVilla(model: VillaContentModel) {
-        if (model) {
-
-            return (
-                <section className="villa-beschrijving"> {model.description} </section>
-            );
-        } else {
-            return false;
-        }
+        return <section className="villa-beschrijving"> {model.description} </section>;
     }
 
 }
-function newFunction() {
-    return (entries: EntryCollection<VillaContentModel>) => entries.items.map(entry => {
+function transFormContenfulToPlainModel() {
+    return (entries: EntryCollection<any>) => entries.items.map(entry => {
         return {
             ...entry.fields
         };

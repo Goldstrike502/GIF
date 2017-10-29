@@ -34,9 +34,9 @@ nav .brand {
   margin-left: 25px;
 }
 .button:hover {
-  border-bottom: 2px solid #1D5D88;
-  border-right: 2px solid #1D5D88;
-  background:#237DB9;
+  border-bottom: 3px solid #1D5D88;
+  border-right: 3px solid #1D5D88;
+  background:rgb(86, 107, 121);
 }
 .button {
   font-size: 16px;
@@ -51,11 +51,15 @@ nav .brand {
    color: #fff;
    padding: 6px 30px;
    background: #2b87c6;
+   display: inline-block;
+   line-height: 44px;
+   margin: 15px;
+   text-decoration: none;
 }
 .button.yellow:hover {
-  border-bottom: 2px solid #b99040;
-  border-right: 2px solid #b99040;
-  background: #f6b632;
+  border-bottom: 3px solid #b99040;
+  border-right: 3px solid #b99040;
+  background: #ffac07;
 }
 .button.yellow {
   background-color: #f5b230;

@@ -7,7 +7,7 @@
     font-size: 28px;
 }
 .villa-compact-view .button{
-    float: right;
+    align-self: right;
 }	
 .villa-compact-view {
     background: url('/images/villas-bg.jpg');
@@ -57,4 +57,8 @@
     text-transform: uppercase;
     border-radius:0;
     border: none;
+}
+.villa-compact-view .react-tabs__tab .villa-actions {
+    display: flex;
+    flex-direction: row;
 }
