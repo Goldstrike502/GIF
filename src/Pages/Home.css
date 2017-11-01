@@ -111,13 +111,6 @@ hr {
   top: 0;
   padding: 20px;
 }
-.image-gallery-image img {
-  transition: all .6s ease;
-}
-.blur .image-gallery-image img {
-  -webkit-filter: blur(5px);  
-}
-
 .image-intro i.play.hidden {
   opacity:0;
   display:none;
@@ -135,12 +128,4 @@ hr {
   margin-top: 35px;
   text-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.34);
   
-}
-.image-gallery-thumbnails-wrapper {
-  top: 85px;
-}
-.image-gallery-slide-wrapper.top {
-  background: rgba(255,255,255,0.8);
-  z-index: 40;
-  margin-top: -156px;
 }

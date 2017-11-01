@@ -1,4 +1,4 @@
-import { Photo, SliderPhotoContentModel } from '../../photoslider/Types';
+import { Photo, SliderPhotoContentModel } from '../../Types';
 import { Entry, EntryCollection } from 'contentful';
 import * as React from 'react';
 import { ContentfulClient, ContentfulPhoto, VILLAS_CONTENT_TYPE_ID } from '../../Contentful';

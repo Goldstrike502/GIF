@@ -55,7 +55,6 @@ export class ChateauPage extends React.Component<ChateauPageProps, ChateauPageSt
         const headerPhoto = selectedPost ?
              (selectedPost as ChateauPost).cover.fields.file.url : '/images/uploads/chateau.jpg';
 
-
         this.setState({... this.state, 
             headerPhoto,
             selectedPost}); 
@@ -73,7 +72,7 @@ export class ChateauPage extends React.Component<ChateauPageProps, ChateauPageSt
         return (
             <div className="container">
         <section className="chateau-page" style={this.backgroundStyle()}>
-        <h1>{(selectedPost ? (selectedPost as ChateauPost).title : 'Chateau Cazaleres')}</h1>
+            <h1>{(selectedPost ? (selectedPost as ChateauPost).title : 'Chateau Cazaleres')}</h1>
         </section>
         <section>
             {selectedPost ? 

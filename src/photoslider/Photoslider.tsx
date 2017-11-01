@@ -3,7 +3,7 @@ import './Photoslider.css';
 import ImageGallery from 'react-image-gallery';
 import ReactTooltip from 'react-tooltip';
 
-import { ImageGalleryProps } from './Types';
+import { ImageGalleryProps } from './../Types';
 interface Props extends ImageGalleryProps {
   closed?: boolean | undefined;
   onClose?: () => void;

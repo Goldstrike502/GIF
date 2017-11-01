@@ -1,11 +1,26 @@
+import { ContentfulClient } from './Contentful';
+import { Footer, Sitemap } from './Footer/Footer';
 import { VillaPage } from './Pages/Villa/Villa';
 import { ChateauPage } from './Pages/Chateau/Chateau';
 import { Home } from './Pages/Home';
 import * as React from 'react';
 import './App.css';
 import 'whatwg-fetch';
+
 import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
-class App extends React.Component {
+interface Props { 
+}
+interface State {
+  footerSitemap: Sitemap;
+}
+class App extends React.Component<Props, State> {
+  client = ContentfulClient;
+state = { footerSitemap: {
+  items: [{
+    title: 'Loading footer',
+    items: []
+  }]
+}};
   render() {
     return (
       <div className="App">
@@ -16,7 +31,7 @@ class App extends React.Component {
             <ul>
               <li><NavLink to="/">Homepage</NavLink></li>
               <li><NavLink to="/chateau">Chateau</NavLink></li>
-              <li><NavLink to="/vakantie-villas">Villa's</NavLink></li>
+              <li><NavLink to="/vakantie-villas/espace">Villa's</NavLink></li>
               <li><NavLink to="/omgeving">Omgeving</NavLink></li>
               <li><NavLink to="/boeken">Boeken</NavLink></li>
               <li><NavLink to="/contact">Contact</NavLink></li>
@@ -26,6 +41,7 @@ class App extends React.Component {
           <Route exact={true} path="/chateau" component={ChateauPage}/>
           <Route path="/chateau/:post" component={ChateauPage}/>
           <Route path="/vakantie-villas/:villa" component={VillaPage}/>
+          {!!this.state && !!this.state.footerSitemap ? <Footer sitemap={this.state.footerSitemap} /> : ''}
           </div>
         </Router>
       </div>

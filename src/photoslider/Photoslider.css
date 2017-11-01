@@ -1,1 +1,21 @@
 @import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+
+
+.image-gallery-image img {
+    transition: all .6s ease;
+}
+.blur .image-gallery-image img {
+    -webkit-filter: blur(5px);  
+}
+
+.image-gallery-thumbnails-wrapper { 
+    margin-top: -156px;
+    top: 85px;
+}
+.image-gallery-slide-wrapper.top {
+    background: rgba(255,255,255,0.8);
+    z-index: 40;
+}
+.image-gallery-slides {
+    max-height: 100vh;
+}

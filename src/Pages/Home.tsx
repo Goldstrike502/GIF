@@ -13,7 +13,7 @@ import {
   VILLAS_CONTENT_TYPE_ID,
 } from '../Contentful';
 import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
-import { Photo, SliderPhotoContentModel } from '../photoslider/Types';
+import { Photo, SliderPhotoContentModel } from '../Types';
 import { Link } from 'react-router-dom';
 interface State {
   introClosed: boolean;
