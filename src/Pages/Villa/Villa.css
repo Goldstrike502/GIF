@@ -62,3 +62,53 @@
     display: flex;
     flex-direction: row;
 }
+section.villa-page-tabs {
+    padding: 0 5%;
+}
+.villa-page-tabs .react-tabs__tab.react-tabs__tab--selected {
+    background: #f5b230;
+    border: none;
+    border-radius: 0;
+}
+.villa-page-tabs .react-tabs__tab-list {
+    padding-bottom: 1px;
+    border-bottom: 2px solid #f5b230;
+}
+.villa-page-tabs .react-tabs__tab {
+    border: none;
+    background: #f2daab;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 14px 40px;
+    font-size: 18px;
+    margin: 0 7px 0 0;
+}
+.villa-page-tabs h1 {
+    font-size: 48px;
+    margin: 45px 8px 25px 8px;
+}
+.villa-content {
+    display: flex;
+    flex-direction: row;
+}
+.villa-content aside h1,
+.villa-content aside h2,
+.villa-content aside h3,
+.villa-content aside p,
+.villa-content hr,
+.villa-content aside li {
+    color: #fff;
+    font-weight: 100;
+    border-color: #fff;
+ }
+.villa-content aside {
+    background: #323331;
+    color: #fff;
+    box-sizing: border-box;
+    padding: 15px;
+    line-height: 28px;
+}
+.villa-content aside.right-content {
+    color: #fff;
+    min-width: 390px;
+}

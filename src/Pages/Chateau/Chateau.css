@@ -39,6 +39,7 @@
     color: rgba(255,255,255,0.7);
     z-index: 292563;
     padding: 5px 0 2px 0;
+    text-transform: uppercase;
     margin:0;
 }
 .chateau-item figure:hover caption {

@@ -71,7 +71,9 @@ body {
   padding: 0;
   font-family: 'Montserrat', sans-serif;  
 }
-
+p {
+  line-height: 28px;
+}
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
   color: rgba(0,0,0,.86);
@@ -79,4 +81,8 @@ h1, h2, h3 {
 
 h1, h2 {
   text-transform: uppercase;
+}
+.content {
+  max-width: 80%;
+  margin: auto;
 }

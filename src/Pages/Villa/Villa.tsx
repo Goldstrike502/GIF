@@ -1,11 +1,13 @@
 import { Photo, SliderPhotoContentModel } from '../../Types';
+import { VillaContentTabs } from './VillaContentTabs';
 import { Entry, EntryCollection } from 'contentful';
 import * as React from 'react';
 import { ContentfulClient, ContentfulPhoto, VILLAS_CONTENT_TYPE_ID } from '../../Contentful';
 import './Villa.css';
 import { match } from 'react-router';
 import ImageGallery from 'react-image-gallery';
-
+import * as ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 interface Props {
     children?: JSX.Element | string;
 }
@@ -24,7 +26,7 @@ export interface VillaContentModel {
     title: string;
     faciliteiten: string;
     description: string;
-    plattegrond: ContentfulPhoto;
+    plattegrond: Entry<ContentfulPhoto>;
     infoRechts: string;
     prijsVanaf: string;
     sliderPhotos: Entry<SliderPhotoContentModel>[];
@@ -60,13 +62,14 @@ export class VillaPage extends React.Component<VillaPageProps, VillaPageState> {
             return villas;
         })
         .then((villas: VillaContentModel[]) => {
-                this.selectVillaStateForParam(this.props.match.params.villa);
+                this.selectVillaStateForParam(this.props.match.params.villa, villas);
                 return villas;
             });
         }
-        selectVillaStateForParam(slug: string) {
+        selectVillaStateForParam(slug: string, villas: VillaContentModel[]) {
             const selectedVilla: VillaContentModel
-                 = this.state.villas.find((v: VillaContentModel) => v.slug === slug) || this.state.villas[0];
+                 = villas .find((v: VillaContentModel) => v.slug === slug) || this.state.villas[0];
+                 
             if (selectedVilla !== undefined && 
                     selectedVilla.sliderPhotos !== undefined) {
                 const sliderPhotos: Photo[] = selectedVilla.sliderPhotos.map(photo => {
@@ -91,14 +94,27 @@ export class VillaPage extends React.Component<VillaPageProps, VillaPageState> {
                         thumbnailPosition="left"
                     /> : ''}
                 {(this.state && this.state.selectedVilla ?
-                    this.renderVilla(this.state.selectedVilla) : 'Kies villa')}
+                    this.renderVillaContent(this.state.selectedVilla) 
+                    : '')}
             </section>
         );
     }
-    renderVilla(model: VillaContentModel) {
-        return <section className="villa-beschrijving"> {model.description} </section>;
-    }
 
+    private renderVillaContent(state: VillaContentModel): React.ReactNode {
+        return (
+            <section className="villa-content">
+                <VillaContentTabs content={state} />
+                <aside className="right-content">
+                    <h2>Algemene informatie</h2>
+                    <ReactMarkdown source={state.infoRechts} />
+                    <hr />
+                    <h2>Hoe kunnen wij u helpen?</h2>
+                    <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk? 
+                        Neem gerust contact op, we staan klaar om u te helpen.</p>
+                    <Link to={`/vakantie-villa/${state.slug}`} className="button yellow">Contact informatie</Link>
+                </aside>
+            </section>);
+    }
 }
 function transFormContenfulToPlainModel() {
     return (entries: EntryCollection<any>) => entries.items.map(entry => {
