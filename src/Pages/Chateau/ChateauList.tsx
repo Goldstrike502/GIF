@@ -1,4 +1,4 @@
-import { ChateauPost } from './Types';
+import { ChateauPost } from '../../Types/index';
 import * as React from 'react';
 import './Chateau.css';
 import { Link } from 'react-router-dom';

@@ -1,7 +1,7 @@
+import { ChateauPost } from '../../Types/index';
 import { ChateauItem, ChateauListViewComponent } from './ChateauList';
 import { CHATEAU_CONTENT_TYPE_ID, ContentfulClient } from '../../Contentful';
 import { EntryCollection } from 'contentful';
-import { ChateauPost } from './Types';
 import * as React from 'react';
 import './Chateau.css';
 import { match } from 'react-router';

@@ -1,12 +1,37 @@
+import { VillaContentModel, VillaFaciliteiten } from '../Pages/Villa/Villa';
 import { Entry } from 'contentful';
 import { ContentfulPhoto } from '../Contentful';
+import { Link } from 'react-router-dom';
 
+export interface SitemapItem {
+  title: string;
+  link: Link;
+}
+export interface SitemapBranch {
+  title: string;
+  items: SitemapItem[];
+}
+export interface Sitemap {
+  items: SitemapBranch[];
+}
 export interface StoreState {
-  languageName: string;
-  enthusiasmLevel: number;
+  footer: Sitemap;
+  chateauPosts: ChateauPost[];
+  VillaFaciliteiten: VillaFaciliteiten[];
+  villas: VillaContentModel[];
+  sliderPhotos: Photo[];
+}
+
+export interface ChateauPost {
+    title: string;
+    description: string;
+    content: string;
+    cover: Entry<ContentfulPhoto>;
+    slug: string;
 }
 
 type positionTypes = 'top' | 'right' | 'bottom' | 'left';
+
 export interface Photo {
   original?: string;
   thumbnail?: string;

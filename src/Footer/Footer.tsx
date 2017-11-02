@@ -1,17 +1,13 @@
+import { Sitemap } from '../Types/index';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
-export interface SitemapItem {
-  title: string;
-  link: Link;
-}
-export interface SitemapBranch {
-  title: string;
-  items: SitemapItem[];
-}
-export interface Sitemap {
-  items: SitemapBranch[];
-}
+export const initialFooterSitemap: Sitemap = {
+  items: [{
+    title: 'Loading footer',
+    items: []
+  }]
+};
+
 interface FooterProps {
   sitemap: Sitemap;
 }

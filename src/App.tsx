@@ -1,8 +1,11 @@
+import { Sitemap } from './Types/index';
 import { ContentfulClient } from './Contentful';
-import { Footer, Sitemap } from './Footer/Footer';
+import { Footer } from './Footer/Footer';
+import { Provider } from 'react-redux';
 import { VillaPage } from './Pages/Villa/Villa';
 import { ChateauPage } from './Pages/Chateau/Chateau';
 import { Home } from './Pages/Home';
+import { store } from './Store';
 import * as React from 'react';
 import './App.css';
 import 'whatwg-fetch';
@@ -15,16 +18,18 @@ interface State {
 }
 class App extends React.Component<Props, State> {
   client = ContentfulClient;
-state = { footerSitemap: {
-  items: [{
-    title: 'Loading footer',
-    items: []
-  }]
-}};
+  state = { footerSitemap: {
+    items: [{
+      title: 'Loading footer',
+      items: []
+    }]
+  }};
   render() {
     return (
       <div className="App">
         <Router>
+        <Provider store={store}>
+
           <div>
           <nav>
             <span className="brand">Goed in Frankrijk</span>
@@ -43,6 +48,7 @@ state = { footerSitemap: {
           <Route path="/vakantie-villas/:villa" component={VillaPage}/>
           {!!this.state && !!this.state.footerSitemap ? <Footer sitemap={this.state.footerSitemap} /> : ''}
           </div>
+          </Provider>
         </Router>
       </div>
     );

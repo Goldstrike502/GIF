@@ -1,5 +1,5 @@
+import { ChateauPost, StoreState } from '../Types/index';
 import { ChateauItem, ChateauListViewComponent } from './Chateau/ChateauList';
-import { ChateauPost } from './Chateau/Types';
 import { VillaCompactView, VillaFaciliteiten } from './Villa/Villa';
 import { PhotoSlider } from '../photoslider/Photoslider';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -15,24 +15,33 @@ import {
 import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
 import { Photo, SliderPhotoContentModel } from '../Types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 interface State {
   introClosed: boolean;
   chateauPosts?: ChateauPost[];
-  sliderPhotos?: Photo[];
   villaFaciliteiten?: VillaFaciliteiten[];
 }
+interface Props {
+  sliderPhotos: Photo[];
 
-export class Home extends React.Component<{}, State> {
+}
+function mapStateToProps(state: StoreState): Props {
+  const {sliderPhotos} = state; 
+  return {
+    sliderPhotos
+  };
+}
+class HomePage extends React.Component<Props, State> {
   client: ContentfulClientApi = ContentfulClient;
   state = {
     introClosed: false,
     chateauPosts: [],
-    sliderPhotos: [],
     villaFaciliteiten: []
   };
   constructor() {
     super();
-    this.initPhotoSliderContentState();
+    // this.initPhotoSliderContentState();
     this.initChateauContentState();
     this.initVillaFaciliteitenState();
   }
@@ -63,11 +72,7 @@ export class Home extends React.Component<{}, State> {
           original: photo.fields.image.fields.file.url,
           thumbnail: photo.fields.image.fields.file.url
         };
-      }))
-      .then((photos) => {
-        this.setState({ ...this.state, sliderPhotos: photos });
-        return photos;
-      });
+      }));
   }
 
   initChateauContentState() {
@@ -85,11 +90,7 @@ export class Home extends React.Component<{}, State> {
       <div className="container">
         <section className="image-intro">
           {this.renderIntroHeader()}
-          <PhotoSlider
-            items={this.state.sliderPhotos}
-            closed={this.state.introClosed}
-            onClose={() => this.onIntroClose()}
-          />
+          <PhotoSlider />
         </section>
         <ChateauListViewComponent intro={true}>
           {this.state.chateauPosts
@@ -150,3 +151,6 @@ export class Home extends React.Component<{}, State> {
     );
   }
 }
+export const Home = connect(mapStateToProps, (state) => {
+  return {};
+})(HomePage);
