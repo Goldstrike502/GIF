@@ -1,4 +1,3 @@
-import { GetSliderPhotos } from '../Actions/index';
 import { Photo, StoreState } from '../Types/index';
 import * as React from 'react';
 import './Photoslider.css';
@@ -21,18 +20,16 @@ interface State {
 export const initialPhotoSliderState: Photo[] = [{
   // tslint:disable-next-line:max-line-length
   original: `https://images.contentful.com/bvxa5ye6wamh/5Gsh0qeQZGi8MEQksWqKwE/66e78a77e2a27ae4c32b10ccf3dc0329/background.jpg`,
-    thumbnail: `https://images.contentful.com/bvxa5ye6wamh/5Gsh0qeQZGi8MEQksWqKwE/66e78a77e2a27ae4c32b10ccf3dc0329/background.jpg`
+  thumbnail: `https://images.contentful.com/bvxa5ye6wamh/5Gsh0qeQZGi8MEQksWqKwE/66e78a77e2a27ae4c32b10ccf3dc0329/background.jpg`
 }];
 
 function mapStateToProps(state: StoreState): Props {
-  console.log('map state to props', [...state.sliderPhotos]);
+  console.log('map state to props', state.sliderPhotos);
   return {items: state.sliderPhotos}; 
 } 
 
 function mapDispatchToProps(dispatch: Dispatch<Props>): Partial<Props> {
-  return {
-    onClose: () => dispatch(GetSliderPhotos())
-  };
+  return { };
 }
 
 class PhotoSliderComponent extends React.Component<Props, State> {
@@ -40,11 +37,9 @@ class PhotoSliderComponent extends React.Component<Props, State> {
   state = { isClosed: false , items: []};
   constructor() {
     super();
+
   }
-  componentWillReceiveProps(props: Props) {
-    console.log('will mount', props);
-    this.setState({ isClosed: props.closed || false });
-  }
+
   render() {
     console.log('render', this.props);
     return (
@@ -58,6 +53,7 @@ class PhotoSliderComponent extends React.Component<Props, State> {
           thumbnailPosition="top"
           showThumbnails={this.state.isClosed}
           showNav={this.state.isClosed}
+          items={this.state.items}
           {... this.props}
       /> 
         <i
@@ -70,7 +66,7 @@ class PhotoSliderComponent extends React.Component<Props, State> {
         <ReactTooltip effect="solid" place="bottom" />
       </div>
     );
-  }
+  } 
   
   onClose() {
     this._imageGallery.play();
@@ -81,6 +77,10 @@ class PhotoSliderComponent extends React.Component<Props, State> {
     if (this.props.onClose) {
       this.props.onClose();
     }
+
   }
 }
-export const PhotoSlider = connect(mapStateToProps, mapDispatchToProps)(PhotoSliderComponent);
+export const BackgroundPhotoSlider = connect(mapStateToProps, mapDispatchToProps)(PhotoSliderComponent);
+export const PhotoSlider = connect<Props, Partial<Props>>
+                                  (mapStateToProps, mapDispatchToProps)
+                                      ((props: Props) => <ImageGallery {... props} />);

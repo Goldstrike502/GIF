@@ -5,12 +5,12 @@ import { Provider } from 'react-redux';
 import { VillaPage } from './Pages/Villa/Villa';
 import { ChateauPage } from './Pages/Chateau/Chateau';
 import { Home } from './Pages/Home';
-import { store } from './Store';
 import * as React from 'react';
 import './App.css';
 import 'whatwg-fetch';
 
 import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
+import configureStore from './Store';
 interface Props { 
 }
 interface State {
@@ -24,11 +24,12 @@ class App extends React.Component<Props, State> {
       items: []
     }]
   }};
+
   render() {
     return (
       <div className="App">
         <Router>
-        <Provider store={store}>
+        <Provider store={configureStore()}>
 
           <div>
           <nav>

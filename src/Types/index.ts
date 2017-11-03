@@ -1,4 +1,3 @@
-import { VillaContentModel, VillaFaciliteiten } from '../Pages/Villa/Villa';
 import { Entry } from 'contentful';
 import { ContentfulPhoto } from '../Contentful';
 import { Link } from 'react-router-dom';
@@ -16,9 +15,6 @@ export interface Sitemap {
 }
 export interface StoreState {
   footer: Sitemap;
-  chateauPosts: ChateauPost[];
-  VillaFaciliteiten: VillaFaciliteiten[];
-  villas: VillaContentModel[];
   sliderPhotos: Photo[];
 }
 

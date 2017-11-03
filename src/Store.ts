@@ -1,13 +1,23 @@
+import { rootEpic } from './Epics/index';
 import { initialFooterSitemap } from './Footer/Footer';
-import { RootReducer } from './Reducers/index';
+import { rootReducer } from './Reducers/index';
 import { StoreState } from './Types/index';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { initialPhotoSliderState } from './photoslider/Photoslider';
+import { createEpicMiddleware } from 'redux-observable';
 
-export const store = createStore<StoreState>(RootReducer, {
-    footer: initialFooterSitemap,
-    chateauPosts: [],
-    VillaFaciliteiten: [],
-    villas: [],
-    sliderPhotos: initialPhotoSliderState
-});
+const epicMiddleware = createEpicMiddleware(rootEpic);
+export default function configureStore() {
+    const store = createStore<StoreState>(
+      rootReducer,
+      initialStoreState,
+      applyMiddleware(epicMiddleware)
+    );
+ 
+    return store;
+  }
+
+const initialStoreState = {
+        footer: initialFooterSitemap,
+        sliderPhotos: [... initialPhotoSliderState]
+    };

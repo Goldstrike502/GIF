@@ -1,7 +1,8 @@
+import { GetSliderPhotos } from '../Actions/index';
 import { ChateauPost, StoreState } from '../Types/index';
 import { ChateauItem, ChateauListViewComponent } from './Chateau/ChateauList';
 import { VillaCompactView, VillaFaciliteiten } from './Villa/Villa';
-import { PhotoSlider } from '../photoslider/Photoslider';
+import { BackgroundPhotoSlider } from '../photoslider/Photoslider';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import * as ReactMarkdown from 'react-markdown';
 import * as React from 'react';
@@ -9,13 +10,12 @@ import './Home.css';
 import {
   CHATEAU_CONTENT_TYPE_ID,
   ContentfulClient,
-  SLIDER_PHOTO_CONTENT_TYPE_ID,
   VILLAS_CONTENT_TYPE_ID,
 } from '../Contentful';
 import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
-import { Photo, SliderPhotoContentModel } from '../Types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 interface State {
   introClosed: boolean;
@@ -23,13 +23,11 @@ interface State {
   villaFaciliteiten?: VillaFaciliteiten[];
 }
 interface Props {
-  sliderPhotos: Photo[];
-
+  onLoadHomepageContent: () => any; 
 }
-function mapStateToProps(state: StoreState): Props {
-  const {sliderPhotos} = state; 
+function mapDispatchToProps(dispatch: Dispatch<StoreState>): Partial<Props> {
   return {
-    sliderPhotos
+    onLoadHomepageContent: () => dispatch(GetSliderPhotos())
   };
 }
 class HomePage extends React.Component<Props, State> {
@@ -42,6 +40,7 @@ class HomePage extends React.Component<Props, State> {
   constructor() {
     super();
     // this.initPhotoSliderContentState();
+    
     this.initChateauContentState();
     this.initVillaFaciliteitenState();
   }
@@ -62,18 +61,6 @@ class HomePage extends React.Component<Props, State> {
         });
       });
   }
-  initPhotoSliderContentState() {
-    return this.client.getEntries({
-      content_type: SLIDER_PHOTO_CONTENT_TYPE_ID,
-      'fields.homepage': true
-    })
-      .then((content: EntryCollection<SliderPhotoContentModel>) => content.items.map(photo => {
-        return {
-          original: photo.fields.image.fields.file.url,
-          thumbnail: photo.fields.image.fields.file.url
-        };
-      }));
-  }
 
   initChateauContentState() {
     return this.client.getEntries({ content_type: CHATEAU_CONTENT_TYPE_ID })
@@ -85,12 +72,17 @@ class HomePage extends React.Component<Props, State> {
         return content;
       });
   }
+  componentWillMount() {
+    if (this.props.onLoadHomepageContent) {
+      this.props.onLoadHomepageContent();
+    }
+  }
   render() {
     return (
       <div className="container">
         <section className="image-intro">
           {this.renderIntroHeader()}
-          <PhotoSlider />
+          <BackgroundPhotoSlider />
         </section>
         <ChateauListViewComponent intro={true}>
           {this.state.chateauPosts
@@ -151,6 +143,7 @@ class HomePage extends React.Component<Props, State> {
     );
   }
 }
-export const Home = connect(mapStateToProps, (state) => {
-  return {};
-})(HomePage);
+export const Home = connect((state) => {
+                              return {};
+                            }, 
+                            mapDispatchToProps)(HomePage);

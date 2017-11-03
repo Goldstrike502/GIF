@@ -1,18 +1,16 @@
+import { initialPhotoSliderState } from '../photoslider/Photoslider';
 import { PhotoSliderActions, FooterActions } from '../Actions/index';
-import { StoreState } from '../Types/index';
+import { Photo, StoreState } from '../Types/index';
 import { combineReducers } from 'redux';
 import * as constants from '../Constants';
 
-function sliderPhotos(state: StoreState, action: PhotoSliderActions): StoreState {
+function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSliderActions): Photo[] {
     switch (action.type) {
         case constants.RECEIVED_SLIDER_PHOTOS:
-            return {
-                ... state,
-                sliderPhotos: [...action.photos]
-            };
+            return [...action.photos];
         default: 
-        console.log('action: ', action);
-        return {... state};
+        console.log('default state', state);
+        return [...state];
     }
 }
 function footer(state: StoreState, action: FooterActions): StoreState {
@@ -25,4 +23,5 @@ function footer(state: StoreState, action: FooterActions): StoreState {
         return {...state};
     }
  }
-export const RootReducer = combineReducers<StoreState>({sliderPhotos, footer});
+  
+export const rootReducer = combineReducers<StoreState>({sliderPhotos, footer});
