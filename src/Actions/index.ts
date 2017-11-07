@@ -1,3 +1,4 @@
+import { Sitemap } from '../Types';
 import { Photo } from '../Types/index';
 import * as constants from '../Constants';
 
@@ -16,7 +17,8 @@ export interface GetFooterSitemap {
 }
 
 export interface ReceivedFooterSitemap {
-    type: constants.RECEIVED_FOOTER_SITEMAP_ITEMS;    
+    type: constants.RECEIVED_FOOTER_SITEMAP;
+    sitemap: Sitemap;
 }
 export interface ReceivedSliderPhotos {
     type: constants.RECEIVED_SLIDER_PHOTOS;

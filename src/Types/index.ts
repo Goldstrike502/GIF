@@ -15,7 +15,7 @@ export interface Sitemap {
 }
 
 export interface FooterState {
-
+  sitemap: Sitemap;
 }
 
 export interface LayoutState {

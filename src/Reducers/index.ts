@@ -1,5 +1,5 @@
 import { LayoutActions } from '../Actions';
-import { LayoutState } from '../Types';
+import { FooterState, LayoutState } from '../Types';
 import { initialPhotoSliderState } from '../photoslider/Photoslider';
 import { PhotoSliderActions, FooterActions } from '../Actions/index';
 import { Photo, StoreState } from '../Types/index';
@@ -16,12 +16,12 @@ function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSli
         return [...state];
     }
 }
-function footer(state: FooterState, action: FooterActions): StoreState {
+function footer(state: FooterState, action: FooterActions): FooterState {
     switch (action.type) {
-        case constants.RECEIVED_FOOTER_SITEMAP_ITEMS:
-            const footerState = {... state.footer};
-            footerState.items.concat(action.branch);
-            return {... state, footer: footerState};
+        case constants.RECEIVED_FOOTER_SITEMAP:
+            const footerState = {... state.sitemap};
+            footerState.items.concat(action.sitemap.items);
+            return {sitemap: footerState};
         default: 
         return {...state};
     }

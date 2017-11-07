@@ -1,3 +1,4 @@
+import { closeIntro } from '../Actions';
 import { Photo, StoreState } from '../Types/index';
 import * as React from 'react';
 import './Photoslider.css';
@@ -25,11 +26,13 @@ export const initialPhotoSliderState: Photo[] = [{
 
 function mapStateToProps(state: StoreState): Props {
   console.log('map state to props', state.sliderPhotos);
-  return {items: state.sliderPhotos}; 
+  return {items: state.sliderPhotos, closed: state.layout.introClosed}; 
 } 
 
-function mapDispatchToProps(dispatch: Dispatch<Props>): Partial<Props> {
-  return { };
+function mapDispatchToProps(dispatch: Dispatch<StoreState>): Partial<Props> {
+  return { 
+    onClose: () => dispatch(closeIntro())
+  };
 }
 
 class PhotoSliderComponent extends React.Component<Props, State> {
@@ -37,7 +40,10 @@ class PhotoSliderComponent extends React.Component<Props, State> {
   state = { isClosed: false , items: []};
   constructor() {
     super();
+  }
 
+  componentWillReceiveProps(props: Props) {
+    this.setState({isClosed: props.closed || false});
   }
 
   render() {

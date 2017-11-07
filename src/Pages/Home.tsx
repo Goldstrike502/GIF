@@ -1,3 +1,4 @@
+import { closeIntro } from '../Actions';
 import { GetSliderPhotos } from '../Actions/index';
 import { ChateauPost, StoreState } from '../Types/index';
 import { ChateauItem, ChateauListViewComponent } from './Chateau/ChateauList';
@@ -23,11 +24,21 @@ interface State {
   villaFaciliteiten?: VillaFaciliteiten[];
 }
 interface Props {
-  onLoadHomepageContent: () => any; 
+  onLoadHomepageContent: () => any;
+  onIntroClose: () => void;
+  introClosed: boolean;
 }
 function mapDispatchToProps(dispatch: Dispatch<StoreState>): Partial<Props> {
   return {
-    onLoadHomepageContent: () => dispatch(GetSliderPhotos())
+    onLoadHomepageContent: () => dispatch(GetSliderPhotos()),
+    onIntroClose: () => dispatch(closeIntro())
+  };
+}
+function mapStateToProps(state: StoreState): Props {
+  return {
+    onLoadHomepageContent: () => undefined,
+    onIntroClose:  () => undefined,
+    introClosed: state.layout.introClosed
   };
 }
 class HomePage extends React.Component<Props, State> {
@@ -38,9 +49,7 @@ class HomePage extends React.Component<Props, State> {
     villaFaciliteiten: []
   };
   constructor() {
-    super();
-    // this.initPhotoSliderContentState();
-    
+    super();    
     this.initChateauContentState();
     this.initVillaFaciliteitenState();
   }
@@ -76,6 +85,28 @@ class HomePage extends React.Component<Props, State> {
     if (this.props.onLoadHomepageContent) {
       this.props.onLoadHomepageContent();
     }
+  }
+  renderIntroHeader() {
+    return (
+      <header className={this.props.introClosed ? 'hidden' : ''}>
+        <span className="close" onClick={() => this.props.onIntroClose()}>X</span>
+        <figure>
+          <img src="./logo.png" alt="Logo" />
+          <h1><span>Goed in</span> Frankrijk</h1>
+        </figure>
+        <hr />
+        <ul>
+          <li>Kindvriendelijk</li>
+          <li>Luxe vakantie-villa's</li>
+          <li>Persoonlijk contact</li>
+        </ul>
+        <p>Zeven eigenaren van luxe vakantie-villa's
+          gelegen in Zuid-Frankrijk hebben zich verenigd in een stichting.
+          Dit om zich te kunnen onderscheiden in mooie en luxe ingerichte villa's met een
+          echt thuisgevoel. Wij zijn er voor uw gemakken en een mooie vakantie.
+        </p>
+      </header>
+    );
   }
   render() {
     return (
@@ -120,30 +151,6 @@ class HomePage extends React.Component<Props, State> {
   onIntroClose() {
     this.setState({ introClosed: true });
   }
-  renderIntroHeader() {
-    return (
-      <header className={this.state.introClosed ? 'hidden' : ''}>
-        <span className="close" onClick={() => this.onIntroClose()}>X</span>
-        <figure>
-          <img src="./logo.png" alt="Logo" />
-          <h1><span>Goed in</span> Frankrijk</h1>
-        </figure>
-        <hr />
-        <ul>
-          <li>Kindvriendelijk</li>
-          <li>Luxe vakantie-villa's</li>
-          <li>Persoonlijk contact</li>
-        </ul>
-        <p>Zeven eigenaren van luxe vakantie-villa's
-          gelegen in Zuid-Frankrijk hebben zich verenigd in een stichting.
-          Dit om zich te kunnen onderscheiden in mooie en luxe ingerichte villa's met een
-          echt thuisgevoel. Wij zijn er voor uw gemakken en een mooie vakantie.
-        </p>
-      </header>
-    );
-  }
 }
-export const Home = connect((state) => {
-                              return {};
-                            }, 
+export const Home = connect((state) => mapStateToProps, 
                             mapDispatchToProps)(HomePage);
