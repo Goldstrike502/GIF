@@ -28,6 +28,5 @@ export const SliderPhotosEpic: Epic<Action, {}, any> =
             map((photos) => {                
                 return ReceivedSliderPhotos(photos);
             })
-    
     );
 };

@@ -13,9 +13,18 @@ export interface SitemapBranch {
 export interface Sitemap {
   items: SitemapBranch[];
 }
+
+export interface FooterState {
+
+}
+
+export interface LayoutState {
+  introClosed: boolean;
+}
 export interface StoreState {
   footer: Sitemap;
   sliderPhotos: Photo[];
+  layout: LayoutState;
 }
 
 export interface ChateauPost {

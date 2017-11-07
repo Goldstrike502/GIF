@@ -1,27 +1,37 @@
+import { LayoutActions } from '../Actions';
+import { LayoutState } from '../Types';
 import { initialPhotoSliderState } from '../photoslider/Photoslider';
 import { PhotoSliderActions, FooterActions } from '../Actions/index';
 import { Photo, StoreState } from '../Types/index';
 import { combineReducers } from 'redux';
 import * as constants from '../Constants';
+import { CLOSE_INTRO_MESSAGE } from '../Constants';
 
 function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSliderActions): Photo[] {
     switch (action.type) {
         case constants.RECEIVED_SLIDER_PHOTOS:
-            return [...action.photos];
+            return [...state, ...action.photos];
         default: 
         console.log('default state', state);
         return [...state];
     }
 }
-function footer(state: StoreState, action: FooterActions): StoreState {
+function footer(state: FooterState, action: FooterActions): StoreState {
     switch (action.type) {
         case constants.RECEIVED_FOOTER_SITEMAP_ITEMS:
             const footerState = {... state.footer};
-            footerState.items.push(action.branch);
+            footerState.items.concat(action.branch);
             return {... state, footer: footerState};
         default: 
         return {...state};
     }
  }
-  
-export const rootReducer = combineReducers<StoreState>({sliderPhotos, footer});
+
+function layout(state: LayoutState = {introClosed: false}, action: LayoutActions): LayoutState {
+    if (action.type === CLOSE_INTRO_MESSAGE) {
+        return {... state, introClosed: true};
+    }
+    return state;
+}
+
+export const rootReducer = combineReducers<StoreState>({sliderPhotos, footer, layout});

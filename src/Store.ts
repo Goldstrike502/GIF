@@ -17,7 +17,10 @@ export default function configureStore() {
     return store;
   }
 
-const initialStoreState = {
+const initialStoreState: StoreState = {
         footer: initialFooterSitemap,
-        sliderPhotos: [... initialPhotoSliderState]
+        sliderPhotos: [... initialPhotoSliderState],
+        layout: {
+            introClosed: false
+        }
     };
