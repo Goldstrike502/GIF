@@ -19,9 +19,9 @@ function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSli
 function footer(state: FooterState, action: FooterActions): FooterState {
     switch (action.type) {
         case constants.RECEIVED_FOOTER_SITEMAP:
-            const footerState = {... state.sitemap};
-            footerState.items.concat(action.sitemap.items);
-            return {sitemap: footerState};
+
+
+            return {sitemap: action.sitemap };
         default: 
         return {...state};
     }

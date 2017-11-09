@@ -16,6 +16,10 @@ export interface GetFooterSitemap {
     type: constants.GET_FOOTER_SITEMAP;
 }
 
+export interface GetWebsiteContent {
+    type: constants.GET_WEBSITE_CONTENT;
+}
+
 export interface ReceivedFooterSitemap {
     type: constants.RECEIVED_FOOTER_SITEMAP;
     sitemap: Sitemap;
@@ -32,7 +36,7 @@ export interface CloseIntro {
 export type PhotoSliderActions = GetSliderPhotos | ReceivedSliderPhotos;
 export type FooterActions = ReceivedFooterSitemap | GetFooterSitemap;
 
-export function GetSliderPhotos(villa?: string): GetSliderPhotos {
+export function getSliderPhotos(villa?: string): GetSliderPhotos {
     return {
         type: constants.GET_SLIDER_PHOTOS,
         villa
@@ -45,17 +49,28 @@ export function getChateauPosts(amount?: number)  {
         amount
     };
 }
-export function ReceivedSliderPhotos(photos: Photo[]): ReceivedSliderPhotos {
+export function receivedSliderPhotos(photos: Photo[]): ReceivedSliderPhotos {
     return {
         type: constants.RECEIVED_SLIDER_PHOTOS,
         photos
     };
 }
 
+export function receivedFooterSitemap(sitemap: Sitemap) {
+    return {
+        type: constants.RECEIVED_FOOTER_SITEMAP,
+        sitemap
+    };
+}
 export type LayoutActions = CloseIntro
 ;
 export function closeIntro(): CloseIntro {
     return {
         type: constants.CLOSE_INTRO_MESSAGE
+    };
+}
+export function getWebsiteContent(): GetWebsiteContent {
+    return {
+        type: constants.GET_WEBSITE_CONTENT
     };
 }

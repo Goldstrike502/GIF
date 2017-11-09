@@ -1,5 +1,5 @@
 import { closeIntro } from '../Actions';
-import { GetSliderPhotos } from '../Actions/index';
+import { getSliderPhotos } from '../Actions/index';
 import { ChateauPost, StoreState } from '../Types/index';
 import { ChateauItem, ChateauListViewComponent } from './Chateau/ChateauList';
 import { VillaCompactView, VillaFaciliteiten } from './Villa/Villa';
@@ -10,8 +10,7 @@ import * as React from 'react';
 import './Home.css';
 import {
   CHATEAU_CONTENT_TYPE_ID,
-  ContentfulClient,
-  VILLAS_CONTENT_TYPE_ID,
+  ContentfulClient
 } from '../Contentful';
 import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
 import { Link } from 'react-router-dom';
@@ -30,7 +29,7 @@ interface Props {
 }
 function mapDispatchToProps(dispatch: Dispatch<StoreState>): Partial<Props> {
   return {
-    onLoadHomepageContent: () => dispatch(GetSliderPhotos()),
+    onLoadHomepageContent: () => dispatch(getSliderPhotos()),
     onIntroClose: () => dispatch(closeIntro())
   };
 }
@@ -51,24 +50,6 @@ class HomePage extends React.Component<Props, State> {
   constructor() {
     super();    
     this.initChateauContentState();
-    this.initVillaFaciliteitenState();
-  }
-  initVillaFaciliteitenState() {
-    return this.client.getEntries({
-      content_type: VILLAS_CONTENT_TYPE_ID,
-      select: ['fields.faciliteiten,fields.title,fields.prijsVanaf,fields.slug']
-    })
-      .then(entries => entries.items.map((villa: Entry<VillaFaciliteiten>) => {
-        return {
-          ... villa.fields
-        };
-      }))
-      .then((faciliteiten) => {
-        this.setState({
-          ... this.state,
-          villaFaciliteiten: faciliteiten
-        });
-      });
   }
 
   initChateauContentState() {

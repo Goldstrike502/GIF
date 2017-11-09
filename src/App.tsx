@@ -25,6 +25,11 @@ class App extends React.Component<Props, State> {
     }]
   }};
 
+  constructor() {
+    super();
+
+  }
+
   render() {
     return (
       <div className="App">
@@ -43,6 +48,7 @@ class App extends React.Component<Props, State> {
               <li><NavLink to="/contact">Contact</NavLink></li>
             </ul>
           </nav>
+
           <Route exact={true} path="/" component={Home}/>
           <Route exact={true} path="/chateau" component={ChateauPage}/>
           <Route path="/chateau/:post" component={ChateauPage}/>
