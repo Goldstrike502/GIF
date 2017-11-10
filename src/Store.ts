@@ -37,4 +37,5 @@ const initialStoreState: StoreState = {
         },
         chateauPosts: [],
         villas: [],
+        router: {location: null}
     };

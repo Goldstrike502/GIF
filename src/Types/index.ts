@@ -1,6 +1,7 @@
 import { ChateauPost, VillaContentModel } from './ContentTypes';
 
 import { Link } from 'react-router-dom';
+import { RouterState } from 'react-router-redux';
 
 export interface SitemapItem {
   title: string;
@@ -27,6 +28,7 @@ export interface StoreState {
   layout: LayoutState;
   chateauPosts: ChateauPost[];
   villas: VillaContentModel[];
+  router: RouterState;
 }
 
 type positionTypes = 'top' | 'right' | 'bottom' | 'left';
