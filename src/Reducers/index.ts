@@ -1,9 +1,9 @@
 import { ChateauPost, VillaContentModel } from '../Types/ContentTypes';
 import {
-  CHATEAU_CONTENT_TYPE_ID,
-  convertContentfulEntryToPhoto,
-  SLIDER_PHOTO_CONTENT_TYPE_ID,
-  VILLAS_CONTENT_TYPE_ID,
+    CHATEAU_CONTENT_TYPE_ID,
+    convertContentfulEntryToPhoto,
+    SLIDER_PHOTO_CONTENT_TYPE_ID,
+    VILLAS_CONTENT_TYPE_ID,
 } from '../Contentful';
 import { LayoutActions, ReceivedWebsiteEntries } from '../Actions';
 import { LayoutState } from '../Types';
@@ -11,6 +11,7 @@ import { initialPhotoSliderState } from '../photoslider/Photoslider';
 import { PhotoSliderActions } from '../Actions/index';
 import { Photo, StoreState } from '../Types/index';
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import * as constants from '../Constants';
 import { CLOSE_INTRO_MESSAGE } from '../Constants';
 
@@ -58,4 +59,12 @@ function villas(state: VillaContentModel[] = [], action: ReceivedWebsiteEntries)
     }
 }
 
-export const rootReducer = combineReducers<StoreState>({ sliderPhotos, layout, chateauPosts, villas });
+export const rootReducer = combineReducers<StoreState>(
+    {
+        sliderPhotos,
+        layout,
+        chateauPosts,
+        villas,
+        router: routerReducer
+    }
+);
