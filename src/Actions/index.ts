@@ -1,3 +1,5 @@
+import { ContentModelTypes, VillaContentModel } from '../Types/ContentTypes';
+import { EntryCollection } from 'contentful';
 import { Sitemap } from '../Types';
 import { Photo } from '../Types/index';
 import * as constants from '../Constants';
@@ -28,12 +30,20 @@ export interface ReceivedSliderPhotos {
     type: constants.RECEIVED_SLIDER_PHOTOS;
     photos: Photo[];
 }
+export interface ReceivedWebsiteEntries {
+    type: constants.RECEIVED_WEBSITE_ENTRIES;
+    entries: EntryCollection<ContentModelTypes>;
+}
+export interface ReceivedVillaContent {
+    type: constants.RECEIVED_VILLA_CONTENT;
+    villas: VillaContentModel[];
+}
 
 export interface CloseIntro {
     type: constants.CLOSE_INTRO_MESSAGE;
 }
 
-export type PhotoSliderActions = GetSliderPhotos | ReceivedSliderPhotos;
+export type PhotoSliderActions = GetSliderPhotos | ReceivedSliderPhotos | ReceivedWebsiteEntries;
 export type FooterActions = ReceivedFooterSitemap | GetFooterSitemap;
 
 export function getSliderPhotos(villa?: string): GetSliderPhotos {
@@ -62,6 +72,14 @@ export function receivedFooterSitemap(sitemap: Sitemap) {
         sitemap
     };
 }
+
+export function receivedWebsiteEntries(entries: EntryCollection<any>) {
+    console.log('received website entries', entries);
+    return {
+        type: constants.RECEIVED_WEBSITE_ENTRIES,
+        entries,
+    };
+}
 export type LayoutActions = CloseIntro
 ;
 export function closeIntro(): CloseIntro {
@@ -72,5 +90,11 @@ export function closeIntro(): CloseIntro {
 export function getWebsiteContent(): GetWebsiteContent {
     return {
         type: constants.GET_WEBSITE_CONTENT
+    };
+}
+export function receivedVillaContent(villas: VillaContentModel[]) {
+    return {
+        type: constants.RECEIVED_VILLA_CONTENT,
+        villas
     };
 }

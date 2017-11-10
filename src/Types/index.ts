@@ -1,5 +1,5 @@
-import { Entry } from 'contentful';
-import { ContentfulPhoto } from '../Contentful';
+import { ChateauPost, VillaContentModel } from './ContentTypes';
+
 import { Link } from 'react-router-dom';
 
 export interface SitemapItem {
@@ -25,14 +25,8 @@ export interface StoreState {
   footer: Sitemap;
   sliderPhotos: Photo[];
   layout: LayoutState;
-}
-
-export interface ChateauPost {
-    title: string;
-    description: string;
-    content: string;
-    cover: Entry<ContentfulPhoto>;
-    slug: string;
+  chateauPosts: ChateauPost[];
+  villas: VillaContentModel[];
 }
 
 type positionTypes = 'top' | 'right' | 'bottom' | 'left';
@@ -87,10 +81,4 @@ export interface ImageGalleryProps {
   onTouchEnd?: () => void;
   onTouchStart?: () => void;
   renderCustomControls?: () => void;
-}
-
-export interface SliderPhotoContentModel {
-  title: string;
-  image: Entry<ContentfulPhoto>;
-  order: number;
 }

@@ -1,18 +1,18 @@
+import { ChateauPost, VillaFaciliteiten } from '../Types/ContentTypes';
 import { closeIntro } from '../Actions';
 import { getSliderPhotos } from '../Actions/index';
-import { ChateauPost, StoreState } from '../Types/index';
+import { StoreState } from '../Types/index';
 import { ChateauItem, ChateauListViewComponent } from './Chateau/ChateauList';
-import { VillaCompactView, VillaFaciliteiten } from './Villa/Villa';
+import { VillaCompactView } from './Villa/Villa';
 import { BackgroundPhotoSlider } from '../photoslider/Photoslider';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import * as ReactMarkdown from 'react-markdown';
 import * as React from 'react';
 import './Home.css';
 import {
-  CHATEAU_CONTENT_TYPE_ID,
   ContentfulClient
 } from '../Contentful';
-import { ContentfulClientApi, Entry, EntryCollection } from 'contentful';
+import { ContentfulClientApi } from 'contentful';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -20,12 +20,13 @@ import { Dispatch } from 'redux';
 interface State {
   introClosed: boolean;
   chateauPosts?: ChateauPost[];
-  villaFaciliteiten?: VillaFaciliteiten[];
 }
 interface Props {
   onLoadHomepageContent: () => any;
   onIntroClose: () => void;
   introClosed: boolean;
+  villaFaciliteiten?: VillaFaciliteiten[];
+  chateauPosts: ChateauPost[];
 }
 function mapDispatchToProps(dispatch: Dispatch<StoreState>): Partial<Props> {
   return {
@@ -37,30 +38,18 @@ function mapStateToProps(state: StoreState): Props {
   return {
     onLoadHomepageContent: () => undefined,
     onIntroClose:  () => undefined,
-    introClosed: state.layout.introClosed
+    introClosed: state.layout.introClosed,
+    chateauPosts: state.chateauPosts,
+    villaFaciliteiten: state.villas
   };
 }
 class HomePage extends React.Component<Props, State> {
   client: ContentfulClientApi = ContentfulClient;
   state = {
     introClosed: false,
-    chateauPosts: [],
-    villaFaciliteiten: []
   };
   constructor() {
-    super();    
-    this.initChateauContentState();
-  }
-
-  initChateauContentState() {
-    return this.client.getEntries({ content_type: CHATEAU_CONTENT_TYPE_ID })
-      .then((entries: EntryCollection<ChateauPost>) => entries.items.map((post: Entry<ChateauPost>) => {
-        return post.fields;
-      }))
-      .then((content) => {
-        this.setState({ ...this.state, chateauPosts: content });
-        return content;
-      });
+    super();      
   }
   componentWillMount() {
     if (this.props.onLoadHomepageContent) {
@@ -97,18 +86,18 @@ class HomePage extends React.Component<Props, State> {
           <BackgroundPhotoSlider />
         </section>
         <ChateauListViewComponent intro={true}>
-          {this.state.chateauPosts
+          {this.props.chateauPosts
             .map((item: ChateauPost) => <ChateauItem key={item.slug} item={item} />)}
       </ChateauListViewComponent>
         <VillaCompactView>
-          {this.state.villaFaciliteiten.length > 0 ?
+          {this.props.villaFaciliteiten && this.props.villaFaciliteiten.length > 0 ?
             <Tabs defaultIndex={0} >
               <TabList>
-                {this.state.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
+                {this.props.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
                   <Tab key={faciliteiten.id} tabIndex={i.toString()}> {faciliteiten.title}</Tab>)}
               </TabList>
 
-              {this.state.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
+              {this.props.villaFaciliteiten.map((faciliteiten: VillaFaciliteiten, i) =>
                 <TabPanel key={faciliteiten.id}>
                   <ReactMarkdown source={faciliteiten.faciliteiten} />
                   <div className="villa-actions">

@@ -5,13 +5,17 @@ import { StoreState } from './Types/index';
 import { createStore, applyMiddleware } from 'redux';
 import { initialPhotoSliderState } from './photoslider/Photoslider';
 import { createEpicMiddleware } from 'redux-observable';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 export default function configureStore() {
     const store = createStore<StoreState>(
       rootReducer,
       initialStoreState,
-      applyMiddleware(epicMiddleware)
+      composeWithDevTools(
+        applyMiddleware(epicMiddleware),
+        // other store enhancers if any
+      ),
     );
  
     return store;
@@ -22,5 +26,7 @@ const initialStoreState: StoreState = {
         sliderPhotos: [... initialPhotoSliderState],
         layout: {
             introClosed: false
-        }
+        },
+        chateauPosts: [],
+        villas: [],
     };

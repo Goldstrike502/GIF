@@ -1,8 +1,9 @@
-import { Photo, SliderPhotoContentModel } from '../../Types';
+import { VillaContentModel } from '../../Types/ContentTypes';
+import { Photo } from '../../Types';
 import { VillaContentTabs } from './VillaContentTabs';
-import { Entry, EntryCollection } from 'contentful';
+import { EntryCollection } from 'contentful';
 import * as React from 'react';
-import { ContentfulClient, ContentfulPhoto, VILLAS_CONTENT_TYPE_ID } from '../../Contentful';
+import { ContentfulClient, VILLAS_CONTENT_TYPE_ID } from '../../Contentful';
 import './Villa.css';
 import { match } from 'react-router';
 import ImageGallery from 'react-image-gallery';
@@ -20,24 +21,6 @@ export class VillaCompactView extends React.Component<Props, State> {
             <div className="villa-compact-view">{this.props.children}</div>
         );
     }
-}
-export interface VillaContentModel {
-    id: string;
-    title: string;
-    faciliteiten: string;
-    description: string;
-    plattegrond: Entry<ContentfulPhoto>;
-    infoRechts: string;
-    prijsVanaf: string;
-    sliderPhotos: Entry<SliderPhotoContentModel>[];
-    slug: string;
-}
-export interface VillaFaciliteiten extends Partial<VillaContentModel> {
-    id: string;
-    title: string;
-    faciliteiten: string;
-    prijsVanaf: string;
-    slug: string;
 }
 export const villa: React.StatelessComponent<{ faciliteiten: string }> = props => {
     return (<div>{props.faciliteiten}</div>);

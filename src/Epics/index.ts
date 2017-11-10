@@ -1,8 +1,6 @@
-import { SliderPhotosEpic } from './SliderPhotosEpic';
+import { contentEpic } from './ContentEpic';
 import { combineEpics } from 'redux-observable';
-import { FooterEpic } from './FooterEpic';
 
 export const rootEpic = combineEpics(
-  SliderPhotosEpic,
-  FooterEpic
+  contentEpic
 );

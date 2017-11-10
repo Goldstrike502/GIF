@@ -1,4 +1,4 @@
-import { ChateauPost } from '../../Types/index';
+import { ChateauPost } from '../../Types/ContentTypes';
 import { ChateauItem, ChateauListViewComponent } from './ChateauList';
 import { CHATEAU_CONTENT_TYPE_ID, ContentfulClient } from '../../Contentful';
 import { EntryCollection } from 'contentful';

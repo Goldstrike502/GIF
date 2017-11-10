@@ -1,4 +1,5 @@
-import { createClient, ContentfulClientApi } from 'contentful';
+import { Photo } from './Types';
+import { ContentfulClientApi, createClient, Entry } from 'contentful';
 
 export const ContentfulClient: ContentfulClientApi = createClient({
     // This is the space ID. A space is like a project folder in Contentful terms
@@ -12,11 +13,9 @@ export const SLIDER_PHOTO_CONTENT_TYPE_ID = 'sliderPhoto';
 export const VILLAS_CONTENT_TYPE_ID = 'villas';
 export const OMGEVING_CONTENT_TYPE_ID = 'omgeving';
 
-export interface ContentfulPhoto {
-    description: string;
-    title: string;
-    file: {
-        url: string;
-        file_name: string;
+export function convertContentfulEntryToPhoto(entry: Entry<any>): Photo {
+    return {
+        original: entry.fields.image.fields.file.url,
+        thumbnail: entry.fields.image.fields.file.url
     };
 }

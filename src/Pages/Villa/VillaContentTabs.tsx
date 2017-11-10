@@ -1,4 +1,4 @@
-import { VillaContentModel } from './Villa';
+import { VillaContentModel } from '../../Types/ContentTypes';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import * as React from 'react';
 
