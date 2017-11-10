@@ -49,7 +49,7 @@ function chateauPosts(state: ChateauPost[] = [], action: ReceivedWebsiteEntries)
 function villas(state: VillaContentModel[] = [], action: ReceivedWebsiteEntries): VillaContentModel[] {
     switch (action.type) {
         case constants.RECEIVED_WEBSITE_ENTRIES:
-            return action.entries.items
+        return action.entries.items
                 .filter(entry => entry.sys.contentType.sys.id === VILLAS_CONTENT_TYPE_ID)
                 .map((entry) => {
                     return { ...entry.fields } as VillaContentModel;
@@ -62,9 +62,9 @@ function villas(state: VillaContentModel[] = [], action: ReceivedWebsiteEntries)
 export const rootReducer = combineReducers<StoreState>(
     {
         sliderPhotos,
+        villas,
         layout,
         chateauPosts,
-        villas,
         router: routerReducer
     }
 );
