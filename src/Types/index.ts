@@ -1,11 +1,10 @@
 import { ChateauPost, VillaContentModel } from './ContentTypes';
 
-import { Link } from 'react-router-dom';
 import { RouterState } from 'react-router-redux';
 
 export interface SitemapItem {
   title: string;
-  link: Link;
+  link: string;
 }
 export interface SitemapBranch {
   title: string;

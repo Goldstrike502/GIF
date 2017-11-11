@@ -1,0 +1,17 @@
+footer {
+  border-top: 12px solid #f5b230;
+  border-bottom: 12px solid #2c87c6;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+footer section.social {
+  min-width: 340px;
+  margin:0;
+}
+footer section {
+  margin: 20px;
+}
+footer section.sitemap {
+  min-width: 44%;
+}

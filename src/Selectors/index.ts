@@ -1,5 +1,5 @@
 import { ChateauPost, VillaContentModel } from '../Types/ContentTypes';
-import { StoreState } from '../Types';
+import { Sitemap, SitemapItem, StoreState } from '../Types';
 export function getCurrentRoute(state: StoreState): string | false {
   return state.router.location ? state.router.location.pathname : false;
 }
@@ -20,4 +20,24 @@ export function getHeaderPhotoFromCurrentChateauPost(
                                currentChateauPost: ChateauPost | undefined,
                                defaultPhoto: string = '/images/uploads/chateau.jpg') {
   return currentChateauPost ? currentChateauPost.cover.fields.file.url || defaultPhoto : defaultPhoto;
+}
+export function getAllContentTypesAsSitemap(state: StoreState): Sitemap {
+  return {
+    items: [
+      {
+        title: `Villa's`,
+        items: state.villas.map(villa => toSitemap(villa))
+      },
+      {
+        title: `Chateau Cazaleres`,
+        items: state.chateauPosts.filter((post, i) => i < 7).map(toSitemap)
+      }
+    ]
+  };
+}
+export function toSitemap(content: {title: string, slug: string}): SitemapItem {
+  return {
+    title: content.title,
+    link: content.slug
+  };
 }

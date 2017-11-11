@@ -59,7 +59,7 @@ class App extends React.Component<Props, State> {
                 <Route exact={true} path="/chateau" component={ChateauPage} />
                 <Route path="/chateau/:post" component={ChateauPage} />
                 <Route path="/vakantie-villas/:villa" component={VillaPage} />
-                {!!this.state && !!this.state.footerSitemap ? <Footer sitemap={this.state.footerSitemap} /> : ''}
+                {!!this.state && !!this.state.footerSitemap ? <Footer/> : ''}
               </div>
             </ConnectedRouter>
           </Provider>
