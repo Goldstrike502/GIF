@@ -1,5 +1,4 @@
 import { rootEpic } from './Epics/index';
-import { initialFooterSitemap } from './Footer/Footer';
 import { rootReducer } from './Reducers/index';
 import { StoreState } from './Types/index';
 import { createStore, applyMiddleware } from 'redux';
@@ -30,7 +29,6 @@ export function configureStore() {
   }
 
 const initialStoreState: StoreState = {
-        footer: initialFooterSitemap,
         sliderPhotos: [... initialPhotoSliderState],
         layout: {
             introClosed: false

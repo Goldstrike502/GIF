@@ -17,12 +17,10 @@ export interface Sitemap {
 export interface FooterState {
   sitemap: Sitemap;
 }
-
 export interface LayoutState {
   introClosed: boolean;
 }
 export interface StoreState {
-  footer: Sitemap;
   sliderPhotos: Photo[];
   layout: LayoutState;
   chateauPosts: ChateauPost[];

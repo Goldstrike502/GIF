@@ -9,6 +9,7 @@ export interface VillaContentModel {
   infoRechts: string;
   prijsVanaf: string;
   sliderPhotos: Entry<SliderPhotoContentModel>[];
+  prijzen: Entry<PriceRange>[];
   slug: string;
 }
 export interface VillaFaciliteiten extends Partial<VillaContentModel> {
@@ -26,6 +27,13 @@ export interface ContentfulPhoto {
     url: string;
     file_name: string;
   };
+}
+
+export interface PriceRange {
+  vanaf: Date;
+  tot: Date;
+  prijs: string;
+  lastminute: boolean;  
 }
 export interface ChateauPost {
   title: string;

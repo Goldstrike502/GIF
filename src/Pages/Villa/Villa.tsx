@@ -10,6 +10,7 @@ import ImageGallery from 'react-image-gallery';
 import * as ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { PriceCalendar } from './PriceCalendar';
 interface Props {
     children?: JSX.Element | string;
 }
@@ -57,16 +58,26 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
     render() {
 
         return (
-            <section className="container">
-                {this.props.sliderPhotos ? 
-                    <ImageGallery 
-                        items={this.props.sliderPhotos} 
-                        thumbnailPosition="left"
-                    /> : ''}
-                {(this.props.selectedVilla ?
-                    this.renderVillaContent(this.props.selectedVilla) 
-                    : '')}
-            </section>
+            <div>
+                <section className="container">
+                    {this.props.sliderPhotos ? 
+                        <ImageGallery 
+                            items={this.props.sliderPhotos} 
+                            thumbnailPosition="left"
+                        /> : ''}
+                    {(this.props.selectedVilla ?
+                        this.renderVillaContent(this.props.selectedVilla) 
+                        : '')}
+                        
+                </section>
+                <section className="prijzen">
+                    <h1>Prijzen & beschikbaarheid</h1>
+                    <PriceCalendar 
+                        prices={this.props.selectedVilla ?
+                        this.props.selectedVilla.prijzen.map(entry => entry.fields) : []} 
+                    />
+                </section>
+            </div>
         );
     }
 
