@@ -261,3 +261,18 @@ table.calendar {
     align-items: center;
     flex-direction: column;
   }
+  table.calendar td.lastminute {
+    background: #f7cf81;
+    font-weight: bold;
+    border: 2px dashed #f3a921;
+    color: rgb(211, 16, 16);
+
+  }
+  table.calendar td.blocked {
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEADmzdv/o8iRA0BoIEAKngPeSAlnXcAAAAASUVORK5CYII=');
+    opacity: 0.5;
+    background-color: #f7cf81;
+    border: none;
+
+  }
+  

@@ -53,7 +53,7 @@ class PhotoSliderComponent extends React.Component<Props, State> {
 
       <ImageGallery
           ref={(i) => this._imageGallery = i}
-          autoPlay={this.state.isClosed}
+          autoPlay={this.state.isClosed}  
           showPlayButton={this.state.isClosed}
           showFullscreenButton={this.state.isClosed}
           thumbnailPosition="top"

@@ -1,6 +1,7 @@
 import { ChateauPost, VillaContentModel } from './ContentTypes';
 
 import { RouterState } from 'react-router-redux';
+import { Moment } from 'moment';
 
 export interface SitemapItem {
   title: string;
@@ -26,9 +27,16 @@ export interface StoreState {
   chateauPosts: ChateauPost[];
   villas: VillaContentModel[];
   router: RouterState;
+  vacation: VacationModel;
 }
 
 type positionTypes = 'top' | 'right' | 'bottom' | 'left';
+
+export interface VacationModel {
+  from: Moment;
+  to: Moment;
+  villa?: VillaContentModel;
+}
 
 export interface Photo {
   original?: string;

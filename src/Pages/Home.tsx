@@ -1,6 +1,5 @@
 import { ChateauPost, VillaFaciliteiten } from '../Types/ContentTypes';
 import { closeIntro } from '../Actions';
-import { getSliderPhotos } from '../Actions/index';
 import { StoreState } from '../Types/index';
 import { ChateauItem, ChateauListViewComponent } from './Chateau/ChateauList';
 import { VillaCompactView } from './Villa/Villa';
@@ -30,7 +29,6 @@ interface Props {
 }
 function mapDispatchToProps(dispatch: Dispatch<StoreState>): Partial<Props> {
   return {
-    onLoadHomepageContent: () => dispatch(getSliderPhotos()),
     onIntroClose: () => dispatch(closeIntro())
   };
 }
@@ -48,14 +46,7 @@ class HomePage extends React.Component<Props, State> {
   state = {
     introClosed: false,
   };
-  constructor() {
-    super();      
-  }
-  componentWillMount() {
-    if (this.props.onLoadHomepageContent) {
-      this.props.onLoadHomepageContent();
-    }
-  }
+
   renderIntroHeader() {
     return (
       <header className={this.props.introClosed ? 'hidden' : ''}>
@@ -112,9 +103,6 @@ class HomePage extends React.Component<Props, State> {
             </Tabs>
             : ''}
         </VillaCompactView>
-        <section>Villa</section>
-        <section>Omgeving</section>
-        <button className="button">Meer informatie</button>
       </div>
     );
   }

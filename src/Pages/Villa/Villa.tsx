@@ -1,7 +1,8 @@
-import { Action, Dispatch } from 'redux';
+import {  setVacation } from '../../Actions';
+import { Dispatch } from 'redux';
 import { getCurrentRoute, getCurrentVillaForRoute } from '../../Selectors';
 import { VillaContentModel } from '../../Types/ContentTypes';
-import { Photo, StoreState } from '../../Types';
+import { Photo, StoreState, VacationModel } from '../../Types';
 import { VillaContentTabs } from './VillaContentTabs';
 import * as React from 'react';
 import { ContentfulClient, convertContentfulEntryToPhoto } from '../../Contentful';
@@ -11,6 +12,8 @@ import * as ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PriceCalendar } from './PriceCalendar';
+import { Moment } from 'moment';
+
 interface Props {
     children?: JSX.Element | string;
 }
@@ -31,6 +34,8 @@ interface VillaPageProps {
     selectedVilla?: VillaContentModel;
     villas: VillaContentModel[];
     sliderPhotos: Photo[];
+    vacation: VacationModel;
+    onVacationSelect: (from: Moment, to: Moment, model?: VillaContentModel) => any;
 }
 interface VillaPageState {
 }
@@ -40,11 +45,16 @@ function mapStateToProps(state: StoreState): VillaPageProps {
     return {
         sliderPhotos: selectedVilla ? selectedVilla.sliderPhotos.map(convertContentfulEntryToPhoto) : [],
         villas: state.villas,
-        selectedVilla
+        selectedVilla,
+        vacation: state.vacation,
+        onVacationSelect: (a, b, c) => undefined 
     };
 }
-function mapDispatchToProps(dispatch: Dispatch<Action>) {
-    return { };
+function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
+    return {
+        onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel) => 
+        dispatch(setVacation(from, to, model))        
+     };
 
 }
 
@@ -56,29 +66,33 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
     }
 
     render() {
-
+   
         return (
-            <div>
-                <section className="container">
-                    {this.props.sliderPhotos ? 
-                        <ImageGallery 
-                            items={this.props.sliderPhotos} 
-                            thumbnailPosition="left"
-                        /> : ''}
-                    {(this.props.selectedVilla ?
-                        this.renderVillaContent(this.props.selectedVilla) 
-                        : '')}
-                        
-                </section>
-                <section className="prijzen">
-                    <h1>Prijzen & beschikbaarheid</h1>
-                    <PriceCalendar 
-                        prices={this.props.selectedVilla ?
-                        this.props.selectedVilla.prijzen.map(entry => entry.fields) : []} 
-                    />
-                </section>
-            </div>
-        );
+                <div>
+                    <section className="container">
+                        {this.props.sliderPhotos ? 
+                            <ImageGallery 
+                                items={this.props.sliderPhotos} 
+                                thumbnailPosition="left"
+                            /> : ''}
+                        {(this.props.selectedVilla ?
+                            this.renderVillaContent(this.props.selectedVilla) 
+                            : '')}
+                            
+                    </section>
+                    <section className="prijzen">
+                        <h1>Prijzen & beschikbaarheid</h1>
+                        {this.props.selectedVilla ? <PriceCalendar 
+                            selectedRange={[this.props.vacation.from, this.props.vacation.to]}
+                            onRangeSelect={(from, to) =>
+                                     this.props.onVacationSelect(from, to, this.props.selectedVilla)}
+                            prices={this.props.selectedVilla.prijzen.map(entry => entry.fields)}
+                        /> : null}
+                    </section>
+                </div>
+            );
+
+       
     }
 
     private renderVillaContent(state: VillaContentModel): React.ReactNode {

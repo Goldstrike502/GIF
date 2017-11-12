@@ -1,5 +1,6 @@
-import { ChateauPost, VillaContentModel } from '../Types/ContentTypes';
+import { ChateauPost, PriceRange, VillaContentModel } from '../Types/ContentTypes';
 import { Sitemap, SitemapItem, StoreState } from '../Types';
+import { Moment } from 'moment';
 export function getCurrentRoute(state: StoreState): string | false {
   return state.router.location ? state.router.location.pathname : false;
 }
@@ -40,4 +41,9 @@ export function toSitemap(content: {title: string, slug: string}): SitemapItem {
     title: content.title,
     link: content.slug
   };
+}
+
+export function hasDayCalandarStyles(prices: PriceRange[], day: Moment, style: string): Boolean {
+  return prices.find(price => day.isBetween(price.vanaf, price.tot)
+                      && price.styles.find(s => s === style) ? true : false) ? true : false;
 }

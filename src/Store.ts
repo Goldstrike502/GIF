@@ -7,7 +7,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
-
+import * as moment from 'moment';
 
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
@@ -35,5 +35,6 @@ const initialStoreState: StoreState = {
         },
         chateauPosts: [],
         villas: [],
-        router: {location: null}
+        router: {location: null},
+        vacation: {from: moment(), to: moment(), villa: undefined}
     };

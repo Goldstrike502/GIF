@@ -33,7 +33,7 @@ export interface PriceRange {
   vanaf: Date;
   tot: Date;
   prijs: string;
-  lastminute: boolean;  
+  styles: string[];  
 }
 export interface ChateauPost {
   title: string;
