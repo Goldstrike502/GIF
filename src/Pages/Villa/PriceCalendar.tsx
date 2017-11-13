@@ -9,7 +9,8 @@ import { Moment } from 'moment';
 interface PriceCalendarProps {
   prices: PriceRange[];
   selectedRange: Moment[];
-  onRangeSelect?: (from: Moment, to: Moment) => void;
+  selectedPrices: PriceRange[];
+  onRangeSelect?: (from: Moment, to: Moment, prices: PriceRange[]) => void;
   }
 interface PriceCalendarState {
 
@@ -19,18 +20,20 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
   render() {
     moment.locale('nl', nl);
     const customCLassesForPrices = {
-      lastminute: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute')
+      lastminute: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute'),
+      blocked: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'block'),
+      hoogseizoen: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'hoogseizoen'),
+      midseizoen: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'midseizoen'),
     };
-    console.log('classesss', customCLassesForPrices.lastminute(moment()));
     return (
       <div className="price-calendar"> 
         <Calendar
             year={2017}
             onPickDate={this.onDatePicked}
-            customClasses={customCLassesForPrices}
+            customClasses={this.props.prices ? customCLassesForPrices : {}}
             selectRange={true}
             selectedRange={this.props.selectedRange}
-            onPickRange={this.props.onRangeSelect ? this.props.onRangeSelect : () => undefined}
+            onPickRange={(from, to) => this.onRangeSelect(from, to)}
         />,
         <section>
           <h2>Indicatie prijs</h2>
@@ -43,6 +46,14 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
         </section>
       </div>
     );
+  }
+  onRangeSelect(from: Moment, to: Moment) {
+    const prices = this.props.prices.filter(price => 
+      from.isBetween(price.vanaf, price.tot) || to.isBetween(price.vanaf, price.tot) || 
+      (from.isBefore(price.vanaf) && to.isAfter(price.tot)));
+    if (this.props.onRangeSelect) {
+      this.props.onRangeSelect(from, to, prices);
+    }
   }
   onDatePicked(e) {
       console.log('selecedddddd date', e);

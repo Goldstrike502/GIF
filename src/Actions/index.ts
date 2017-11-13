@@ -1,4 +1,4 @@
-import { ContentModelTypes, VillaContentModel } from '../Types/ContentTypes';
+import { ContentModelTypes, PriceRange, VillaContentModel } from '../Types/ContentTypes';
 import { EntryCollection } from 'contentful';
 import * as constants from '../Constants';
 import { Moment } from 'moment';
@@ -21,6 +21,7 @@ export interface SetVacation {
     from: Moment;
     to: Moment;
     villa?: VillaContentModel;
+    prices: PriceRange[];
 }
 export type PhotoSliderActions = ReceivedWebsiteEntries;
 
@@ -43,11 +44,13 @@ export function getWebsiteContent(): GetWebsiteContent {
         type: constants.GET_WEBSITE_CONTENT
     };
 }
-export function setVacation(from: Moment, to: Moment, villa: VillaContentModel | undefined = undefined): SetVacation {
+export function setVacation(from: Moment, to: Moment, villa: VillaContentModel | undefined = undefined,
+                            prices: PriceRange[]): SetVacation {
     return {
         type: constants.SELECTED_VACATION,
         from,
         to,
-        villa
+        villa,
+        prices
     };
 }

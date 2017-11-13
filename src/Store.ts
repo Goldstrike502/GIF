@@ -2,12 +2,10 @@ import { rootEpic } from './Epics/index';
 import { rootReducer } from './Reducers/index';
 import { StoreState } from './Types/index';
 import { createStore, applyMiddleware } from 'redux';
-import { initialPhotoSliderState } from './photoslider/Photoslider';
 import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
-import * as moment from 'moment';
 
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
@@ -18,7 +16,6 @@ const router = routerMiddleware(history);
 export function configureStore() {
     const store = createStore<StoreState>(
       rootReducer,
-      initialStoreState,
       composeWithDevTools(
         applyMiddleware(...[epicMiddleware, router]),
         // other store enhancers if any
@@ -28,13 +25,13 @@ export function configureStore() {
     return store;
   }
 
-const initialStoreState: StoreState = {
-        sliderPhotos: [... initialPhotoSliderState],
-        layout: {
-            introClosed: false
-        },
-        chateauPosts: [],
-        villas: [],
-        router: {location: null},
-        vacation: {from: moment(), to: moment(), villa: undefined}
-    };
+// const initialStoreState: StoreState = {
+//         sliderPhotos: [... initialPhotoSliderState],
+//         layout: {
+//             introClosed: false
+//         },
+//         chateauPosts: [],
+//         villas: [],
+//         router: {location: null},
+//         vacation: {from: moment(), to: moment(), villa: undefined}
+//     };

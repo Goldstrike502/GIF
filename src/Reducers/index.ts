@@ -59,13 +59,15 @@ function villas(state: VillaContentModel[] = [], action: ReceivedWebsiteEntries)
             return state;
     }
 }
-function vacation(state: VacationModel = {from: moment(), to: moment()}, action: SetVacation): VacationModel {
+function vacation(state: VacationModel = {from: moment(), to: moment(), prices: []},
+                  action: SetVacation): VacationModel {
     switch (action.type) {
         case constants.SELECTED_VACATION:
         return {
             from: action.from,
             to: action.to,
-            villa: action.villa
+            villa: action.villa,
+            prices: action.prices
         };
         default: 
         return state;

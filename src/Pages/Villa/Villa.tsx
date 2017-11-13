@@ -1,7 +1,7 @@
 import {  setVacation } from '../../Actions';
 import { Dispatch } from 'redux';
 import { getCurrentRoute, getCurrentVillaForRoute } from '../../Selectors';
-import { VillaContentModel } from '../../Types/ContentTypes';
+import { PriceRange, VillaContentModel } from '../../Types/ContentTypes';
 import { Photo, StoreState, VacationModel } from '../../Types';
 import { VillaContentTabs } from './VillaContentTabs';
 import * as React from 'react';
@@ -52,8 +52,8 @@ function mapStateToProps(state: StoreState): VillaPageProps {
 }
 function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
     return {
-        onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel) => 
-        dispatch(setVacation(from, to, model))        
+        onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel, prices: PriceRange[]) => 
+        dispatch(setVacation(from, to, model, prices))        
      };
 
 }
@@ -84,9 +84,12 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                         <h1>Prijzen & beschikbaarheid</h1>
                         {this.props.selectedVilla ? <PriceCalendar 
                             selectedRange={[this.props.vacation.from, this.props.vacation.to]}
-                            onRangeSelect={(from, to) =>
-                                     this.props.onVacationSelect(from, to, this.props.selectedVilla)}
+                            onRangeSelect={(from, to, prices) => {
+                                     console.log('pricessss', prices);
+                                     this.props.onVacationSelect(from, to, this.props.selectedVilla);
+                                    }}
                             prices={this.props.selectedVilla.prijzen.map(entry => entry.fields)}
+                            selectedPrices={this.props.vacation.prices}
                         /> : null}
                     </section>
                 </div>

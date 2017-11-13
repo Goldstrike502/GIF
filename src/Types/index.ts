@@ -1,4 +1,4 @@
-import { ChateauPost, VillaContentModel } from './ContentTypes';
+import { ChateauPost, PriceRange, VillaContentModel } from './ContentTypes';
 
 import { RouterState } from 'react-router-redux';
 import { Moment } from 'moment';
@@ -36,6 +36,7 @@ export interface VacationModel {
   from: Moment;
   to: Moment;
   villa?: VillaContentModel;
+  prices: PriceRange[];
 }
 
 export interface Photo {
