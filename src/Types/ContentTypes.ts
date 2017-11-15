@@ -33,8 +33,11 @@ export interface PriceRange {
   vanaf: Date;
   tot: Date;
   prijs: string;
-  styles: string[];  
+  styles: PriceRangeStyles[];  
 }
+
+export type PriceRangeStyles = 'lastminute' | 'block' | 'laagseizoen' | 'midseizoen' | 'hoogseizoen';
+
 export interface ChateauPost {
   title: string;
   description: string;

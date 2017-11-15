@@ -35,7 +35,7 @@ interface VillaPageProps {
     villas: VillaContentModel[];
     sliderPhotos: Photo[];
     vacation: VacationModel;
-    onVacationSelect: (from: Moment, to: Moment, model?: VillaContentModel) => any;
+    onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel, prices: PriceRange[]) => any;
 }
 interface VillaPageState {
 }
@@ -83,10 +83,12 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                     <section className="prijzen">
                         <h1>Prijzen & beschikbaarheid</h1>
                         {this.props.selectedVilla ? <PriceCalendar 
-                            selectedRange={[this.props.vacation.from, this.props.vacation.to]}
+                            selectedVacation={this.props.vacation}
                             onRangeSelect={(from, to, prices) => {
                                      console.log('pricessss', prices);
-                                     this.props.onVacationSelect(from, to, this.props.selectedVilla);
+                                     if (this.props.onVacationSelect && this.props.selectedVilla) {
+                                         this.props.onVacationSelect(from, to, this.props.selectedVilla, prices);
+                                     }
                                     }}
                             prices={this.props.selectedVilla.prijzen.map(entry => entry.fields)}
                             selectedPrices={this.props.vacation.prices}
