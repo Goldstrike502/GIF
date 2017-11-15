@@ -3,7 +3,6 @@ import * as React from 'react';
 import { PriceRange } from '../../Types/ContentTypes';
 import { Calendar } from 'react-yearly-calendar';
 import * as moment from 'moment';
-import nl from 'moment/locale/nl';
 import { Moment } from 'moment';
 import { VacationModel } from '../../Types/index';
 
@@ -19,7 +18,6 @@ interface PriceCalendarState {
 
 export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCalendarState> {
   render() {
-    moment.locale('nl', nl);
     const customCLassesForPrices = {
       lastminute: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute'),
       blocked: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'block'),

@@ -13,6 +13,7 @@ import 'whatwg-fetch';
 
 import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
 import { configureStore, history } from './Store';
+import { OmgevingPage } from './Pages/Omgeving/OmgevingPage';
 interface Props {
 }
 interface State {
@@ -40,8 +41,6 @@ class App extends React.Component<Props, State> {
         <Router>
           <Provider store={configureStore()}>
             <ConnectedRouter history={history}>
-
-
               <div>
                 <nav>
                   <span className="brand">Goed in Frankrijk</span>
@@ -49,7 +48,7 @@ class App extends React.Component<Props, State> {
                     <li><NavLink to="/">Homepage</NavLink></li>
                     <li><NavLink to="/chateau">Chateau</NavLink></li>
                     <li><NavLink to="/vakantie-villas/espace">Villa's</NavLink></li>
-                    <li><NavLink to="/omgeving">Omgeving</NavLink></li>
+                    <li><NavLink to="/omgeving-daumazan">Omgeving</NavLink></li>
                     <li><NavLink to="/boeken">Boeken</NavLink></li>
                     <li><NavLink to="/contact">Contact</NavLink></li>
                   </ul>
@@ -57,10 +56,12 @@ class App extends React.Component<Props, State> {
 
                 <Route exact={true} path="/" component={Home} />
                 <Route exact={true} path="/chateau" component={ChateauPage} />
+                <Route exact={true} path="/omgeving-daumazan" component={OmgevingPage} />
                 <Route path="/chateau/:post" component={ChateauPage} />
                 <Route path="/vakantie-villas/:villa" component={VillaPage} />
+                <Route path="/omgeving-daumazan/:item" component={OmgevingPage} />
                 {!!this.state && !!this.state.footerSitemap ? <Footer/> : ''}
-              </div>
+              </div>  
             </ConnectedRouter>
           </Provider>
         </Router>
