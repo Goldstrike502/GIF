@@ -12,6 +12,7 @@ export const CHATEAU_CONTENT_TYPE_ID = 'chateauPosts';
 export const SLIDER_PHOTO_CONTENT_TYPE_ID = 'sliderPhoto';
 export const VILLAS_CONTENT_TYPE_ID = 'villas';
 export const OMGEVING_CONTENT_TYPE_ID = 'omgeving';
+export const MAP_MARKER_CONTENT_TYPE_ID = 'mapMarker';
 
 export function convertContentfulEntryToPhoto(entry: Entry<any>): Photo {
     return {

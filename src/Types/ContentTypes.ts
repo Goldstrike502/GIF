@@ -1,5 +1,14 @@
 import { Entry } from 'contentful';
 
+export interface MapMarker {
+  titel: string;
+  locatie: {lat: number, lon: number};
+  photo: Entry<ContentfulPhoto>;
+  markerIcon: Entry<ContentfulPhoto>;
+  slug: string;
+  content: string;
+}
+
 export interface VillaContentModel {
   id: string;
   title: string;
@@ -50,4 +59,5 @@ export interface SliderPhotoContentModel {
   image: Entry<ContentfulPhoto>;
   order: number;
 }
-export type ContentModelTypes = ChateauPost | VillaContentModel | ChateauPost | SliderPhotoContentModel;
+// tslint:disable-next-line:max-line-length
+export type ContentModelTypes = ChateauPost | VillaContentModel | ChateauPost | SliderPhotoContentModel | MapMarker | PriceRange;

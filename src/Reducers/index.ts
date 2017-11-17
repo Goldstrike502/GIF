@@ -1,12 +1,13 @@
-import { ChateauPost, VillaContentModel } from '../Types/ContentTypes';
+import { ChateauPost, VillaContentModel, MapMarker } from '../Types/ContentTypes';
 import {
     CHATEAU_CONTENT_TYPE_ID,
     convertContentfulEntryToPhoto,
+    MAP_MARKER_CONTENT_TYPE_ID,
     SLIDER_PHOTO_CONTENT_TYPE_ID,
     VILLAS_CONTENT_TYPE_ID,
 } from '../Contentful';
 import { LayoutActions, ReceivedWebsiteEntries, SetVacation } from '../Actions';
-import { LayoutState, VacationModel } from '../Types';
+import { LayoutState, OmgevingState, VacationModel } from '../Types';
 import { initialPhotoSliderState } from '../photoslider/Photoslider';
 import { PhotoSliderActions } from '../Actions/index';
 import { Photo, StoreState } from '../Types/index';
@@ -74,6 +75,22 @@ function vacation(state: VacationModel = {from: moment(), to: moment(), prices: 
     }
 }
 
+function omgeving(state: OmgevingState = {markers: []}, action: ReceivedWebsiteEntries): OmgevingState {
+    switch (action.type) {
+        case constants.RECEIVED_WEBSITE_ENTRIES:
+        return ({
+            markers: action.entries.items
+                            .filter(entry => entry.sys.contentType.sys.id === MAP_MARKER_CONTENT_TYPE_ID)
+                            .map((entry) => {
+                                return {... entry.fields} as MapMarker;
+                            })
+        });
+        default: 
+        return state;
+
+    }
+}
+
 export const rootReducer = combineReducers<StoreState>(
     {
         sliderPhotos,
@@ -81,6 +98,7 @@ export const rootReducer = combineReducers<StoreState>(
         layout,
         chateauPosts,
         vacation,
-        router: routerReducer
+        router: routerReducer,
+        omgeving
     }
 );

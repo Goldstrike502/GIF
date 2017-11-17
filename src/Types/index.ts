@@ -1,4 +1,4 @@
-import { ChateauPost, PriceRange, VillaContentModel } from './ContentTypes';
+import { ChateauPost, MapMarker, PriceRange, VillaContentModel } from './ContentTypes';
 
 import { RouterState } from 'react-router-redux';
 import { Moment } from 'moment';
@@ -28,6 +28,10 @@ export interface StoreState {
   villas: VillaContentModel[];
   router: RouterState;
   vacation: VacationModel;
+  omgeving: OmgevingState;
+}
+export interface OmgevingState {
+  markers: MapMarker[];
 }
 
 type positionTypes = 'top' | 'right' | 'bottom' | 'left';
