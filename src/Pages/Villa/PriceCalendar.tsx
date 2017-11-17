@@ -2,15 +2,15 @@ import { hasDayCalandarStyles } from '../../Selectors';
 import * as React from 'react';
 import { PriceRange } from '../../Types/ContentTypes';
 import { Calendar } from 'react-yearly-calendar';
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import * as Moment from 'moment';
 import { VacationModel } from '../../Types/index';
-
+import { extendMoment } from 'moment-range';
+const moment = extendMoment(Moment);
 interface PriceCalendarProps {
   prices: PriceRange[];
   selectedVacation: VacationModel;
   selectedPrices?: PriceRange[];
-  onRangeSelect?: (from: Moment, to: Moment, prices: PriceRange[]) => any;
+  onRangeSelect?: (from: Moment.Moment, to: Moment.Moment, prices: PriceRange[]) => any;
   }
 interface PriceCalendarState {
 
@@ -19,10 +19,10 @@ interface PriceCalendarState {
 export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCalendarState> {
   render() {
     const customCLassesForPrices = {
-      lastminute: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute'),
-      blocked: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'block'),
-      hoogseizoen: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'hoogseizoen'),
-      midseizoen: (day: moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'midseizoen'),
+      lastminute: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute'),
+      blocked: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'block'),
+      hoogseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'hoogseizoen'),
+      midseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'midseizoen'),
     };
     return (
       <div className="price-calendar"> 
@@ -51,10 +51,12 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
       </div>
     );
   }
-  onRangeSelect(from: Moment, to: Moment) {
-    const prices = this.props.prices.filter(price => 
-      from.isBetween(price.vanaf, price.tot) || to.isBetween(price.vanaf, price.tot) || 
-      (from.isBefore(price.vanaf) && to.isAfter(price.tot)));
+  onRangeSelect(from: Moment.Moment, to: Moment.Moment) {
+    const selectedRange = moment.range(from, to);
+    const prices = this.props.prices.filter(price => {
+        const range = moment.range(price.vanaf, price.tot);
+        return range.overlaps(selectedRange) || range.contains(selectedRange);
+    });
     if (this.props.onRangeSelect) {
       this.props.onRangeSelect(from, to, prices);
     }

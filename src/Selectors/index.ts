@@ -45,5 +45,5 @@ export function toSitemap(content: {title: string, slug: string}): SitemapItem {
 
 export function hasDayCalandarStyles(prices: PriceRange[], day: Moment, style: PriceRangeStyles): Boolean {
   return prices.find(price => (price.styles.indexOf(style) !== -1) &&
-                              day.isBetween(price.vanaf, price.tot)) ? true : false;
+                              (day.isSameOrAfter(price.vanaf) && day.isSameOrBefore(price.tot))) ? true : false;
 }
