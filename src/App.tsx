@@ -14,6 +14,7 @@ import 'whatwg-fetch';
 import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
 import { configureStore, history } from './Store';
 import { OmgevingPage } from './Pages/Omgeving/OmgevingPage';
+import { ContactPageComponent } from './Pages/Contact/ContactPage';
 interface Props {
 }
 interface State {
@@ -57,6 +58,7 @@ class App extends React.Component<Props, State> {
                 <Route exact={true} path="/" component={Home} />
                 <Route exact={true} path="/chateau" component={ChateauPage} />
                 <Route exact={true} path="/omgeving-daumazan" component={OmgevingPage} />
+                <Route exact={true} path="/contact" component={ContactPageComponent} />
                 <Route path="/chateau/:post" component={ChateauPage} />
                 <Route path="/vakantie-villas/:villa" component={VillaPage} />
                 <Route path="/omgeving-daumazan/:item" component={OmgevingPage} />
