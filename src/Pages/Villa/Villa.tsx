@@ -5,7 +5,7 @@ import { PriceRange, VillaContentModel } from '../../Types/ContentTypes';
 import { Photo, StoreState, VacationModel } from '../../Types';
 import { VillaContentTabs } from './VillaContentTabs';
 import * as React from 'react';
-import { ContentfulClient, convertContentfulEntryToPhoto } from '../../Contentful';
+import { ContentfulClient, convertContentfulEntryToPhoto, SLIDER_PHOTO_CONTENT_TYPE_ID } from '../../Contentful';
 import './Villa.css';
 import ImageGallery from 'react-image-gallery';
 import * as ReactMarkdown from 'react-markdown';
@@ -43,7 +43,10 @@ interface VillaPageState {
 function mapStateToProps(state: StoreState): VillaPageProps {
     const selectedVilla = getCurrentVillaForRoute(state, getCurrentRoute(state));
     return {
-        sliderPhotos: selectedVilla ? selectedVilla.sliderPhotos.map(convertContentfulEntryToPhoto) : [],
+        sliderPhotos: selectedVilla ? selectedVilla.sliderPhotos
+            .filter(photo => photo.sys.contentType 
+                && photo.sys.contentType.sys.id === SLIDER_PHOTO_CONTENT_TYPE_ID)                                    
+            .map(convertContentfulEntryToPhoto) : [],
         villas: state.villas,
         selectedVilla,
         vacation: state.vacation,
@@ -81,7 +84,7 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                             
                     </section>
                     <section className="prijzen">
-                        <h1>Prijzen & beschikbaarheid</h1>
+                        <h1>Prijzen &amp; beschikbaarheid</h1>
                         {this.props.selectedVilla ? <PriceCalendar 
                             selectedVacation={this.props.vacation}
                             onRangeSelect={(from, to, prices) => {

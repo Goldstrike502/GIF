@@ -1,3 +1,4 @@
+import { SliderPhotoContentModel } from './Types/ContentTypes';
 import { Photo } from './Types';
 import { ContentfulClientApi, createClient, Entry } from 'contentful';
 
@@ -14,7 +15,7 @@ export const VILLAS_CONTENT_TYPE_ID = 'villas';
 export const OMGEVING_CONTENT_TYPE_ID = 'omgeving';
 export const MAP_MARKER_CONTENT_TYPE_ID = 'mapMarker';
 
-export function convertContentfulEntryToPhoto(entry: Entry<any>): Photo {
+export function convertContentfulEntryToPhoto(entry: Entry<SliderPhotoContentModel>): Photo {
     return {
         original: entry.fields.image.fields.file.url,
         thumbnail: entry.fields.image.fields.file.url

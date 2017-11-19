@@ -12,7 +12,7 @@ export const contentEpic = (actions$: ActionsObservable<Action>) => {
     .ofType(GET_WEBSITE_CONTENT)
     .pipe(startWith(getWebsiteContent()))
     .pipe(
-      switchMap(action => client.getEntries()),
+      switchMap(action => client.getEntries({include: '10'})),
       map((entries) => receivedWebsiteEntries(entries)), 
     );
 };

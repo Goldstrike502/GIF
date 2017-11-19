@@ -115,7 +115,7 @@ section.villa-page-tabs {
 
 table.calendar {
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
   }
   
   table.calendar thead {
@@ -275,4 +275,43 @@ table.calendar {
     border: none;
 
   }
-  
+  aside.legenda {
+    background: white;
+    padding: 5px;
+    margin-top: -10px;
+    margin-right: -10px;
+    line-height: 25px;
+  }
+  .legenda-item.lastminute {
+    color: rgb(211, 16, 16);
+  }
+  .legenda-item.lastminute:before {
+    background: #f7cf81;
+    font-weight: bold;
+    border: 2px dashed #f3a921;
+  }
+  .legenda-item {
+    margin-left: 50px;
+  }
+  .legenda-item:before {
+    content: ' ';
+    position: relative;
+    left: -15px;
+    top: 1px;
+    height: 15px;
+    width: 15px;
+    background: white;
+    display: inline-block;
+    box-shadow: 0 3px 14px rgba(0,0,0,.46);
+  }
+section.prijs-indicatie h2 {
+  margin-top: 5px;
+  color: white; 
+}
+section.prijs-indicatie p {
+  color: rgba(255,255,255,.86);
+}
+section.prijs-indicatie {
+  background: #323331;
+  padding: 10px;
+}
