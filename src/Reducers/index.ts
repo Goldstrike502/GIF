@@ -15,6 +15,7 @@ import { routerReducer } from 'react-router-redux';
 import * as constants from '../Constants';
 import * as moment from 'moment';
 import { CLOSE_INTRO_MESSAGE } from '../Constants';
+import { reducer as formReducer } from 'redux-form';
 
 function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSliderActions): Photo[] {
     switch (action.type) {
@@ -81,6 +82,7 @@ export const rootReducer = combineReducers<StoreState>(
         layout,
         chateauPosts,
         vacation,
+        form: formReducer,       
         router: routerReducer
     }
 );

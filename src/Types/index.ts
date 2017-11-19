@@ -2,6 +2,7 @@ import { ChateauPost, PriceRange, VillaContentModel } from './ContentTypes';
 
 import { RouterState } from 'react-router-redux';
 import { Moment } from 'moment';
+import { FormStateMap } from 'redux-form';
 
 export interface SitemapItem {
   title: string;
@@ -28,8 +29,8 @@ export interface StoreState {
   villas: VillaContentModel[];
   router: RouterState;
   vacation: VacationModel;
+  form: {} & FormStateMap;
 }
-
 type positionTypes = 'top' | 'right' | 'bottom' | 'left';
 
 export interface VacationModel {
