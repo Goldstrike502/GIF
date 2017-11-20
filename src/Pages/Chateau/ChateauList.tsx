@@ -32,7 +32,7 @@ export const ChateauListViewComponent: React.StatelessComponent<Props> = props =
                      imperdiet est hendrerit, aliquam urna. Nulla eget suscipit diam. 
                      Suspendisse rutrum non enim sit amet iaculis.
                 </p>
-                <Link to="/chateau" className="button">Informatie over Chateau Cazaleres</Link>
+                <Link to="/chateau-cazaleres" className="button">Informatie over Chateau Cazaleres</Link>
         </div>
         : ''}
     </div>

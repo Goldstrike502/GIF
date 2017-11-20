@@ -4,6 +4,7 @@ import { Sitemap } from '../Types/index';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 export const initialFooterSitemap: Sitemap = {
   items: [{
     title: 'Loading footer',
@@ -28,8 +29,8 @@ export function FooterComponent(props: FooterProps) {
           <div className="branch" key={branch.title}>
               <h2>{branch.title}</h2>
             <ul>
-              {branch.items.map(sub => <li key={sub.title}>{sub.title}</li>)}
-            </ul>
+              {branch.items.map(sub => <li key={sub.title}><Link to={`${sub.link}`}>{sub.title}</Link></li>)}
+            </ul> 
           </div>
           );
 

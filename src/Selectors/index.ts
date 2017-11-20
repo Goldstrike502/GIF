@@ -1,3 +1,4 @@
+import { CHATEAU_ROUTE_URL, OMGEVING_ROUTE_URL, VILLAS_ROUTE_URL } from '../Routes';
 import { ChateauPost, PriceRange, PriceRangeStyles, VillaContentModel } from '../Types/ContentTypes';
 import { Sitemap, SitemapItem, StoreState } from '../Types';
 import { Moment } from 'moment';
@@ -8,7 +9,7 @@ export function getCurrentVillaForRoute(state: StoreState, route: string | false
   if (route) {
     return state.villas.find(villa => route.endsWith(villa.slug));
   }
-  return undefined; 
+  return undefined;
 }
 export function getChateauPostForRoute(state: StoreState, route: string | false): ChateauPost | undefined {
   if (route) {
@@ -18,8 +19,8 @@ export function getChateauPostForRoute(state: StoreState, route: string | false)
   return undefined;
 }
 export function getHeaderPhotoFromCurrentChateauPost(
-                               currentChateauPost: ChateauPost | undefined,
-                               defaultPhoto: string = '/images/uploads/chateau.jpg') {
+  currentChateauPost: ChateauPost | undefined,
+  defaultPhoto: string = '/images/uploads/chateau.jpg') {
   return currentChateauPost ? currentChateauPost.cover.fields.file.url || defaultPhoto : defaultPhoto;
 }
 export function getAllContentTypesAsSitemap(state: StoreState): Sitemap {
@@ -27,23 +28,29 @@ export function getAllContentTypesAsSitemap(state: StoreState): Sitemap {
     items: [
       {
         title: `Villa's`,
-        items: state.villas.map(villa => toSitemap(villa))
+        items: state.villas.map(toSitemap(VILLAS_ROUTE_URL))
       },
       {
         title: `Chateau Cazaleres`,
-        items: state.chateauPosts.filter((post, i) => i < 7).map(toSitemap)
+        items: state.chateauPosts.filter((post, i) => i < 7).map(toSitemap(CHATEAU_ROUTE_URL))
+      },
+      {
+        title: `Omgeving`,
+        items: state.omgeving.markers.map(toSitemap(OMGEVING_ROUTE_URL))
       }
     ]
   };
 }
-export function toSitemap(content: {title: string, slug: string}): SitemapItem {
-  return {
-    title: content.title,
-    link: content.slug
+export function toSitemap(parentSlug: string): (content: { title: string, slug: string }) => SitemapItem {
+  return (content: { title: string, slug: string }) => {
+    return {
+      title: content.title,
+      link: `${parentSlug}/${content.slug}`
+    };
   };
 }
 
 export function hasDayCalandarStyles(prices: PriceRange[], day: Moment, style: PriceRangeStyles): Boolean {
   return prices.find(price => (price.styles.indexOf(style) !== -1) &&
-                              (day.isSameOrAfter(price.vanaf) && day.isSameOrBefore(price.tot))) ? true : false;
+    (day.isSameOrAfter(price.vanaf) && day.isSameOrBefore(price.tot))) ? true : false;
 }

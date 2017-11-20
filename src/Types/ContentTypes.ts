@@ -1,7 +1,7 @@
 import { Entry } from 'contentful';
 
 export interface MapMarker {
-  titel: string;
+  title: string;
   locatie: {lat: number, lon: number};
   photo: Entry<ContentfulPhoto>;
   markerIcon: Entry<ContentfulPhoto>;

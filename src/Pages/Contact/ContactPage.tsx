@@ -1,46 +1,81 @@
+import { BelMijTerugForm } from './BelMijTerugForm';
 import * as React from 'react';
-import { reduxForm, Field, InjectedFormProps } from 'redux-form';
+import './ContactPage.css';
+import { ChangeEvent } from 'react';
+import { ContactForm, ContactFormData } from './ContactForm';
 
 interface Props {
 
 }
-export class ContactPageComponent extends React.Component<Props, {}> {
-  submit(values: FormData) {
+interface State {
+  selectedForm: 'contact' | 'prijs' | 'belmijterug';
+}
+export class ContactPageComponent extends React.Component<Props, State> {
+  constructor() {
+    super();
+    this.state = {
+      selectedForm: 'contact'
+    };
+  }
+  submit(values: Partial<ContactFormData>) {
     // print the form values to the console
     console.log(values);
+  }
+  onFormRadioChange(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.value === 'contact' ||
+      e.target.value === 'prijs' ||
+      e.target.value === 'belmijterug') {
+      this.setState({ selectedForm: e.target.value });
+    }
   }
   render() {
     return (
       <section className="contact-page">
         <div className="container">
-          <ContactForm onSubmit={this.submit}/>
+          <div style={{ marginTop: 150 }}>
+            <label htmlFor="contact">
+              <input 
+                id="contact" 
+                name="contactType" 
+                type="radio" 
+                value="contact"
+                onChange={(e) => this.onFormRadioChange(e)} 
+                checked={this.state.selectedForm === 'contact'}
+              />
+              {' '}
+              Contact / Vraag / Opmerking
+              </label>
+            <label htmlFor="prijs">
+              <input 
+                id="prijs" 
+                name="contactType" 
+                type="radio" 
+                value="prijs"  
+                onChange={(e) => this.onFormRadioChange(e)} 
+                checked={this.state.selectedForm === 'prijs'} 
+              />
+              {' '}
+              Prijs aanvraag
+              </label>
+            <label htmlFor="belmijterug">
+              <input 
+                id="belmijterug" 
+                name="contactType"  
+                type="radio" 
+                value="belmijterug"  
+                onChange={(e) => this.onFormRadioChange(e)} 
+                checked={this.state.selectedForm === 'belmijterug'} 
+              />
+              {' '}
+              Bel mij terug
+              </label>
+          </div>
+          {(this.state.selectedForm === 'contact') ? <ContactForm onSubmit={(values) => this.submit(values)} /> : null}
+          {(this.state.selectedForm === 'belmijterug') ? 
+            <BelMijTerugForm onSubmit={(values) => this.submit(values)} /> : null}
+          
         </div>
       </section>
     );
   }
 }
-const ContactFormComponent = (props: InjectedFormProps) => {
-  const { handleSubmit } = props;
-  return (
-    <form onSubmit={handleSubmit}>
-      <div style={{marginTop: 150}}>
-        <label htmlFor="firstName">Voornaam</label>
-        <Field name="firstName" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="lastName">Achternaam</label>
-        <Field name="lastName" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <Field name="email" component="input" type="email" />
-      </div>
-      <button type="submit">Verzenden</button>
-    </form>
-  );
-};
-
-export const ContactForm = reduxForm({
-  // a unique name for the form
-  form: 'contact'
-})(ContactFormComponent);

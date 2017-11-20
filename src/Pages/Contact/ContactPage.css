@@ -1,0 +1,9 @@
+form input {
+    line-height: 25px;
+    background: white;
+    color: black;
+    border-width: 2px;   
+}
+form input::-webkit-input-placeholder {
+    color: #eee;
+}

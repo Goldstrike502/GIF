@@ -32,7 +32,7 @@ export class OmgevingsMap extends React.Component<Props & DispatchProps, State> 
               key={i}
               lat={marker.locatie.lat}
               lng={marker.locatie.lon}
-              text={marker.titel}
+              text={marker.title}
               icon={marker.markerIcon.fields.file.url}
             />
             )}
