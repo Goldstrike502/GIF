@@ -2,7 +2,7 @@ import { reduxForm, InjectedFormProps, Field, FormErrors } from 'redux-form';
 import * as React from 'react';
 
 const BelMijTerugFormComponent = (props: InjectedFormProps) => {
-    const { handleSubmit } = props;
+    const { handleSubmit, pristine, submitting } = props;
     return (
         <form onSubmit={handleSubmit}>
 
@@ -21,7 +21,7 @@ const BelMijTerugFormComponent = (props: InjectedFormProps) => {
                 <option value="geen">Geen voorkeur</option>
             </Field>
             </div>
-            <button type="submit">Verzenden</button>
+            <button type="submit" disabled={pristine || submitting}>>Verzenden</button>
         </form>
     );
 };

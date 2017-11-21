@@ -1,3 +1,4 @@
+import { PrijsForm } from './PrijsAanvraagForm';
 import { BelMijTerugForm } from './BelMijTerugForm';
 import * as React from 'react';
 import './ContactPage.css';
@@ -73,6 +74,8 @@ export class ContactPageComponent extends React.Component<Props, State> {
           {(this.state.selectedForm === 'contact') ? <ContactForm onSubmit={(values) => this.submit(values)} /> : null}
           {(this.state.selectedForm === 'belmijterug') ? 
             <BelMijTerugForm onSubmit={(values) => this.submit(values)} /> : null}
+          {(this.state.selectedForm === 'prijs') ? 
+            <PrijsForm onSubmit={(values) => this.submit(values)} /> : null}
           
         </div>
       </section>
