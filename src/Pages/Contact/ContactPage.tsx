@@ -1,9 +1,11 @@
-import { PrijsForm } from './PrijsAanvraagForm';
+import { prijsFormSubmitUrl } from '../../Constants/api';
+import { PrijsForm, PrijsFormData } from './PrijsAanvraagForm';
 import { BelMijTerugForm } from './BelMijTerugForm';
 import * as React from 'react';
 import './ContactPage.css';
 import { ChangeEvent } from 'react';
 import { ContactForm, ContactFormData } from './ContactForm';
+import axios from 'axios';
 
 interface Props {
 
@@ -75,10 +77,14 @@ export class ContactPageComponent extends React.Component<Props, State> {
           {(this.state.selectedForm === 'belmijterug') ? 
             <BelMijTerugForm onSubmit={(values) => this.submit(values)} /> : null}
           {(this.state.selectedForm === 'prijs') ? 
-            <PrijsForm onSubmit={(values) => this.submit(values)} /> : null}
+            <PrijsForm onSubmit={(values: PrijsFormData) => onSubmit(values)} /> : null}
           
         </div>
       </section>
     );
   }
+}
+function onSubmit(data: PrijsFormData) {
+  console.log("data", data);
+  return axios.post(prijsFormSubmitUrl, data);
 }
