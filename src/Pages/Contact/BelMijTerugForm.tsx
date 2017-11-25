@@ -1,3 +1,4 @@
+import { DatePickerFormInput } from '../../DatePickerFormInput';
 import { reduxForm, InjectedFormProps, Field, FormErrors } from 'redux-form';
 import * as React from 'react';
 
@@ -11,6 +12,12 @@ const BelMijTerugFormComponent = (props: InjectedFormProps) => {
             </div>
             <div>
                 <Field name="phone" component="input" type="text" placeholder="Telefoon nummer" />
+            </div>
+            <div>
+                <label>
+                    Datum terug bellen:
+                    <Field name="vanaf" component={DatePickerFormInput}/>
+                </label>
             </div>
             <div>
             <Field name="tijdstip" component="select">

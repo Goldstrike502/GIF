@@ -47,9 +47,9 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
               <p>Prijzen voor uw geselecteerde periode: {this.props.selectedVacation.from.format('ll')} t/m &nbsp; 
               {this.props.selectedVacation.to.format('ll')}</p> : null)}
               {this.props.selectedPrices && selectedRange ? 
-                this.props.selectedPrices
+                <ul className="prices"> {this.props.selectedPrices
               .map((price, i) =>
-              this.renderPriceForSelectedPeriode(price, selectedRange, i)) : null }
+              this.renderPriceForSelectedPeriode(price, selectedRange, i)) } </ul> : null }
         </section>
       </div>
     );
@@ -69,11 +69,28 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
   private renderPriceForSelectedPeriode(price: PriceRange, range: DateRange, i: number): string | JSX.Element {
     const intersection = range.intersect(moment.range(price.vanaf, price.tot));
     return (
-    <li className="prijs-row">
-      <span className="prijs-vanaf">{intersection.start.format('ll')}</span>
-      <span className="prijs-tot">{intersection.end.format('ll')}</span>
+    <li className="prijs">
+      <div className="">
+      {price.styles.map((style => {
+        switch (style) {
+          case 'block':
+          return (<span><h3><i className="material-icons">hotel</i>Geblokeerd / Niet beschikbaar</h3></span>);
+          case 'lastminute': 
+          return (<span><h3><i className="material-icons">new_releases</i>Lastminute optie beschikbaar</h3></span>);
+          default: 
+          return (<span><h3><i className="material-icons">hotel</i>Villa beschikbaar</h3></span>);
+        }
+      }))}
+
+      </div>
+      <span className="prijs-vanaf">
+        VANAF: <span style={{float: 'right'}}>{intersection.start.format('ll')}</span>
+        </span>
+      <span className="prijs-tot">
+        TOT: <span style={{float: 'right'}}>{intersection.end.format('ll')}</span>
+        </span>
       <span className="prijs-title">{getTitleForStyles(price.styles)}</span>
-      <span className="prijs-price">{price.prijs}</span>
+      <span className="prijs-price"><h3>{price.prijs}</h3> </span>
     </li>);
   }
 

@@ -53,7 +53,7 @@ export class ChateauPageComponent extends React.Component<ChateauPageProps, Chat
         <section className="chateau-page" style={this.backgroundStyle()}>
             <h1>{(selectedPost ? (selectedPost as ChateauPost).title : 'Chateau Cazaleres')}</h1>
         </section>
-        <section>
+        <section className="content">
             {selectedPost ? 
                 <ReactMarkdown 
                     source={(selectedPost as ChateauPost).description ? (selectedPost as ChateauPost).description : ''} 

@@ -20,6 +20,11 @@ export interface VillaContentModel {
   sliderPhotos: Entry<SliderPhotoContentModel>[];
   prijzen: Entry<PriceRange>[];
   slug: string;
+  faciteitenIconen: Entry<FeatureIcon>[];
+}
+export interface FeatureIcon {
+  title: string;
+  icon: string;
 }
 export interface VillaFaciliteiten extends Partial<VillaContentModel> {
   id: string;

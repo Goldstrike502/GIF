@@ -1,3 +1,4 @@
+import { FeatureIcons } from './FeatureIcons';
 import {  setVacation } from '../../Actions';
 import { Dispatch } from 'redux';
 import { getCurrentRoute, getCurrentVillaForRoute } from '../../Selectors';
@@ -110,6 +111,7 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                 <aside className="right-content">
                     <h2>Algemene informatie</h2>
                     <ReactMarkdown source={state.infoRechts} />
+                    <FeatureIcons />
                     <hr />
                     <h2>Hoe kunnen wij u helpen?</h2>
                     <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk? 

@@ -1,3 +1,4 @@
+import { CHATEAU_ROUTE_URL } from '../../Routes';
 import { ChateauPost } from '../../Types/ContentTypes';
 import * as React from 'react';
 import './Chateau.css';
@@ -45,7 +46,7 @@ interface ChateauItemProps {
 export const ChateauItem: React.StatelessComponent<ChateauItemProps> = props => {
     return (
         <div className="chateau-item">
-            <Link to={'/chateau/' + props.item.slug}>
+            <Link to={CHATEAU_ROUTE_URL + '/' + props.item.slug}>
                 <figure>
                     <img 
                         src={props.item.cover.fields.file.url} 

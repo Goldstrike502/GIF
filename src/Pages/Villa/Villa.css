@@ -315,3 +315,18 @@ section.prijs-indicatie {
   background: #323331;
   padding: 10px;
 }
+ul.prices {
+  display: flex;
+  width: 100%;
+  padding:0;
+  flex-direction: row;
+}
+.prices li.prijs {
+  display: flex;
+  padding: 10px;
+  background: white;
+  box-shadow: 2px 0 12px rgba(0,0,0, 0.8);
+  max-width: 30%;
+  margin: 0 10px;
+  flex-direction: column;
+}

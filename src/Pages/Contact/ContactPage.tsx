@@ -1,4 +1,4 @@
-import { prijsFormSubmitUrl } from '../../Constants/api';
+import { prijsFormSubmitUrl, belMijTerugSubmitUrl } from '../../Constants/api';
 import { PrijsForm, PrijsFormData } from './PrijsAanvraagForm';
 import { BelMijTerugForm } from './BelMijTerugForm';
 import * as React from 'react';
@@ -21,8 +21,9 @@ export class ContactPageComponent extends React.Component<Props, State> {
     };
   }
   submit(values: Partial<ContactFormData>) {
+    axios.post(belMijTerugSubmitUrl, values);
     // print the form values to the console
-    console.log(values);
+    console.log(JSON.stringify(values));
   }
   onFormRadioChange(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.value === 'contact' ||
