@@ -64,11 +64,6 @@ function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
 
 export class VillaPageComponent extends React.Component<VillaPageProps, VillaPageState> {
     client = ContentfulClient;
-
-    constructor() {
-        super();
-    }
-
     render() {
    
         return (
