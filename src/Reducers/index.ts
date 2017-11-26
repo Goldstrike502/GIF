@@ -15,7 +15,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import * as constants from '../Constants';
 import * as moment from 'moment';
-import { CLOSE_INTRO_MESSAGE } from '../Constants';
+import { CLOSE_INTRO_MESSAGE, SELECT_INITIAL_CONTACT_FORM } from '../Constants';
 import { reducer as formReducer } from 'redux-form';
 
 function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSliderActions): Photo[] {
@@ -29,9 +29,13 @@ function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSli
     }
 }
 
-function layout(state: LayoutState = { introClosed: false }, action: LayoutActions): LayoutState {
+function layout(state: LayoutState = { introClosed: false, selectedForm: 'contact' },
+                action: LayoutActions): LayoutState {
     if (action.type === CLOSE_INTRO_MESSAGE) {
         return { ...state, introClosed: true };
+    }
+    if (action.type === SELECT_INITIAL_CONTACT_FORM) {
+        return {...state, selectedForm: action.form};
     }
     return state;
 }

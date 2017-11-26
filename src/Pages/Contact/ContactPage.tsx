@@ -6,9 +6,11 @@ import './ContactPage.css';
 import { ChangeEvent } from 'react';
 import { ContactForm, ContactFormData } from './ContactForm';
 import axios from 'axios';
+import { StoreState } from '../../Types/index';
+import { connect } from 'react-redux';
 
 interface Props {
-
+  initialSelectedForm: 'contact' | 'prijs' | 'belmijterug';
 }
 interface State {
   selectedForm: 'contact' | 'prijs' | 'belmijterug';
@@ -24,6 +26,11 @@ export class ContactPageComponent extends React.Component<Props, State> {
     axios.post(belMijTerugSubmitUrl, values);
     // print the form values to the console
     console.log(JSON.stringify(values));
+  }
+  componentWillReceiveProps(props: Partial<Props>) {
+    if (props.initialSelectedForm) {
+      this.setState({selectedForm: props.initialSelectedForm});
+    }
   }
   onFormRadioChange(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.value === 'contact' ||
@@ -89,3 +96,9 @@ function onSubmit(data: PrijsFormData) {
   console.log("data", data);
   return axios.post(prijsFormSubmitUrl, data);
 }
+function mapStateToProps(state: StoreState): Props {
+  return {
+    initialSelectedForm: state.layout.selectedForm
+  };
+}
+export const ContactPage = connect(mapStateToProps)(ContactPageComponent);

@@ -16,6 +16,10 @@ export interface CloseIntro {
     type: constants.CLOSE_INTRO_MESSAGE;
 }
 
+export interface SelectInitialContactForm {
+    type: constants.SELECT_INITIAL_CONTACT_FORM;
+    form: 'contact' | 'prijs' | 'belmijterug';
+}
 export interface SetVacation {
     type: constants.SELECTED_VACATION;
     from: Moment;
@@ -32,11 +36,17 @@ export function receivedWebsiteEntries(entries: EntryCollection<any>) {
         entries,
     };
 }
-export type LayoutActions = CloseIntro
-;
+export type LayoutActions = CloseIntro | SelectInitialContactForm;
+
 export function closeIntro(): CloseIntro {
     return {
         type: constants.CLOSE_INTRO_MESSAGE
+    };
+}
+export function selectInitialContactForm(form: 'contact' | 'prijs' | 'belmijterug') {
+    return {
+        type: constants.SELECT_INITIAL_CONTACT_FORM,
+        form,
     };
 }
 export function getWebsiteContent(): GetWebsiteContent {

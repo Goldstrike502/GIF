@@ -330,3 +330,6 @@ ul.prices {
   margin: 0 10px;
   flex-direction: column;
 }
+.prices-container {
+  display: flex;
+}

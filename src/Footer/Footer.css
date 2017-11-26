@@ -15,3 +15,24 @@ footer section {
 footer section.sitemap {
   min-width: 44%;
 }
+  footer ul {
+    padding:0;
+  }
+  footer ul li:first-child:before {
+  content: "";
+  margin: 0;
+}
+footer ul li:before {
+  content: "|";
+  margin:0 8px;
+}
+footer ul li {
+  list-style-type: none;
+  display: inline-block;
+}
+footer ul li a:hover {
+  font-weight: bold;
+}
+footer ul li a {
+  color: #000;
+}
