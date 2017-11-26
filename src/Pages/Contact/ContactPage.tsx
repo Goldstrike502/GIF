@@ -16,8 +16,8 @@ interface State {
   selectedForm: 'contact' | 'prijs' | 'belmijterug';
 }
 export class ContactPageComponent extends React.Component<Props, State> {
-  constructor() {
-    super();
+  constructor(props: Props, state: State) {
+    super(props, state);
     this.state = {
       selectedForm: 'contact'
     };
