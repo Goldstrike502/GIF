@@ -38,9 +38,6 @@ function mapDispatchToProps(dispatch: Dispatch<StoreState>): Partial<Props> {
 class PhotoSliderComponent extends React.Component<Props, State> {
   _imageGallery: any;
   state = { isClosed: false , items: []};
-  constructor() {
-    super();
-  }
 
   componentWillReceiveProps(props: Props) {
     this.setState({isClosed: props.closed || false});
