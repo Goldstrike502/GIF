@@ -37,9 +37,6 @@ export class ChateauPageComponent extends React.Component<ChateauPageProps, Chat
     componentWillReceiveProps(nextProps: ChateauPageProps) {
         return false;
     }
-    constructor() {
-        super();
-    }
     
     backgroundStyle(): any {
         return {
