@@ -36,15 +36,6 @@ export function FooterComponent(props: FooterProps) {
 
         })}
       </section>
-      <section className="social">
-        <div 
-          className="fb-page" 
-          // tslint:disable-next-line:jsx-alignment
-          // tslint:disable-next-line:jsx-alignment
-          // tslint:disable-next-line:max-line-length
-          // tslint:disable-next-line:jsx-alignment
-          data-href="https://www.facebook.com/goedinfrankrijk/" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/goedinfrankrijk/" className="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/goedinfrankrijk/">Goed in Frankrijk</a></blockquote></div>
-      </section>
   </footer>
   );
 }

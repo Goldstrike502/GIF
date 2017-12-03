@@ -42,8 +42,8 @@ export class ContactPageComponent extends React.Component<Props, State> {
   render() {
     return (
       <section className="contact-page">
-        <div className="container">
-          <div style={{ marginTop: 150 }}>
+        <div className="contact-forms">
+          <div className="contact-form-type">
             <label htmlFor="contact">
               <input 
                 id="contact" 
@@ -87,6 +87,17 @@ export class ContactPageComponent extends React.Component<Props, State> {
           {(this.state.selectedForm === 'prijs') ? 
             <PrijsForm onSubmit={(values: PrijsFormData) => onSubmit(values)} /> : null}
           
+        </div>
+        <div className="social-medial">
+        <section className="social">
+        <div 
+          className="fb-page" 
+          // tslint:disable-next-line:jsx-alignment
+          // tslint:disable-next-line:jsx-alignment
+          // tslint:disable-next-line:max-line-length
+          // tslint:disable-next-line:jsx-alignment
+          data-href="https://www.facebook.com/goedinfrankrijk/" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/goedinfrankrijk/" className="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/goedinfrankrijk/">Goed in Frankrijk</a></blockquote></div>
+      </section>
         </div>
       </section>
     );

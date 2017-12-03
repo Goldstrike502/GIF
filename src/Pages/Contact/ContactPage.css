@@ -1,9 +1,47 @@
-form input {
+form input:focus,
+form textarea:focus
+{
+    border-color: #f5b230;
+    outline: none;
+}
+form input,
+form textarea {
     line-height: 25px;
     background: white;
     color: black;
-    border-width: 2px;   
+    border-width: 2px;
+    margin: 5px;
+    border-width: 2px;
+    border-style: solid;  
+    height: 35px;
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+form input:focus::-webkit-input-placeholder {
+    color: rgb(224, 224, 224);    
 }
 form input::-webkit-input-placeholder {
-    color: #eee;
+    color: rgb(73, 73, 73);
+}
+
+form textarea {
+    min-height: 150px;
+}
+.social-medial {
+    width: 100%;
+}
+.contact-page {
+    display: flex;
+    padding-top:80px;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 85%; 
+}
+.contact-forms {
+    min-width: 60%;
+    margin-right: 25px;
+}
+.contact-form-type {
+    margin-bottom: 15px;
 }
