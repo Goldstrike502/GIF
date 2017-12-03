@@ -32,11 +32,6 @@ class App extends React.Component<Props, State> {
     }
   };
 
-  constructor() {
-    super();
-
-  }
-
   render() {
     return (
       <div className="App">
