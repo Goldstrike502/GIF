@@ -20,12 +20,12 @@ export const VillaContentTabs: React.StatelessComponent<VillaContentTabsProps> =
         <ReactMarkdown source={props.content.description} />
       </TabPanel>
       <TabPanel>
-        <p>
+        <div className="plattegrond">
           <img 
             src={props.content.plattegrond.fields.file.url} 
             alt={props.content.plattegrond.fields.title}
           />
-        </p>
+        </div>
       </TabPanel>
     </Tabs>
   </section>);

@@ -333,3 +333,6 @@ ul.prices {
 .prices-container {
   display: flex;
 }
+.plattegrond {
+  min-width: 60%; 
+}
