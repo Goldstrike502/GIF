@@ -1,6 +1,7 @@
 import { VillaContentModel } from '../../Types/ContentTypes';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import * as React from 'react';
+import * as ReactMarkdown from 'react-markdown';
 
 interface VillaContentTabsProps {
   content: VillaContentModel;
@@ -16,7 +17,7 @@ export const VillaContentTabs: React.StatelessComponent<VillaContentTabsProps> =
         <Tab>Video</Tab>
       </TabList>
       <TabPanel>
-        <p>{props.content.description}</p>
+        <ReactMarkdown source={props.content.description} />
       </TabPanel>
       <TabPanel>
         <p>

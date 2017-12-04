@@ -36,6 +36,15 @@ export function FooterComponent(props: FooterProps) {
 
         })}
       </section>
+      <section className="footer-links">
+        <a
+          target="_blank" 
+          href={
+            // tslint:disable-next-line:jsx-alignment
+            'https://www.zoover.nl/frankrijk/midi-pyrenees/daumazan/goed-in-frankrijk-chateau-cazaleres/vakantiehuis'}>
+          <img src="/images/zoover-logo.svg" />
+        </a>
+      </section>
   </footer>
   );
 }
