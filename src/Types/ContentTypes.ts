@@ -21,6 +21,7 @@ export interface VillaContentModel {
   prijzen: Entry<PriceRange>[];
   slug: string;
   faciteitenIconen: Entry<FeatureIcon>[];
+  youtubeLinks: string[] | undefined;
 }
 export interface FeatureIcon {
   title: string;
