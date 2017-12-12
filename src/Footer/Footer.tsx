@@ -13,7 +13,7 @@ export const initialFooterSitemap: Sitemap = {
 };
 
 function mapStateToProps(state: StoreState): FooterProps {
-  return {sitemap: getAllContentTypesAsSitemap(state)};
+  return { sitemap: getAllContentTypesAsSitemap(state) };
 }
 
 interface FooterProps {
@@ -21,23 +21,27 @@ interface FooterProps {
 }
 export function FooterComponent(props: FooterProps) {
   return (
-  <footer>
-      <section className="sitemap">
-        <h1>Goed in Frankrijk</h1>
-        {props.sitemap.items.map((branch) => {
-        return (
-          <div className="branch" key={branch.title}>
-              <h2>{branch.title}</h2>
-            <ul>
-              {branch.items.map(sub => <li key={sub.title}><Link to={`${sub.link}`}>{sub.title}</Link></li>)}
-            </ul> 
-          </div>
-          );
+    <footer>
+      <div className="footer-content">
+        <section className="sitemap">
+          <h1>Goed in Frankrijk</h1>
+          {props.sitemap.items.map((branch) => {
+            return (
+              <div className="branch" key={branch.title}>
+                <h2>{branch.title}</h2>
+                <ul>
+                  {branch.items.map(sub => <li key={sub.title}><Link to={`${sub.link}`}>{sub.title}</Link></li>)}
+                </ul>
+              </div>
+            );
 
-        })}
-      </section>
+          })}
+        </section>
+        <section><iframe src="/zoover-widget.html" style={{border: 0, height: '100%'}} />
+        </section>
+    </div>
   </footer>
-  );
+      );
 }
 export const Footer = connect(mapStateToProps, () => {
   return {};
