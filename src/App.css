@@ -87,4 +87,6 @@ h1, h2 {
 .content {
   max-width: 80%;
   margin: auto;
+  font-size: 17px;
+  line-height: 24px;
 }

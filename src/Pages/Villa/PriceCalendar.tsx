@@ -25,6 +25,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
       hoogseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'hoogseizoen'),
       midseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'midseizoen'),
     };
+    console.log('prices in render', this.props.prices);
     const selectedRange = this.props.selectedVacation ?
       moment.range(this.props.selectedVacation.from, this.props.selectedVacation.to) : false;
     return (

@@ -333,3 +333,21 @@ ul.prices {
 .prices-container {
   display: flex;
 }
+.villa-title a:hover {
+  text-decoration: underline;
+}
+.villa-title a {
+  color: #000;
+  text-decoration: none;
+}
+.villa-title h1, .villa-title h2 {
+  margin: 15px;
+  color: #000;
+}
+.villa-title {
+  display: flex;
+  display: flex;
+  width: 80%;
+  margin: 20px auto 0 auto;
+  align-items: center;
+}

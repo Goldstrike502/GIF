@@ -14,7 +14,6 @@ export const VillaContentTabs: React.StatelessComponent<VillaContentTabsProps> =
   };
   return (
     <section className="villa-page-tabs content">
-      <h1>{props.content.title}</h1>
       <Tabs defaultIndex={0} >
         <TabList>
           <Tab>Faciliteiten</Tab>

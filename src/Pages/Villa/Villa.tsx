@@ -1,5 +1,6 @@
+import { VILLAS_ROUTE_URL } from '../../Routes';
 import { FeatureIcons } from './FeatureIcons';
-import {  setVacation } from '../../Actions';
+import { setVacation } from '../../Actions';
 import { Dispatch } from 'redux';
 import { getCurrentRoute, getCurrentVillaForRoute } from '../../Selectors';
 import { PriceRange, VillaContentModel } from '../../Types/ContentTypes';
@@ -45,75 +46,91 @@ function mapStateToProps(state: StoreState): VillaPageProps {
     const selectedVilla = getCurrentVillaForRoute(state, getCurrentRoute(state));
     return {
         sliderPhotos: selectedVilla ? selectedVilla.sliderPhotos
-            .filter(photo => photo.sys.contentType 
-                && photo.sys.contentType.sys.id === SLIDER_PHOTO_CONTENT_TYPE_ID)                                    
+            .filter(photo => photo.sys.contentType
+                && photo.sys.contentType.sys.id === SLIDER_PHOTO_CONTENT_TYPE_ID)
             .map(convertContentfulEntryToPhoto) : [],
         villas: state.villas,
         selectedVilla,
         vacation: state.vacation,
-        onVacationSelect: (a, b, c) => undefined 
+        onVacationSelect: (a, b, c) => undefined
     };
 }
 function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
     return {
-        onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel, prices: PriceRange[]) => 
-        dispatch(setVacation(from, to, model, prices))        
-     };
+        onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel, prices: PriceRange[]) =>
+            dispatch(setVacation(from, to, model, prices))
+    };
 
 }
 
 export class VillaPageComponent extends React.Component<VillaPageProps, VillaPageState> {
     client = ContentfulClient;
     render() {
-   
-        return (
-                <div>
-                    <section className="container">
-                        {this.props.sliderPhotos ? 
-                            <ImageGallery 
-                                items={this.props.sliderPhotos} 
-                                thumbnailPosition="left"
-                            /> : ''}
-                        {(this.props.selectedVilla ?
-                            this.renderVillaContent(this.props.selectedVilla) 
-                            : '')}
-                            
-                    </section>
-                    <section className="prijzen">
-                        <h1>Prijzen &amp; beschikbaarheid</h1>
-                        {this.props.selectedVilla ? <PriceCalendar 
-                            selectedVacation={this.props.vacation}
-                            onRangeSelect={(from, to, prices) => {
-                                     console.log('pricessss', prices);
-                                     if (this.props.onVacationSelect && this.props.selectedVilla) {
-                                         this.props.onVacationSelect(from, to, this.props.selectedVilla, prices);
-                                     }
-                                    }}
-                            prices={this.props.selectedVilla.prijzen.map(entry => entry.fields)}
-                            selectedPrices={this.props.vacation.prices}
-                        /> : null}
-                    </section>
-                </div>
-            );
 
-       
+        return (
+            <div>
+                <section className="container">
+                    {this.props.sliderPhotos ?
+                        <ImageGallery
+                            items={this.props.sliderPhotos}
+                            thumbnailPosition="left"
+                        /> : ''}
+                    {(this.props.selectedVilla ?
+                        this.renderVillaContent(this.props.selectedVilla)
+                        : '')}
+
+                </section>
+                <section className="prijzen">
+                    <h1>Prijzen &amp; beschikbaarheid</h1>
+                    {this.props.selectedVilla ? <PriceCalendar
+                        selectedVacation={this.props.vacation}
+                        onRangeSelect={(from, to, prices) => {
+                            console.log('pricessss', prices);
+                            if (this.props.onVacationSelect && this.props.selectedVilla) {
+                                this.props.onVacationSelect(from, to, this.props.selectedVilla, prices);
+                            }
+                        }}
+                        prices={this.props.selectedVilla.prijzen.map(entry => entry.fields)}
+                        selectedPrices={this.props.vacation.prices}
+                    /> : null}
+                </section>
+            </div>
+        );
+
+
     }
 
     private renderVillaContent(state: VillaContentModel): React.ReactNode {
         return (
+
             <section className="villa-content">
-                <VillaContentTabs content={state} />
-                <aside className="right-content">
-                    <h2>Algemene informatie</h2>
-                    <ReactMarkdown source={state.infoRechts} />
-                    <FeatureIcons />
-                    <hr />
-                    <h2>Hoe kunnen wij u helpen?</h2>
-                    <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk? 
-                        Neem gerust contact op, we staan klaar om u te helpen.</p>
-                    <Link to={`/vakantie-villa/${state.slug}`} className="button yellow">Contact informatie</Link>
-                </aside>
-            </section>);
+                <div>
+                    <section className="villa-title">
+                        <h1>{state.title}</h1>
+                        {this.props.villas
+                            .filter(v => v.title !== state.title)
+                            .map(v =>
+                                <Link
+                                    key={v.slug}
+                                    to={VILLAS_ROUTE_URL + '/' + v.slug}
+                                >
+                                    <h2>{v.title}</h2>
+                                </Link>)}
+                    </section>
+                    <VillaContentTabs content={state} />
+                </div>
+                    <aside className="right-content">
+                        <h2>Algemene informatie</h2>
+                        <ReactMarkdown source={state.infoRechts} />
+                        <FeatureIcons />
+                        <hr />
+                        <h2>Hoe kunnen wij u helpen?</h2>
+                        <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk?
+                            Neem gerust contact op, we staan klaar om u te helpen.</p>
+                        <Link to={`/vakantie-villa/${state.slug}`} className="button yellow">Contact informatie</Link>
+                    </aside>
+            </section>
+        );
     }
 }
 export const VillaPage = connect(mapStateToProps, mapDispatchToProps)(VillaPageComponent);
