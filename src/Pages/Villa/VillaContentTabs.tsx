@@ -2,6 +2,7 @@ import { VillaContentModel } from '../../Types/ContentTypes';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import * as React from 'react';
 import YouTube from 'react-youtube';
+import * as ReactMarkdown from 'react-markdown';
 
 interface VillaContentTabsProps {
   content: VillaContentModel;
@@ -21,15 +22,15 @@ export const VillaContentTabs: React.StatelessComponent<VillaContentTabsProps> =
           {props.content.youtubeLinks ? <Tab>Video</Tab> : null}
         </TabList>
         <TabPanel>
-          <p>{props.content.description}</p>
+          <ReactMarkdown source={props.content.description} />
         </TabPanel>
         <TabPanel>
-          <p>
-            <img
-              src={props.content.plattegrond.fields.file.url}
+          <div className="plattegrond">
+            <img 
+              src={props.content.plattegrond.fields.file.url} 
               alt={props.content.plattegrond.fields.title}
             />
-          </p>
+        </div>
         </TabPanel>
         {props.content.youtubeLinks ? <TabPanel>
           <section className="videos">

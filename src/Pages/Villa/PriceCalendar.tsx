@@ -14,11 +14,15 @@ interface PriceCalendarProps {
   onRangeSelect?: (from: Moment.Moment, to: Moment.Moment, prices: PriceRange[]) => any;
 }
 interface PriceCalendarState {
-
+    year: number; 
 }
 
 export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCalendarState> {
+  state = {
+    year: 2018
+  };
   render() {
+    const { year } = this.state; 
     const customCLassesForPrices = {
       lastminute: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute'),
       blocked: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'block'),
@@ -31,7 +35,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
     return (
       <div className="price-calendar">
         <Calendar
-          year={2017}
+          year={year}
           onPickDate={this.onDatePicked}
           customClasses={this.props.prices ? customCLassesForPrices : {}}
           selectRange={true}

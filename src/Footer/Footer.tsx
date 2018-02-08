@@ -35,11 +35,18 @@ export function FooterComponent(props: FooterProps) {
               </div>
             );
 
-          })}
-        </section>
-        <section><iframe src="/zoover-widget.html" style={{border: 0, height: '100%'}} />
-        </section>
-    </div>
+        })}
+      </section>
+      <section className="footer-links">
+        <a
+          target="_blank" 
+          href={
+            // tslint:disable-next-line:jsx-alignment
+            'https://www.zoover.nl/frankrijk/midi-pyrenees/daumazan/goed-in-frankrijk-chateau-cazaleres/vakantiehuis'}>
+          <img src="/images/zoover-logo.svg" />
+        </a>
+      </section>
+      </div>
   </footer>
       );
 }

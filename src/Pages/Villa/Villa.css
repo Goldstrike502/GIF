@@ -351,3 +351,6 @@ ul.prices {
   margin: 20px auto 0 auto;
   align-items: center;
 }
+.plattegrond {
+  min-width: 60%; 
+}
