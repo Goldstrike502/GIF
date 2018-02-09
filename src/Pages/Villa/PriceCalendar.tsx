@@ -14,7 +14,7 @@ interface PriceCalendarProps {
   onRangeSelect?: (from: Moment.Moment, to: Moment.Moment, prices: PriceRange[]) => any;
 }
 interface PriceCalendarState {
-    year: number; 
+  year: number;
 }
 
 export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCalendarState> {
@@ -22,7 +22,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
     year: 2018
   };
   render() {
-    const { year } = this.state; 
+    const { year } = this.state;
     const customCLassesForPrices = {
       lastminute: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute'),
       blocked: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'block'),
@@ -34,14 +34,16 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
       moment.range(this.props.selectedVacation.from, this.props.selectedVacation.to) : false;
     return (
       <div className="price-calendar">
-        <Calendar
-          year={year}
-          onPickDate={this.onDatePicked}
-          customClasses={this.props.prices ? customCLassesForPrices : {}}
-          selectRange={true}
-          selectedRange={[this.props.selectedVacation.from, this.props.selectedVacation.to]}
-          onPickRange={(from, to) => this.onRangeSelect(from, to)}
-        />
+        <div className="calendar-container">
+          <Calendar
+            year={year}
+            onPickDate={this.onDatePicked}
+            customClasses={this.props.prices ? customCLassesForPrices : {}}
+            selectRange={true}
+            selectedRange={[this.props.selectedVacation.from, this.props.selectedVacation.to]}
+            onPickRange={(from, to) => this.onRangeSelect(from, to)}
+          />
+        </div>
         <section className="prijs-indicatie">
           <aside className="legenda" style={{ float: 'right' }}>Legenda:
             <span className="legenda-item beschikbaar">Beschikbaar</span>
@@ -91,15 +93,15 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
               case 'block':
                 return (<span>
                   <h3><i className="material-icons">event_busy</i>Geblokeerd / Niet beschikbaar</h3>
-                  </span>);
+                </span>);
               case 'lastminute':
                 return (<span>
                   <h3><i className="material-icons">new_releases</i>Lastminute optie beschikbaar</h3>
-                  </span>);
+                </span>);
               default:
                 return (<span>
                   <h3><i className="material-icons">hotel</i>Villa beschikbaar</h3>
-                  </span>);
+                </span>);
             }
           }))}
 
