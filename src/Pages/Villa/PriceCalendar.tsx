@@ -55,7 +55,8 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
             <div className="boeken">
               <p>Wilt u boeken? Of meer informatie?
               Om u het beste te kunnen helpen, doen wij dat graag persoonlijk. Neem contact met ons op
-               of laat uw telefoon nummer achter en wij helpen u met het boeken van uw perfecte vakantie. </p>
+              of laat uw telefoon nummer achter en wij helpen u met het boeken van uw perfecte vakantie en
+              doen dat graag met een persoonlijke aanbieding. </p>
               <Link className="button" to="/contact">Een persoonlijke vrijblijvende prijsopgave</Link>
               <Link className="button" to="/contact">Neem contact op</Link>
             </div>

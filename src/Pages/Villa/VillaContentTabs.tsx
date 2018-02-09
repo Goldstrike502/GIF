@@ -27,6 +27,14 @@ export const VillaContentTabs: React.StatelessComponent<VillaContentTabsProps> =
           />
         </div>
       </TabPanel>
+      <TabPanel>
+        <div className="videos">
+          <img 
+            src={props.content.plattegrond.fields.file.url} 
+            alt={props.content.plattegrond.fields.title}
+          />
+        </div>
+      </TabPanel>
     </Tabs>
   </section>);
 };
