@@ -9,6 +9,9 @@ footer section.social {
   min-width: 340px;
   margin:0;
 }
+footer .footer-content {
+  display: flex;
+}
 footer section {
   margin: 20px;
 }
