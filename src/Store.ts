@@ -6,7 +6,6 @@ import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
-import scrollRestorationMiddleware from 'redux-router-scroll-restoration';
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
@@ -17,7 +16,7 @@ export function configureStore() {
     const store = createStore<StoreState>(
       rootReducer,
       composeWithDevTools(
-        applyMiddleware(...[epicMiddleware, router, scrollRestorationMiddleware]),
+        applyMiddleware(...[epicMiddleware, router]),
         // other store enhancers if any
       ),
     );

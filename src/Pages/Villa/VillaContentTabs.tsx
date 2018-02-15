@@ -31,15 +31,17 @@ export const VillaContentTabs: React.StatelessComponent<VillaContentTabsProps> =
               alt={props.content.plattegrond.fields.title}
             />
         </div>
-      </TabPanel>
-      <TabPanel>
-        <div className="videos">
-          <img 
-            src={props.content.plattegrond.fields.file.url} 
-            alt={props.content.plattegrond.fields.title}
-          />
-        </div>
-      </TabPanel>
-    </Tabs>
-  </section>);
+        </TabPanel>
+        {props.content.youtubeLinks ? <TabPanel>
+          <section className="videos">
+            {props.content.youtubeLinks.map(link =>
+              <YouTube
+                key={link}
+                videoId={link}
+                opts={opts}
+              />)}
+          </section>
+        </TabPanel> : null}
+      </Tabs>
+    </section>);
 };
