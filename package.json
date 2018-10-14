@@ -6,7 +6,7 @@
     "@types/google-map-react": "^0.23.0",
     "@types/moment-range": "^3.0.4",
     "@types/react-datepicker": "^0.55.1",
-    "@types/react-redux": "^5.0.12",
+    "@types/react-redux": "^5.0.0",
     "@types/react-router-dom": "^4.0.8",
     "@types/react-router-redux": "^5.0.10",
     "@types/react-youtube": "^7.4.0",
@@ -16,7 +16,7 @@
     "contentful": "^5.0.1",
     "google-map-react": "^0.25.0",
     "history": "^4.7.2",
-    "moment": "^2.19.1",
+    "moment": "^2.22.2",
     "moment-range": "^3.0.3",
     "react": "^16.0.0",
     "react-datepicker": "^0.61.0",
@@ -24,10 +24,10 @@
     "react-image-gallery": "^0.8.3",
     "react-markdown": "^2.5.0",
     "react-material-icons": "^1.0.2",
-    "react-redux": "^5.0.6",
+    "react-redux": "^5.0.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
-    "react-scripts-ts": "2.7.0",
+    "react-scripts-ts": "^4.0.8",
     "react-tabs": "^2.1.0",
     "react-tooltip": "^3.4.0",
     "react-yearly-calendar": "^1.1.5",
@@ -37,6 +37,7 @@
     "redux-observable": "^0.17.0",
     "redux-router-scroll-restoration": "^1.0.0",
     "rxjs": "^5.5.2",
+    "typescript": "^3.1.3",
     "underscore": "^1.8.3",
     "underscore.string": "^3.3.4",
     "whatwg-fetch": "^2.0.3"
@@ -53,5 +54,11 @@
     "@types/react": "^16.0.10",
     "@types/react-dom": "^16.0.1",
     "redux-devtools-extension": "^2.13.2"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

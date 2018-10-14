@@ -25,7 +25,7 @@ export class ContactPageComponent extends React.Component<Props, State> {
   submit(values: Partial<ContactFormData>) {
     axios.post(belMijTerugSubmitUrl, values);
     // print the form values to the console
-    console.log(JSON.stringify(values));
+    // console.log(JSON.stringify(values));
   }
   componentWillReceiveProps(props: Partial<Props>) {
     if (props.initialSelectedForm) {
@@ -104,7 +104,7 @@ export class ContactPageComponent extends React.Component<Props, State> {
   }
 }
 function onSubmit(data: PrijsFormData) {
-  console.log("data", data);
+  // console.log("data", data);
   return axios.post(prijsFormSubmitUrl, data);
 }
 function mapStateToProps(state: StoreState): Props {

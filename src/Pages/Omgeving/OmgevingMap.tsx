@@ -19,7 +19,7 @@ interface State {
 }
 export class OmgevingsMap extends React.Component<Props & DispatchProps, State> {
   render() {
-    console.log('markers', this.props.markers);
+    // console.log('markers', this.props.markers);
     return (
       <div style={{ height: '500px', width: '100%' }}>
 

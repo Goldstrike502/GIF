@@ -85,7 +85,7 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                     {this.props.selectedVilla ? <PriceCalendar
                         selectedVacation={this.props.vacation}
                         onRangeSelect={(from, to, prices) => {
-                            console.log('pricessss', prices);
+                            // console.log('pricessss', prices);
                             if (this.props.onVacationSelect && this.props.selectedVilla) {
                                 this.props.onVacationSelect(from, to, this.props.selectedVilla, prices);
                             }
@@ -96,7 +96,6 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                 </section>
             </div>
         );
-
 
     }
 

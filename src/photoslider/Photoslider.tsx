@@ -25,7 +25,7 @@ export const initialPhotoSliderState: Photo[] = [{
 }];
 
 function mapStateToProps(state: StoreState): Props {
-  console.log('map state to props', state.sliderPhotos);
+  // console.log('map state to props', state.sliderPhotos);
   return {items: state.sliderPhotos, closed: state.layout.introClosed}; 
 } 
 
@@ -44,7 +44,7 @@ class PhotoSliderComponent extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('render', this.props);
+    // console.log('render', this.props);
     return (
       <div className={this.state.isClosed ? 'focus' : 'blur'}>
 

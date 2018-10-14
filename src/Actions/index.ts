@@ -30,7 +30,6 @@ export interface SetVacation {
 export type PhotoSliderActions = ReceivedWebsiteEntries;
 
 export function receivedWebsiteEntries(entries: EntryCollection<any>) {
-    console.log('received website entries', entries);
     return {
         type: constants.RECEIVED_WEBSITE_ENTRIES,
         entries,

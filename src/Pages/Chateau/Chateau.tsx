@@ -18,14 +18,14 @@ interface ChateauPageState {
 }
 function mapStateToProps(state: StoreState): ChateauPageProps {
     const selectedPost = getChateauPostForRoute(state, getCurrentRoute(state));
-    console.log('mapstatechateau', getCurrentRoute(state), state);
+
     return {
         chateauPosts: state.chateauPosts,
         headerPhoto: getHeaderPhotoFromCurrentChateauPost(selectedPost),
         selectedPost
     };
 }
-function mapDispatchToProps(dispatch: Dispatch<Action>): Partial<ChateauPageProps>{
+function mapDispatchToProps(dispatch: Dispatch<Action>): Partial<ChateauPageProps> {
     return { };
 }
 

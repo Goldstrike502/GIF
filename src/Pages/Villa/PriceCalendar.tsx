@@ -29,7 +29,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
       hoogseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'hoogseizoen'),
       midseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'midseizoen'),
     };
-    console.log('prices in render', this.props.prices);
+    // console.log('prices in render', this.props.prices);
     const selectedRange = this.props.selectedVacation ?
       moment.range(this.props.selectedVacation.from, this.props.selectedVacation.to) : false;
     return (
@@ -72,8 +72,8 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
       </div>
     );
   }
-  onDatePicked(e) {
-    console.log('selecedddddd date', e);
+  onDatePicked() {
+    // console.log('selecedddddd date', e);
   }
   onRangeSelect(f: Moment.Moment, t: Moment.Moment) {
     const { from, to } = getRelativeFromTo(f, t);
