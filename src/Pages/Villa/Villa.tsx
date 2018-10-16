@@ -1,5 +1,5 @@
 import { VILLAS_ROUTE_URL } from '../../Routes';
-import { FeatureIcons } from './FeatureIcons';
+// import { FeatureIcons } from './FeatureIcons';
 import { setVacation } from '../../Actions';
 import { Dispatch } from 'redux';
 import { getCurrentRoute, getCurrentVillaForRoute } from '../../Selectors';
@@ -99,15 +99,15 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
 
     }
 
-    private renderVillaContent(state: VillaContentModel): React.ReactNode {
+    private renderVillaContent(content: VillaContentModel): React.ReactNode {
         return (
 
             <section className="villa-content">
-                <div>
+                <div style={{minWidth: '70%'}}>
                     <section className="villa-title">
-                        <h1>{state.title}</h1>
+                        <h1>{content.title}</h1>
                         {this.props.villas
-                            .filter(v => v.title !== state.title)
+                            .filter(v => v.title !== content.title) // dont show current page link
                             .map(v =>
                                 <Link
                                     key={v.slug}
@@ -116,17 +116,17 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                                     <h2>{v.title}</h2>
                                 </Link>)}
                     </section>
-                    <VillaContentTabs content={state} />
+                    <VillaContentTabs content={content} />
                 </div>
                     <aside className="right-content">
                         <h2>Algemene informatie</h2>
-                        <ReactMarkdown source={state.infoRechts} />
-                        <FeatureIcons />
+                        <ReactMarkdown source={content.infoRechts} />
+                        {/* <FeatureIcons /> */}
                         <hr />
                         <h2>Hoe kunnen wij u helpen?</h2>
                         <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk?
                             Neem gerust contact op, we staan klaar om u te helpen.</p>
-                        <Link to={`/vakantie-villa/${state.slug}`} className="button yellow">Contact informatie</Link>
+                        <Link to={`/vakantie-villa/${content.slug}`} className="button yellow">Contact informatie</Link>
                     </aside>
             </section>
         );

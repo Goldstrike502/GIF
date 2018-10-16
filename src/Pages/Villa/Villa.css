@@ -112,7 +112,10 @@ section.villa-page-tabs {
     color: #fff;
     min-width: 390px;
 }
-
+.price-calendar {
+  position: relative;
+  width: 100%;
+}
 table.calendar {
     border-collapse: collapse;
     width: 100%;
@@ -325,25 +328,30 @@ ul.prices {
   width: 100%;
   padding:0;
   flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.prices li.prijs h3 i {
+  padding: 0 5px;
 }
 .prices li.prijs {
   display: flex;
   padding: 10px;
   background: white;
   box-shadow: 2px 0 12px rgba(0,0,0, 0.8);
-  max-width: 30%;
-  margin: 0 10px;
+  width: 35%;
+  margin: 10px;
   flex-direction: column;
 }
 .prices-container {
   display: flex;
 }
-.villa-title a:hover {
-  text-decoration: underline;
-}
+/* .villa-title a:hover {
+} */
 .villa-title a {
+  text-decoration: underline;
   color: #000;
-  text-decoration: none;
+  /* text-decoration: none; */
 }
 .villa-title h1, .villa-title h2 {
   margin: 15px;
