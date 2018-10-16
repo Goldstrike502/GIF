@@ -58,6 +58,7 @@ export interface Photo {
   description?: string;
   srcSet?: string;
   sizes?: string;
+  homepage?: boolean;
 }
 export interface ImageGalleryProps {
   items?: Photo[];

@@ -12,9 +12,9 @@ interface Props extends ImageGalleryProps {
   closed?: boolean | undefined;
   onClose?: () => void;
   items: Photo[];
+  homepage?: boolean;
 }
 interface State {
-  items: Photo[];
   isClosed: boolean;
 }
 
@@ -44,10 +44,10 @@ class PhotoSliderComponent extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('render', this.props);
+    const photos = this.props.homepage ? this.props.items.filter(_ => _.homepage) : this.props.items;
+    console.log('render', photos);
     return (
       <div className={this.state.isClosed ? 'focus' : 'blur'}>
-
       <ImageGallery
           ref={(i) => this._imageGallery = i}
           autoPlay={this.state.isClosed}  
@@ -56,8 +56,8 @@ class PhotoSliderComponent extends React.Component<Props, State> {
           thumbnailPosition="top"
           showThumbnails={this.state.isClosed}
           showNav={this.state.isClosed}
-          items={this.state.items}
           {... this.props}
+          items={photos}
       /> 
         <i
           className={'material-icons play ' + (this.state.isClosed ? 'hidden' : '')}
@@ -74,7 +74,6 @@ class PhotoSliderComponent extends React.Component<Props, State> {
   onClose() {
     this._imageGallery.play();
     this.setState({
-      ... this.state,
       isClosed: true
     });
     if (this.props.onClose) {
@@ -83,7 +82,7 @@ class PhotoSliderComponent extends React.Component<Props, State> {
 
   }
 }
-export const BackgroundPhotoSlider = connect(mapStateToProps, mapDispatchToProps)(PhotoSliderComponent);
+export const BackgroundPhotoSlider = connect<any, any, any>(mapStateToProps, mapDispatchToProps)(PhotoSliderComponent);
 export const PhotoSlider = connect<Props, Partial<Props>>
                                   (mapStateToProps, mapDispatchToProps)
                                       ((props: Props) => <ImageGallery {... props} />);

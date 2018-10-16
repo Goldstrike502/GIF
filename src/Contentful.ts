@@ -18,6 +18,7 @@ export const MAP_MARKER_CONTENT_TYPE_ID = 'mapMarker';
 export function convertContentfulEntryToPhoto(entry: Entry<SliderPhotoContentModel>): Photo {
     return {
         original: entry.fields.image.fields.file.url,
-        thumbnail: entry.fields.image.fields.file.url
+        thumbnail: entry.fields.image.fields.file.url,
+        homepage: entry.fields.homepage
     };
 }

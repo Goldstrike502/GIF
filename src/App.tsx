@@ -49,16 +49,17 @@ class App extends React.Component<Props, State> {
                     <li><NavLink to={CONTACT_ROUTE_URL}>Contact</NavLink></li>
                   </ul>
                 </nav>
-
-                <Route exact={true} path="/" component={Home} />
-                <Route exact={true} path={CHATEAU_ROUTE_URL} component={ChateauPage} />
-                <Route exact={true} path={OMGEVING_ROUTE_URL} component={OmgevingPage} />
-                <Route exact={true} path={CONTACT_ROUTE_URL} component={ContactPageComponent} />
-                <Route path={`${CHATEAU_ROUTE_URL}/:post`} component={ChateauPage} />
-                <Route path={`${VILLAS_ROUTE_URL}/:villa`} component={VillaPage} />
-                <Route path={`${OMGEVING_ROUTE_URL}/:item`} component={OmgevingPage} />
-                {!!this.state && !!this.state.footerSitemap ? <Footer/> : ''}
-              </div>  
+                <section className="main-body" style={{paddingTop: 65}}>
+                  <Route exact={true} path="/" component={Home} />
+                  <Route exact={true} path={CHATEAU_ROUTE_URL} component={ChateauPage} />
+                  <Route exact={true} path={OMGEVING_ROUTE_URL} component={OmgevingPage} />
+                  <Route exact={true} path={CONTACT_ROUTE_URL} component={ContactPageComponent} />
+                  <Route path={`${CHATEAU_ROUTE_URL}/:post`} component={ChateauPage} />
+                  <Route path={`${VILLAS_ROUTE_URL}/:villa`} component={VillaPage} />
+                  <Route path={`${OMGEVING_ROUTE_URL}/:item`} component={OmgevingPage} />
+                  {!!this.state && !!this.state.footerSitemap ? <Footer /> : ''}
+                </section>
+              </div>
             </ConnectedRouter>
           </Provider>
         </Router>

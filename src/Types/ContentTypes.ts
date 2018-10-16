@@ -64,6 +64,7 @@ export interface SliderPhotoContentModel {
   title: string;
   image: Entry<ContentfulPhoto>;
   order: number;
+  homepage: boolean;
 }
 // tslint:disable-next-line:max-line-length
 export type ContentModelTypes = ChateauPost | VillaContentModel | ChateauPost | SliderPhotoContentModel | MapMarker | PriceRange;

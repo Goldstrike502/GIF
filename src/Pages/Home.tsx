@@ -61,11 +61,7 @@ class HomePage extends React.Component<Props, State> {
           <li>Luxe vakantie-villa's</li>
           <li>Persoonlijk contact</li>
         </ul>
-        <p>Zeven eigenaren van luxe vakantie-villa's
-          gelegen in Zuid-Frankrijk hebben zich verenigd in een stichting.
-          Dit om zich te kunnen onderscheiden in mooie en luxe ingerichte villa's met een
-          echt thuisgevoel. Wij zijn er voor uw gemakken en een mooie vakantie.
-        </p>
+        <p>Genieten, het ultieme vakantiegevoel beleven, willen wij dat niet allemaal? Frankrijk is vakantieland nummer één voor veel Nederlanders. Wij bieden u in dit prachtige land het Franse vakantiegevoel met een Nederlands tintje.</p>
       </header>
     );
   }
@@ -74,7 +70,7 @@ class HomePage extends React.Component<Props, State> {
       <div className="container">
         <section className="image-intro">
           {this.renderIntroHeader()}
-          <BackgroundPhotoSlider />
+          <BackgroundPhotoSlider homepage={true} />
         </section>
         <ChateauListViewComponent intro={true}>
           {this.props.chateauPosts

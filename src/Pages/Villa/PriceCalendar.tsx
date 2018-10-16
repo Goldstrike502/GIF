@@ -19,8 +19,14 @@ interface PriceCalendarState {
 
 export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCalendarState> {
   state = {
-    year: 2018
+    year: new Date().getFullYear()
   };
+  nextYear(): any {
+    this.setState({year: this.state.year + 1});
+  }
+  previousYear(): any {
+    this.setState({year: this.state.year - 1});
+  }
   render() {
     const { year } = this.state;
     const customCLassesForPrices = {
@@ -35,6 +41,9 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
     return (
       <div className="price-calendar">
         <div className="calendar-container">
+          {this.state.year > new Date().getFullYear() ? <a onClick={() => this.previousYear()}>Vorig jaar</a> : ''}
+          <span>{this.state.year}</span>
+          <a onClick={() => this.nextYear()}>Volgend jaar</a>
           <Calendar
             year={year}
             onPickDate={this.onDatePicked}
