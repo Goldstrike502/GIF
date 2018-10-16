@@ -8,7 +8,6 @@ export const DatePickerFormInput = (props)  => {
         {...props}
         selected={props.input.value} 
         onChange={(e) => {
-            console.log(e); 
             props.input.onChange(e); }} 
     />);
 };

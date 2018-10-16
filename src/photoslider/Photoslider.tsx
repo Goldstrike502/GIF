@@ -25,7 +25,7 @@ export const initialPhotoSliderState: Photo[] = [{
 }];
 
 function mapStateToProps(state: StoreState): Props {
-  console.log('map state to props', state.sliderPhotos);
+  // console.log('map state to props', state.sliderPhotos);
   return {items: state.sliderPhotos, closed: state.layout.introClosed}; 
 } 
 
