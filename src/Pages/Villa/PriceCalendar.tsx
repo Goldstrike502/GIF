@@ -55,9 +55,10 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
         </div>
         <section className="prijs-indicatie">
           <aside className="legenda" style={{ float: 'right' }}>Legenda:
-            <span className="legenda-item beschikbaar">Beschikbaar</span>
+
+            <span className="legenda-item available">Beschikbaar</span>
             <span className="legenda-item lastminute">Lastminute</span>
-            <span className="legenda-item blocked">Vol geboekt / Geblokkeerd</span>
+            <span className="legenda-item blocked">Geblokkeerd</span>
           </aside>
           <h2>Indicatie prijs</h2>
           {(this.props.selectedPrices ?
@@ -102,7 +103,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
             switch (style) {
               case 'block':
                 return (<span>
-                  <h3><i className="material-icons">event_busy</i>Geblokeerd / Niet beschikbaar</h3>
+                  <h3><i className="material-icons">event_busy</i>Niet beschikbaar</h3>
                 </span>);
               case 'lastminute':
                 return (<span>
@@ -144,7 +145,7 @@ function getRelativeFromTo(f: Moment.Moment, t: Moment.Moment): { from: Moment.M
 
 function getTitleForStyles(styles: PriceRangeStyles[]): string {
   const titles = {
-    block: 'Geblokeerd / Niet beschikbaar',
+    block: 'Geblokkeerd / Niet beschikbaar',
     lastminute: 'Lastminute, beperkt beschikbaar'
   };
   return styles.map(style => titles[style] ? titles[style] : 'Beschikbaar').join(' ');

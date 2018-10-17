@@ -45,7 +45,7 @@ class PhotoSliderComponent extends React.Component<Props, State> {
 
   render() {
     const photos = this.props.homepage ? this.props.items.filter(_ => _.homepage) : this.props.items;
-    console.log('render', photos);
+    // console.log('render', photos);
     return (
       <div className={this.state.isClosed ? 'focus' : 'blur'}>
       <ImageGallery
@@ -53,7 +53,7 @@ class PhotoSliderComponent extends React.Component<Props, State> {
           autoPlay={this.state.isClosed}  
           showPlayButton={this.state.isClosed}
           showFullscreenButton={this.state.isClosed}
-          thumbnailPosition="top"
+          thumbnailPosition="left"
           showThumbnails={this.state.isClosed}
           showNav={this.state.isClosed}
           {... this.props}

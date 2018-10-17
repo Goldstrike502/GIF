@@ -277,9 +277,9 @@ table.calendar {
 
   }
   table.calendar td.blocked {
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEADmzdv/o8iRA0BoIEAKngPeSAlnXcAAAAASUVORK5CYII=');
-    opacity: 0.5;
-    background-color: #f7cf81;
+    /* background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEADmzdv/o8iRA0BoIEAKngPeSAlnXcAAAAASUVORK5CYII='); */
+    /* opacity: 0.5; */
+    background-color: rgb(211, 16, 16);
     border: none;
 
   }
@@ -293,6 +293,9 @@ table.calendar {
   .legenda-item.lastminute {
     color: rgb(211, 16, 16);
   }
+  .legenda-item.blocked:before {
+    background-color: rgb(211, 16, 16);
+  }
   .legenda-item.lastminute:before {
     background: #f7cf81;
     font-weight: bold;
@@ -300,6 +303,9 @@ table.calendar {
   }
   .legenda-item {
     margin-left: 50px;
+  }
+  .legenda-item.available:before {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEADmzdv/o8iRA0BoIEAKngPeSAlnXcAAAAASUVORK5CYII=');
   }
   .legenda-item:before {
     content: ' ';

@@ -42,7 +42,11 @@ section.image-intro {
   right: 0;
   width: 100%;
   z-index:0;
-  max-height: 100vh;
+  max-height: 90vh;
+}
+
+.blur .image-gallery-slide-wrapper {
+  width: 100vw;
 }
 header p {
   font-size: 17px;
