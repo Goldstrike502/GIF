@@ -38,19 +38,19 @@
 .chateau-item h3 {
     color: rgba(255,255,255,0.7);
     z-index: 292563;
-    padding: 5px 0 2px 0;
+    padding: 5px 0 2px 8px;
     text-transform: uppercase;
     margin:0;
 }
-.chateau-item figure:hover caption {
+.chateau-item figure:hover .caption {
     background: rgba(0,0,0,0.9);
 }
-.chateau-item figure:hover caption p {
+.chateau-item figure:hover .caption p {
     opacity: 1;
     height: auto;
     color: rgba(255,255,255,0.7);
 }
-.chateau-item caption p {
+.chateau-item .caption p {
     color: rgba(255,255,255,0.0);
     margin:0 0 8px 0;
     font-size: 14px;
@@ -60,7 +60,7 @@
     height: 0;
     opacity: 0;
 }
-.chateau-item caption {
+.chateau-item .caption {
     transition: all .4s ease;
     background: rgba(0,0,0,0.7);
     position: absolute;

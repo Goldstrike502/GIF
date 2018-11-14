@@ -8,6 +8,7 @@ import * as React from 'react';
 import './Chateau.css';
 import * as ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
+import { ScrollToTopOnMount } from '../../ScrollToTopOnMount';
 
 interface ChateauPageProps {
     chateauPosts?: ChateauPost[];
@@ -31,9 +32,6 @@ function mapDispatchToProps(dispatch: Dispatch<Action>): Partial<ChateauPageProp
 
 export class ChateauPageComponent extends React.Component<ChateauPageProps, ChateauPageState> {
     client = ContentfulClient;
-    state = {
-        selectedPost: undefined
-    };
     renderDefaultChateauPage() {
         return (
             <div>
@@ -57,6 +55,7 @@ export class ChateauPageComponent extends React.Component<ChateauPageProps, Chat
         const selectedPost = this.props.selectedPost;
         return (
             <div className="container">
+                <ScrollToTopOnMount />
                 <section className="chateau-page" style={this.backgroundStyle()}>
                     <h1>{(selectedPost ? (selectedPost as ChateauPost).title : 'Chateau Cazaleres')}</h1>
                 </section>

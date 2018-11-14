@@ -1,4 +1,4 @@
-import { hasDayCalandarStyles } from '../../Selectors';
+import { hasDayCalandarStyles, isDayStartDay, isDayEndDay } from '../../Selectors';
 import * as React from 'react';
 import { PriceRange, PriceRangeStyles } from '../../Types/ContentTypes';
 import { Calendar } from 'react-yearly-calendar';
@@ -15,11 +15,13 @@ interface PriceCalendarProps {
 }
 interface PriceCalendarState {
   year: number;
+  discount: number;
 }
 
 export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCalendarState> {
   state = {
-    year: new Date().getFullYear()
+    year: new Date().getMonth() >= 8 ? new Date().getFullYear() + 1 : new Date().getFullYear(),
+    discount: 0.0
   };
   nextYear(): any {
     this.setState({year: this.state.year + 1});
@@ -31,6 +33,8 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
     const { year } = this.state;
     const customCLassesForPrices = {
       lastminute: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'lastminute'),
+      changedayStart: (day: Moment.Moment) => isDayStartDay(this.props.prices, day),
+      changedayEnd: (day: Moment.Moment) => isDayEndDay(this.props.prices, day),
       blocked: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'block'),
       hoogseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'hoogseizoen'),
       midseizoen: (day: Moment.Moment) => hasDayCalandarStyles(this.props.prices, day, 'midseizoen'),
@@ -64,6 +68,9 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
           {(this.props.selectedPrices ?
             <p>Prijzen voor uw geselecteerde periode: {this.props.selectedVacation.from.format('ll')} t/m &nbsp;
               {this.props.selectedVacation.to.format('ll')}</p> : null)}
+          <div>
+              {this.renderDiscount(this.props.selectedVacation.prices.map(price => this.countDaysNotHoogseizoen(price, selectedRange)).reduce(getSum, 0))}
+          </div>
           <div className="prices-container">
             {this.props.selectedPrices && selectedRange ?
               <ul className="prices"> {this.props.selectedPrices
@@ -78,9 +85,25 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
               <Link className="button" to="/contact">Neem contact op</Link>
             </div>
           </div>
+        
         </section>
       </div>
     );
+  }
+  countDaysNotHoogseizoen(price: PriceRange, range: DateRange | false): number {
+    if ( range && price.styles.indexOf('hoogseizoen') === -1 && price.styles.indexOf('block') === -1) {
+      const intersection = range.intersect(moment.range(price.vanaf, price.tot));
+      return intersection.duration('days');
+    } else {
+      return 0;
+    }
+  }
+  renderDiscount(numberOfDays: number): React.ReactNode {
+    if (numberOfDays > 7) {
+      return <h3 style={{color: 'white'}}>De onderstaande prijzen zijn exclusief {this.getDiscount(numberOfDays)} % korting! </h3>;
+    } else {
+      return <h3 style={{color: 'white'}}>U heeft geen korting</h3>;
+    }
   }
   onDatePicked() {
     // console.log('selecedddddd date', e);
@@ -94,8 +117,25 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
       this.props.onRangeSelect(from, to, prices);
     }
   }
+  getDiscount(duration: number) {
+ 
+      if (duration >= 21) {
+        return 20;
+      }
+      if (duration >= 14) {
+        return 15;
+      }
+      if (duration >= 7) {
+        return 10;
+      }
+      return 0;
+  }
   private renderPriceForSelectedPeriode(price: PriceRange, range: DateRange, i: number): string | JSX.Element {
     const intersection = range.intersect(moment.range(price.vanaf, price.tot));
+    const duration = intersection.duration('days');
+    // const regex = /^\d*\.?\d*$/;
+    // tslint:disable-next-line:no-console
+    // console.log('price', priceInt);
     return (
       <li className="prijs">
         <div className="">
@@ -117,6 +157,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
           }))}
 
         </div>
+        {price.styles.length > 0 ? price.styles[0] : ''}
         <span className="prijs-vanaf">
           VANAF: <span style={{ float: 'right' }}>{intersection.start.format('ll')}</span>
         </span>
@@ -124,7 +165,8 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
           TOT: <span style={{ float: 'right' }}>{intersection.end.format('ll')}</span>
         </span>
         <span className="prijs-title">{getTitleForStyles(price.styles)}</span>
-        <span className="prijs-price"><h3>{price.prijs}</h3> </span>
+        {price.styles.indexOf('block') === -1 ? <span className="prijs-price"><h3>{duration} dag{duration > 1 ? 'en' : ''} x &euro; {price.prijs},- = &euro; {Number(price.prijs) * duration},-</h3> </span> : ''}
+        {/* <span className="prijs-korting">Inclusief {this.getDiscount(price, duration)}% korting</span> */}
       </li>);
   }
 
@@ -149,4 +191,7 @@ function getTitleForStyles(styles: PriceRangeStyles[]): string {
     lastminute: 'Lastminute, beperkt beschikbaar'
   };
   return styles.map(style => titles[style] ? titles[style] : 'Beschikbaar').join(' ');
+}
+function getSum(total: number, num: number) {
+  return total + num;
 }

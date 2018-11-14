@@ -42,10 +42,10 @@ export const ChateauItem: React.StatelessComponent<ChateauItemProps> = props => 
                         alt={props.item.cover.fields.description}
                         title={props.item.cover.fields.title}
                     />
-                    <caption>
+                    <div className="caption">
                         <h3> {props.item.title}</h3>
                         <p>{props.item.description}</p>
-                    </caption>
+                    </div>
                 </figure>
             </Link>
         </div>

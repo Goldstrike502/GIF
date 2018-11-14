@@ -191,23 +191,23 @@ table.calendar {
   
   /* Selected range */
   table.calendar td.range {
-    background-color: rgba(255,69,0, 0.7);
+    background-color: #2b87c6;
     font-weight: bold;
     color: white;
   }
   
   table.calendar td.range-left {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    /* border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px; */
     overflow: hidden;
-    background: orangered;
+    background: #2b87c6;
   }
   
   table.calendar td.range-right {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    /* border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px; */
     overflow: hidden;
-    background: orangered;
+    background: #2b87c6;
   }
   
   div.calendar-controls {
@@ -276,12 +276,27 @@ table.calendar {
     color: rgb(211, 16, 16);
 
   }
+  table.calendar td.blocked.range-right.changedayStart {
+    background-color: #2b87c6;
+  }
+  table.calendar td.blocked.range-left.changedayEnd {
+    background-color: #2b87c6;
+  }
+  table.calendar td.blocked.changedayEnd {
+    background-image: url('/images/change-day.svg') !important;
+    background-size: cover;
+    background-color: white;
+    border:none;
+  }
+  table.calendar td.blocked.changedayStart {
+    background-image: url('/images/change-day-2.svg') !important;
+    background-size: cover;
+    background-color: white;
+    border:none;
+  }
   table.calendar td.blocked {
-    /* background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAABZJREFUCB1jYEADmzdv/o8iRA0BoIEAKngPeSAlnXcAAAAASUVORK5CYII='); */
-    /* opacity: 0.5; */
-    background-color: rgb(211, 16, 16);
+    background: orangered;
     border: none;
-
   }
   aside.legenda {
     background: white;
@@ -294,7 +309,7 @@ table.calendar {
     color: rgb(211, 16, 16);
   }
   .legenda-item.blocked:before {
-    background-color: rgb(211, 16, 16);
+    background-color: orangered
   }
   .legenda-item.lastminute:before {
     background: #f7cf81;

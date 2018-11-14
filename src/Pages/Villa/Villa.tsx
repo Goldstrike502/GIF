@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PriceCalendar } from './PriceCalendar';
 import { Moment } from 'moment';
+import { ScrollToTopOnMount } from '../../ScrollToTopOnMount';
 
 interface Props {
     children?: JSX.Element | string;
@@ -69,6 +70,7 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
 
         return (
             <div>
+                <ScrollToTopOnMount />
                 <section className="container">
                     {this.props.sliderPhotos ?
                         <ImageGallery
@@ -103,7 +105,7 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
         return (
 
             <section className="villa-content">
-                <div style={{minWidth: '70%'}}>
+                <div style={{ minWidth: '70%' }}>
                     <section className="villa-title">
                         <h1>{content.title}</h1>
                         {this.props.villas
@@ -118,16 +120,16 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                     </section>
                     <VillaContentTabs content={content} />
                 </div>
-                    <aside className="right-content">
-                        <h2>Algemene informatie</h2>
-                        <ReactMarkdown source={content.infoRechts} />
-                        {/* <FeatureIcons /> */}
-                        <hr />
-                        <h2>Hoe kunnen wij u helpen?</h2>
-                        <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk?
+                <aside className="right-content">
+                    <h2>Algemene informatie</h2>
+                    <ReactMarkdown source={content.infoRechts} />
+                    {/* <FeatureIcons /> */}
+                    <hr />
+                    <h2>Hoe kunnen wij u helpen?</h2>
+                    <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk?
                             Neem gerust contact op, we staan klaar om u te helpen.</p>
-                        <Link to={`/vakantie-villa/${content.slug}`} className="button yellow">Contact informatie</Link>
-                    </aside>
+                    <Link to={`/vakantie-villa/${content.slug}`} className="button yellow">Contact informatie</Link>
+                </aside>
             </section>
         );
     }

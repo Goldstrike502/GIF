@@ -50,7 +50,26 @@ export function toSitemap(parentSlug: string): (content: { title: string, slug: 
   };
 }
 
+export function getPriceRangeWhereDayIsWithinAndHasStyle(prices: PriceRange[], day: Moment, style: PriceRangeStyles): PriceRange | undefined {
+  return (prices.find(price => (price.styles.indexOf(style) !== -1) &&
+  (day.isSameOrAfter(price.vanaf) && day.isSameOrBefore(price.tot))));
+}
 export function hasDayCalandarStyles(prices: PriceRange[], day: Moment, style: PriceRangeStyles): Boolean {
-  return prices.find(price => (price.styles.indexOf(style) !== -1) &&
-    (day.isSameOrAfter(price.vanaf) && day.isSameOrBefore(price.tot))) ? true : false;
+  return getPriceRangeWhereDayIsWithinAndHasStyle(prices, day, style) ? true : false;
+}
+export function isDayStartDay(prices: PriceRange[], day: Moment): Boolean {
+  const range = getPriceRangeWhereDayIsWithinAndHasStyle(prices, day, 'block');
+  if (range) {
+    return day.isSame(range.vanaf) || false;
+  } else {
+    return false;
+  }
+}
+export function isDayEndDay(prices: PriceRange[], day: Moment): Boolean {
+  const range = getPriceRangeWhereDayIsWithinAndHasStyle(prices, day, 'block');
+  if (range) {
+    return day.isSame(range.tot) || false;
+  } else {
+    return false;
+  }
 }
