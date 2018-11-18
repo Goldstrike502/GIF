@@ -45,11 +45,14 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
     return (
       <div className="price-calendar">
         <div className="calendar-container">
-          {this.state.year > new Date().getFullYear() ? <a onClick={() => this.previousYear()}>Vorig jaar</a> : ''}
-          <span>{this.state.year}</span>
-          <a onClick={() => this.nextYear()}>Volgend jaar</a>
+          <div className="year-controls">
+            {this.state.year > new Date().getFullYear() ? <a onClick={() => this.previousYear()}>Vorig jaar</a> : ''}
+            <span>{this.state.year}</span>
+            <a onClick={() => this.nextYear()}>Volgend jaar</a>
+          </div>
           <Calendar
             year={year}
+            firstDayOfWeek={5}
             onPickDate={this.onDatePicked}
             customClasses={this.props.prices ? customCLassesForPrices : {}}
             selectRange={true}
@@ -102,7 +105,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
     if (numberOfDays > 7) {
       return <h3 style={{color: 'white'}}>De onderstaande prijzen zijn exclusief {this.getDiscount(numberOfDays)} % korting! </h3>;
     } else {
-      return <h3 style={{color: 'white'}}>U heeft geen korting</h3>;
+      return <h3 style={{color: 'white'}}>Boek meer dan 7 dagen buiten het hoogseizoen en ontvangassssssssssssssssssssz </h3>;
     }
   }
   onDatePicked() {

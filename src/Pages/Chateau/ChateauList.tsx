@@ -8,11 +8,12 @@ interface Props {
     items?: any[];
     intro?: boolean;
     children: string | JSX.Element[];
+    className?: string;
 }
 
 export const ChateauListViewComponent: React.StatelessComponent<Props> = props => {
     return (
-        <div className="chateau-list-view">
+        <div className={'chateau-list-view ' + props.className || ''}>
             <ul className={!props.intro ? 'full-width list' : 'list'}>
                 {props.children}
             </ul>

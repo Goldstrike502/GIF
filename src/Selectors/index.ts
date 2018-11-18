@@ -11,6 +11,9 @@ export function getCurrentVillaForRoute(state: StoreState, route: string | false
   }
   return undefined;
 }
+export function selectFirstVillaModel(state: StoreState): VillaContentModel | undefined {
+  return state.villas.length > 0 ? state.villas[0] : undefined;
+}
 export function getChateauPostForRoute(state: StoreState, route: string | false): ChateauPost | undefined {
   if (route) {
     return state.chateauPosts.find(post => route.endsWith(post.slug));

@@ -42,9 +42,9 @@ class App extends React.Component<Props, State> {
                 <nav>
                   <span className="brand">Goed in Frankrijk</span>
                   <ul>
-                    <li><NavLink to="/">Homepage</NavLink></li>
+                    <li><NavLink to="/" exact={true}>Homepage</NavLink></li>
                     <li><NavLink to={CHATEAU_ROUTE_URL}>Chateau</NavLink></li>
-                    <li><NavLink to={`${VILLAS_ROUTE_URL}/espace`}>Villa's</NavLink></li>
+                    <li><NavLink to={`${VILLAS_ROUTE_URL}/`}>Villa's</NavLink></li>
                     <li><NavLink to={OMGEVING_ROUTE_URL}>Omgeving</NavLink></li>
                     <li><NavLink to={CONTACT_ROUTE_URL}>Contact</NavLink></li>
                   </ul>
@@ -53,9 +53,9 @@ class App extends React.Component<Props, State> {
                   <Route exact={true} path="/" component={Home} />
                   <Route exact={true} path={CHATEAU_ROUTE_URL} component={ChateauPage} />
                   <Route exact={true} path={OMGEVING_ROUTE_URL} component={OmgevingPage} />
+                  <Route path={`${VILLAS_ROUTE_URL}`} component={VillaPage} />
                   <Route exact={true} path={CONTACT_ROUTE_URL} component={ContactPageComponent} />
                   <Route path={`${CHATEAU_ROUTE_URL}/:post`} component={ChateauPage} />
-                  <Route path={`${VILLAS_ROUTE_URL}/:villa`} component={VillaPage} />
                   <Route path={`${OMGEVING_ROUTE_URL}/:item`} component={OmgevingPage} />
                   {!!this.state && !!this.state.footerSitemap ? <Footer /> : ''}
                 </section>

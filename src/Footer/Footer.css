@@ -12,6 +12,11 @@ footer section.social {
 footer .footer-content {
   display: flex;
 }
+@media only screen and (max-width: 1000px) {
+  footer .footer-content {
+    flex-direction: column;
+  }
+}
 footer section {
   margin: 20px;
 }

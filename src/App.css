@@ -21,8 +21,16 @@ nav ul li {
   border-left: rgba(0,0,0,.86) solid 1px;
   font-family: 'Playfair Display', serif;
 }
+@media only screen and (max-width: 1000px) {
+  nav ul li {
+    display: block;
+  }
+}
 nav li a:hover {
   text-decoration: underline;
+}
+nav li a.active {
+  font-weight: bold;
 }
 nav li a {
   color: rgba(0,0,0,1);
@@ -32,6 +40,7 @@ nav .brand {
   font-size: 22px;
   font-family: 'Playfair Display', serif;  
   margin-left: 25px;
+  display: inline-block;  
 }
 .button:hover {
   border-bottom: 3px solid #1D5D88;

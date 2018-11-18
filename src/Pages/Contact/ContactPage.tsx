@@ -43,6 +43,8 @@ export class ContactPageComponent extends React.Component<Props, State> {
     return (
       <section className="contact-page">
         <div className="contact-forms">
+          <h1>Contact</h1>
+          <p>Zend ons uw vraag of verzoek en we reageren zo snel mogelijk. <br /> Ook 's-avonds of in het weeekend.</p>
           <div className="contact-form-type">
             <label htmlFor="contact">
               <input 
@@ -88,7 +90,15 @@ export class ContactPageComponent extends React.Component<Props, State> {
             <PrijsForm onSubmit={(values: PrijsFormData) => onSubmit(values)} /> : null}
           
         </div>
-        <div className="social-medial">
+        <div className="social-media">
+          <div className="personal-contact">
+            <img src="/images/franca.jpg" />
+            <p>
+              Wij zijn een stiching bestaande uit 7 villa eigenaren, wij steken zo veel mogelijk liefde en tijd in onze tweede 'thuis'. We willen daarom ook graag persoonlijk contact, om zoveel mogelijk specifieke informatie over onze vakantie villa's te kunnen geven.
+            </p>
+            <h3>0623189594</h3>
+            <h4>Dagelijks: 18.00 tot 22.00 uur </h4>
+          </div>
         <section className="social">
         <div 
           className="fb-page" 

@@ -2,7 +2,7 @@ import { VILLAS_ROUTE_URL } from '../../Routes';
 // import { FeatureIcons } from './FeatureIcons';
 import { setVacation } from '../../Actions';
 import { Dispatch } from 'redux';
-import { getCurrentRoute, getCurrentVillaForRoute } from '../../Selectors';
+import { getCurrentRoute, getCurrentVillaForRoute, selectFirstVillaModel } from '../../Selectors';
 import { PriceRange, VillaContentModel } from '../../Types/ContentTypes';
 import { Photo, StoreState, VacationModel } from '../../Types';
 import { VillaContentTabs } from './VillaContentTabs';
@@ -30,9 +30,6 @@ export class VillaCompactView extends React.Component<Props, State> {
         );
     }
 }
-export const villa: React.StatelessComponent<{ faciliteiten: string }> = props => {
-    return (<div>{props.faciliteiten}</div>);
-};
 interface VillaPageProps {
     selectedVilla?: VillaContentModel;
     villas: VillaContentModel[];
@@ -44,7 +41,9 @@ interface VillaPageState {
 }
 
 function mapStateToProps(state: StoreState): VillaPageProps {
-    const selectedVilla = getCurrentVillaForRoute(state, getCurrentRoute(state));
+    const selectedVilla = getCurrentVillaForRoute(state, getCurrentRoute(state)) || selectFirstVillaModel(state);
+    // tslint:disable-next-line:no-console
+    console.log('villa state', selectedVilla);
     return {
         sliderPhotos: selectedVilla ? selectedVilla.sliderPhotos
             .filter(photo => photo.sys.contentType
@@ -67,16 +66,10 @@ function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
 export class VillaPageComponent extends React.Component<VillaPageProps, VillaPageState> {
     client = ContentfulClient;
     render() {
-
         return (
             <div>
                 <ScrollToTopOnMount />
                 <section className="container">
-                    {this.props.sliderPhotos ?
-                        <ImageGallery
-                            items={this.props.sliderPhotos}
-                            thumbnailPosition="left"
-                        /> : ''}
                     {(this.props.selectedVilla ?
                         this.renderVillaContent(this.props.selectedVilla)
                         : '')}
@@ -105,7 +98,12 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
         return (
 
             <section className="villa-content">
-                <div style={{ minWidth: '70%' }}>
+                <div className="left-content">
+                {this.props.sliderPhotos ?
+                        <ImageGallery
+                            items={this.props.sliderPhotos}
+                            thumbnailPosition="left"
+                        /> : ''}
                     <section className="villa-title">
                         <h1>{content.title}</h1>
                         {this.props.villas

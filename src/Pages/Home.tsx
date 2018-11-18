@@ -72,7 +72,7 @@ class HomePage extends React.Component<Props, State> {
           {this.renderIntroHeader()}
           <BackgroundPhotoSlider homepage={true} />
         </section>
-        <ChateauListViewComponent intro={true}>
+      <ChateauListViewComponent intro={true} className={this.props.introClosed ? '' : 'pull-up'}>
           {this.props.chateauPosts
             .map((item: ChateauPost) => <ChateauItem key={item.slug} item={item} />)}
       </ChateauListViewComponent>

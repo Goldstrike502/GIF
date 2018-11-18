@@ -1,11 +1,15 @@
-
+.chateau-list-view.pull-up {
+    margin-top: -35px;
+}
 .chateau-list-view {
     background: url('/images/chateau-bg.png');
     background-size: cover;
     min-height: 60vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-around
+    justify-content: space-around;
+    position: relative;
+    z-index: 2
 }
 .chateau-intro {
     padding: 15px;  
@@ -91,4 +95,9 @@
     align-items: flex-end;
     flex-direction: row;
     padding: 0 20px;
+}
+@media only screen and (max-width: 1000px) {
+    .chateau-list-view.pull-up {
+    margin-top: 0;
+    }
 }
