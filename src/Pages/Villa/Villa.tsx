@@ -1,6 +1,6 @@
 import { VILLAS_ROUTE_URL } from '../../Routes';
 // import { FeatureIcons } from './FeatureIcons';
-import { setVacation } from '../../Actions';
+import { setVacation, setInitialContactForm } from '../../Actions';
 import { Dispatch } from 'redux';
 import { getCurrentRoute, getCurrentVillaForRoute, selectFirstVillaModel } from '../../Selectors';
 import { PriceRange, VillaContentModel } from '../../Types/ContentTypes';
@@ -14,8 +14,9 @@ import * as ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { PriceCalendar } from './PriceCalendar';
-import { Moment } from 'moment';
+import * as moment from 'moment';
 import { ScrollToTopOnMount } from '../../ScrollToTopOnMount';
+import { initialize } from 'redux-form';
 
 interface Props {
     children?: JSX.Element | string;
@@ -35,7 +36,7 @@ interface VillaPageProps {
     villas: VillaContentModel[];
     sliderPhotos: Photo[];
     vacation: VacationModel;
-    onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel, prices: PriceRange[]) => any;
+    onVacationSelect: (from: moment.Moment, to: moment.Moment, model: VillaContentModel, prices: PriceRange[]) => any;
 }
 interface VillaPageState {
 }
@@ -57,8 +58,13 @@ function mapStateToProps(state: StoreState): VillaPageProps {
 }
 function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
     return {
-        onVacationSelect: (from: Moment, to: Moment, model: VillaContentModel, prices: PriceRange[]) =>
-            dispatch(setVacation(from, to, model, prices))
+        onVacationSelect: (from: moment.Moment, to: moment.Moment, model: VillaContentModel, prices: PriceRange[]) => {
+            dispatch(setVacation(from, to, model, prices));
+            // tslint:disable-next-line:no-console
+            console.log('model', model);
+            dispatch(initialize('prijs', {vanaf: moment(from), tot: moment(to), villa: model.slug}));
+            dispatch(setInitialContactForm('prijs'));
+        }
     };
 
 }
@@ -126,7 +132,7 @@ export class VillaPageComponent extends React.Component<VillaPageProps, VillaPag
                     <h2>Hoe kunnen wij u helpen?</h2>
                     <p>Vragen over de inrichting, prijzen of is er iets anders niet duidelijk?
                             Neem gerust contact op, we staan klaar om u te helpen.</p>
-                    <Link to={`/vakantie-villa/${content.slug}`} className="button yellow">Contact informatie</Link>
+                    <Link to={`/contact`} className="button yellow">Contact informatie</Link>
                 </aside>
             </section>
         );

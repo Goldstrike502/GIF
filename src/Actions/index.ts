@@ -28,21 +28,29 @@ export interface SetVacation {
     prices: PriceRange[];
 }
 export type PhotoSliderActions = ReceivedWebsiteEntries;
-
+export interface ContactSucceeded { 
+    type: constants.CONTACT_SUCCEEDED;
+}
 export function receivedWebsiteEntries(entries: EntryCollection<any>) {
     return {
         type: constants.RECEIVED_WEBSITE_ENTRIES,
         entries,
     };
 }
-export type LayoutActions = CloseIntro | SelectInitialContactForm;
+
+export function setContactSucceeded() {
+    return {
+        type: constants.CONTACT_SUCCEEDED
+    };
+}
+export type LayoutActions = CloseIntro | SelectInitialContactForm | ContactSucceeded;
 
 export function closeIntro(): CloseIntro {
     return {
         type: constants.CLOSE_INTRO_MESSAGE
     };
 }
-export function selectInitialContactForm(form: 'contact' | 'prijs' | 'belmijterug') {
+export function setInitialContactForm(form: 'contact' | 'prijs' | 'belmijterug') {
     return {
         type: constants.SELECT_INITIAL_CONTACT_FORM,
         form,
@@ -61,5 +69,12 @@ export function setVacation(from: Moment, to: Moment, villa: VillaContentModel |
         to,
         villa,
         prices
+    };
+}
+
+export function sendFormToGoogleSheets(formData: FormData) {
+    return {
+        type: constants.SEND_FORM_TO_GOOGLE_SHEETS,
+        formData
     };
 }

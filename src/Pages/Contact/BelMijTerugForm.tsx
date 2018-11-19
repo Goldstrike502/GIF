@@ -28,7 +28,7 @@ const BelMijTerugFormComponent = (props: InjectedFormProps) => {
                 <option value="geen">Geen voorkeur</option>
             </Field>
             </div>
-            <button type="submit" disabled={pristine || submitting}>>Verzenden</button>
+            <button type="submit" className="button yellow" disabled={pristine || submitting}>>Verzenden</button>
         </form>
     );
 };

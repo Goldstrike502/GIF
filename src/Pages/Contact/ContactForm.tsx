@@ -2,10 +2,10 @@ import { reduxForm, InjectedFormProps, Field, FormErrors } from 'redux-form';
 import * as React from 'react';
 
 const ContactFormComponent = (props: InjectedFormProps) => {
-    const { handleSubmit } = props;
+    const { handleSubmit, submitting } = props;
     return (
         <form onSubmit={handleSubmit}>
-
+            {submitting && 'submitting'}
             <div>
                 <Field name="firstName" component="input" type="text" placeholder="Voornaam" />
             </div>
@@ -18,7 +18,7 @@ const ContactFormComponent = (props: InjectedFormProps) => {
             <div>
                 <Field name="bericht" component="textarea" placeholder="Bericht / Vraag / Opmerking" />
             </div>
-            <button type="submit">Verzenden</button>
+            <button type="submit" className="button yellow" disabled={submitting}>Verzenden</button>
         </form>
     );
 };

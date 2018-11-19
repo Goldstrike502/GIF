@@ -105,7 +105,7 @@ export class PriceCalendar extends React.Component<PriceCalendarProps, PriceCale
     if (numberOfDays > 7) {
       return <h3 style={{color: 'white'}}>De onderstaande prijzen zijn exclusief {this.getDiscount(numberOfDays)} % korting! </h3>;
     } else {
-      return <h3 style={{color: 'white'}}>Boek meer dan 7 dagen buiten het hoogseizoen en ontvangassssssssssssssssssssz </h3>;
+      return <p style={{color: 'white'}}>Boek meer dan 7 dagen buiten het hoogseizoen en ontvang korting op uw verblijf. </p>;
     }
   }
   onDatePicked() {

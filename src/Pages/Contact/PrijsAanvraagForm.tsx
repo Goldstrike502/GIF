@@ -14,18 +14,44 @@ const PrijsFormComponent = (props: InjectedFormProps) => {
                 <Field name="lastName" component="input" type="text" placeholder="Achternaam" />
             </div>
             <div>
-                <Field name="email" component="input" type="email" placeholder="E-mail" />
-            </div>
-            <div>
+                <div>
+                    <Field name="lastName" component="input" type="text" placeholder="Achternaam" />
+                </div>
+                <div>
+                    <Field name="email" component="input" type="email" placeholder="E-mail" />
+                </div>
+                <div>
+                    <label>Type villa</label>
+                    <div className="villa-field">
+                        <label>
+                            <Field
+                                name="villa"
+                                component="input"
+                                type="radio"
+                                value="campagne"
+                            />{' '}
+                            Campagne
+                            </label>
+                        <label>
+                            <Field
+                                name="villa"
+                                component="input"
+                                type="radio"
+                                value="espace"
+                            />{' '}
+                            Espace
+                            </label>
+                    </div>
+                </div>
                 <label>
                     Voorkeursdatum vanaf:
-                    <Field name="vanaf" component={DatePickerFormInput}/>
+                    <Field name="vanaf" component={DatePickerFormInput} />
                 </label>
             </div>
             <div>
                 <label>
                     Voorkeursdatum tot:
-                    <Field name="tot" component={DatePickerFormInput}/>
+                    <Field name="tot" component={DatePickerFormInput} />
                 </label>
             </div>
             <div>
@@ -34,7 +60,7 @@ const PrijsFormComponent = (props: InjectedFormProps) => {
                     Voorkeursdatum vanaf:
                 </label>
             </div>
-            <button type="submit">Verzenden</button>
+            <button type="submit" className="button yellow">Aanvragen</button>
         </form>
     );
 };
@@ -46,6 +72,9 @@ export const PrijsForm = reduxForm<PrijsFormData>({
 
 export const contactFormValidate = (values) => {
     const errors = {} as FormErrors<PrijsFormData>;
+    if (!values.villa) {
+        errors.villa = 'Verplicht';
+    }
     if (!values.username) {
         errors.firstName = 'Verplicht';
     }
@@ -59,4 +88,7 @@ export interface PrijsFormData {
     firstName: string;
     lastName: string;
     email: string;
+    vanaf?: string;
+    tot?: string;
+    villa?: string;
 }

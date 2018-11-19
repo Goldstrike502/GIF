@@ -61,9 +61,11 @@ nav .brand {
    padding: 6px 30px;
    background: #2b87c6;
    display: inline-block;
-   line-height: 44px;
-   margin: 15px;
+   line-height: 26px;
+   margin: 15px 0;
    text-decoration: none;
+   box-sizing: border-box;
+   cursor: pointer;
 }
 .button.yellow:hover {
   border-bottom: 3px solid #b99040;

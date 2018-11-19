@@ -29,13 +29,17 @@ function sliderPhotos(state: Photo[] = initialPhotoSliderState, action: PhotoSli
     }
 }
 
-function layout(state: LayoutState = { introClosed: false, selectedForm: 'contact' },
+function layout(state: LayoutState = { introClosed: false, selectedForm: 'contact', showThankMessage: false },
                 action: LayoutActions): LayoutState {
     if (action.type === CLOSE_INTRO_MESSAGE) {
         return { ...state, introClosed: true };
     }
     if (action.type === SELECT_INITIAL_CONTACT_FORM) {
         return {...state, selectedForm: action.form};
+    }
+
+    if (action.type === constants.CONTACT_SUCCEEDED) {
+        return {...state, showThankMessage: true};
     }
     return state;
 }

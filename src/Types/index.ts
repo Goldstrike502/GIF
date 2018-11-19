@@ -22,6 +22,7 @@ export interface FooterState {
 export interface LayoutState {
   introClosed: boolean;
   selectedForm: 'contact' | 'prijs' | 'belmijterug';
+  showThankMessage: boolean;
 }
 export interface StoreState {
   sliderPhotos: Photo[];

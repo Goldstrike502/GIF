@@ -8,9 +8,10 @@ form input,
 form textarea {
     line-height: 25px;
     background: white;
+    font-size: 17px;
     color: black;
     border-width: 2px;
-    margin: 5px;
+    margin: 12px 0  ;
     border-width: 2px;
     border-style: solid;  
     height: 35px;
@@ -33,7 +34,7 @@ form textarea {
 }
 .contact-page {
     display: flex;
-    padding-top:80px;
+    padding-top:10px;
     align-items: center;
     margin: 0 auto;
     max-width: 85%; 
@@ -43,7 +44,7 @@ form textarea {
     margin-right: 25px;
 }
 .contact-form-type {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 .personal-contact img {
     border: 12px solid #2c87c6;
@@ -52,8 +53,26 @@ form textarea {
     font-size: 16px;
     font-weight: 100;
 }
+.contact-form-type label input {
+    margin-right: 8px;
+}
 .contact-form-type label {
     margin: 15px;
     font-size: 18px;
     text-transform: uppercase;
+}
+.react-datepicker__input-container {
+    width: 70%;
+}
+.contact-page .villa-field label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-transform: uppercase;
+}
+.contact-page .villa-field label input{
+    width: auto; 
+    margin: 12px;
+    display: inline-block;
+    font-size: 21px;
 }
